@@ -8,6 +8,18 @@ Each group of scripts are in a separate folder together with a README.md for usa
 
 You can find here scripts for:
 
+- Scrobbling to last.fm and ListenBrainz
 - yt-dlp integration
-- Scrobbling
 - and many more
+
+## Documentation
+
+https://jcorporation.github.io/myMPD/scripting/
+
+## Contributions
+
+Contributions to this repository are very welcome:
+
+- Improve existing scripts
+- Write your own myMPD scripts and share it with the community
+- Discuss new possibilities for scripts
