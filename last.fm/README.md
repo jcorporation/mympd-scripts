@@ -15,10 +15,12 @@ Import `lastfm_lib.lua` as `lastfm_lib`.
 | VARIABLE | VALUE |
 | -------- | ----- |
 | lastfm_api_key | your api key |
-| lastfm_secret | your secret |
+| lastfm_secret | your shared secret |
 | lastfm_session_key | your session key |
 
-You can use the script `lastfm_get_session_key.lua` to get the session key. This script asks for your last.fm username and password. Set the variables `lastfm_api_key` and `lastfm_secret` before.
+You can use the script `lastfm_get_session_key.lua` to set the session key. This script asks for your last.fm username and password. Set the variables `lastfm_api_key` and `lastfm_secret` before.
+
+The last.fm APi is available for everyone. You can get your API key and shared secret from: https://www.last.fm/api
 
 ## Set triggers for events
 
