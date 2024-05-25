@@ -12,8 +12,7 @@ local data = {
 
 local rc, body = lastfm_lib.sendData(data)
 local ret = json.decode(body)
-local session_key = ret.session.key
 
 mympd.api("MYMPD_API_SCRIPT_VAR_SET", { key = "lastfm_session_key", value = ret.session.key })
 
-return "Set session key for last.fm to " .. session_key
+return "Set session key for last.fm to " .. ret.session.key
