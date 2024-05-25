@@ -30,3 +30,7 @@ You can send hate/love feedback to ListenBrainz with the thumbs up and down butt
   - Event: `mympd_feedback`
   - Action: above script
   - Leave the arguments empty
+
+## Set Pin
+
+Sets the pin to the current song or removes the pin if no uri is provided.
