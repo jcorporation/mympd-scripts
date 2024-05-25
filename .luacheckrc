@@ -1,7 +1,8 @@
  -- these globals can be set and accessed.
 globals = {
     "json",
-    "mympd"
+    "mympd",
+    "lastfm_lib"
 }
 
 -- these globals can only be accessed.
@@ -25,3 +26,4 @@ read_globals = {
 }
 
 unused = false
+max_line_length = 256
