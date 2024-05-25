@@ -1,0 +1,25 @@
+name: index
+on:
+  push:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  createIndex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install prerequisites
+        run: sudo apt install -y jq
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: Create index of lua scripts
+        run: ./index.sh
+
+      - name: Add, commit and push
+        uses: EndBug/add-and-commit@v9.1.4
+        with:
+          add: index.json
+          message: Update index
+          push: true

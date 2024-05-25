@@ -1,1 +1,1 @@
-{"scripts":["BatteryIndicator.lua","ListenBrainz-Feedback.lua","ListenBrainz-Pin.lua","ListenBrainz-Scrobbler.lua","EnableJukebox.lua","PlayRandomPlaylist.lua","yt-dlp.lua"]}
+{"scripts":["BatteryIndicator/BatteryIndicator.lua","ListenBrainz/ListenBrainz-Feedback.lua","ListenBrainz/ListenBrainz-Pin.lua","ListenBrainz/ListenBrainz-Scrobbler.lua","Misc/EnableJukebox.lua","Misc/PlayRandomPlaylist.lua","yt-dlp/yt-dlp.lua"]}

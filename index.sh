@@ -17,10 +17,11 @@ printf "{\"scripts\":[" >&3
 I=0
 for F in */*.lua
 do
-[ "$I" -gt 0 ] &&  printf "," >&3
-SCRIPTNAME=$(basename "$F")
-printf "\"%s\"" "$SCRIPTNAME" >&3
-I=$((I+1))
+    [ "$I" -gt 0 ] &&  printf "," >&3
+    CATEGORY=$(dirname "$F")
+    SCRIPTNAME=$(basename "$F")
+    printf "\"%s/%s\"" "$CATEGORY" "$SCRIPTNAME" >&3
+    I=$((I+1))
 done
 printf "]}\n" >&3
 exec 3>&-
