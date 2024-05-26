@@ -1,13 +1,11 @@
 -- {"order":1,"arguments":["username", "password"]}
-mympd.init()
-
 local lastfm_lib = require "scripts/lastfm_lib"
 
 local data = {
   method   = "auth.getMobileSession",
   username = mympd_arguments.username,
   password = mympd_arguments.password,
-  api_key  = mympd_state.var_lastfm_api_key,
+  api_key  = mympd_env.var_lastfm_api_key,
 }
 
 local rc, body = lastfm_lib.sendData(data)

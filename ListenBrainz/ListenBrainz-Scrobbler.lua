@@ -1,12 +1,11 @@
 -- {"order":1,"arguments":[]}
-mympd.init()
-if mympd_state.var_listenbrainz_token == nil then
+if mympd_env.var_listenbrainz_token == nil then
   return "No ListenBrainz token set"
 end
 
 local uri = "https://api.listenbrainz.org/1/submit-listens"
 local headers = "Content-type: application/json\r\n"..
-  "Authorization: Token "..mympd_state["var_listenbrainz_token"].."\r\n"
+  "Authorization: Token " .. mympd_env.var_listenbrainz_token .. "\r\n"
 
 local rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
 if rc ~= 0 then

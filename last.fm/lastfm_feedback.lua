@@ -1,6 +1,4 @@
 -- {"order":1,"arguments":["uri","vote","type"]}
-mympd.init()
-
 local lastfm_lib = require "scripts/lastfm_lib"
 
 -- main
@@ -24,10 +22,10 @@ local title = result.Title
 
 local data = {
   method      = "track.love",
-  api_key     = mympd_state.var_lastfm_api_key,
+  api_key     = mympd_env.var_lastfm_api_key,
   track       = title,
   artist      = artist,
-  sk          = mympd_state.var_lastfm_session_key,
+  sk          = mympd_env.var_lastfm_session_key,
 }
 
 local body

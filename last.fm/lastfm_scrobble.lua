@@ -16,13 +16,13 @@ local albumArtist = result.AlbumArtist[1]
 
 local data = {
   method      = "track.scrobble",
-  api_key     = mympd_state.var_lastfm_api_key,
+  api_key     = mympd_env.var_lastfm_api_key,
   timestamp   = tostring(os.time()-30),
   track       = title,
   artist      = artist,
   album       = album,
   albumArtist = albumArtist,
-  sk          = mympd_state.var_lastfm_session_key,
+  sk          = mympd_env.var_lastfm_session_key,
 }
 
 local body
