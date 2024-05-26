@@ -8,7 +8,7 @@ local play_state = mympd_state.play_state
 local elapsed_time = mympd_state.elapsed_time
 
 if play_state ~= 2 or elapsed_time > 5 then
-  return "not now playing"
+  return "Now Playing: Not Playing"
 end
 
 local rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
@@ -16,13 +16,11 @@ if rc ~= 0 then
   return "Now Playing: Not Playing"
 end
 
-if result.webradio then
-  return "web radio"
-end
-
-if string.sub(result.uri, 1, 8) == "https://" or
-   string.sub(result.uri, 1, 7) == "http://" then
-  return "web radio"
+if result.webradio or
+   string.sub(result.uri, 1, 8) == "https://" or
+   string.sub(result.uri, 1, 7) == "http://"
+then
+  return
 end
 
 local artist = result.Artist[1]

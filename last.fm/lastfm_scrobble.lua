@@ -1,6 +1,4 @@
 -- {"order":1,"arguments":[]}
-mympd.init()
-
 local lastfm_lib = require "scripts/lastfm_lib"
 
 -- main

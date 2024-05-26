@@ -12,12 +12,10 @@ if rc ~= 0 then
   return
 end
 
-if result.webradio then
-  return
-end
-
-if string.sub(result.uri, 1, 8) == "https://" or
-   string.sub(result.uri, 1, 7) == "http://" then
+if result.webradio or
+   string.sub(result.uri, 1, 8) == "https://" or
+   string.sub(result.uri, 1, 7) == "http://"
+then
   return
 end
 
