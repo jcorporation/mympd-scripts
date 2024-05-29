@@ -14,7 +14,8 @@ local lyrics_found = 0
 local lyrics_text
 -- TODO: construct the uri to fetch the lyrics from
 local lyrics_uri = ""
-local rc, code, header, body = mympd.http_client("GET", lyrics_uri, "", "")
+local code, header, body
+rc, code, header, body = mympd.http_client("GET", lyrics_uri, "", "")
 if rc == 0 and #body > 0 then
     -- TODO: extract lyrics text from response
     if lyrics_text then
@@ -34,7 +35,7 @@ local entry = {
     text = lyrics_text
 }
 local result = {
-    data = { entry }, 
+    data = { entry },
     totalEntities = 1,
     returnedEntities = 1
 }
