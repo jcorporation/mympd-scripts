@@ -3,12 +3,12 @@
 local p_www_songtexte_com = {
     name = "Songtexte",
     artist_filter = function(artist)
-        artist = artist:gsub(" ", "-")
+        artist = artist:gsub("%s", "-")
         artist = artist:lower(artist)
         return artist
     end,
     title_filter = function(title)
-        title = title:gsub(" ", "-")
+        title = title:gsub("%s", "-")
         title = title:lower(title)
         return title
     end,
@@ -27,6 +27,6 @@ local p_www_songtexte_com = {
 
 -- Return the providers as lua table
 -- You can use this table to sort or disable providers
-return { 
+return {
     p_www_songtexte_com,
 }
