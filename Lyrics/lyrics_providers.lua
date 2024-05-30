@@ -1,8 +1,6 @@
 -- {"order":1,"arguments":[]}
 
-local providers = {}
-
-providers.www_songtexte_com = {
+local p_www_songtexte_com = {
     name = "Songtexte",
     artist_filter = function(artist)
         artist = artist:gsub(" ", "-")
@@ -19,10 +17,16 @@ providers.www_songtexte_com = {
     lyrics_uri = "https://www.songtexte.com/",
     lyrics_pattern = "<div id=\"lyrics\">(.-)<p id=\"artistCopyright\"",
     result_filter = function(result)
+        if result:find("Kein Songtext vorhanden.") then
+            result = nil
+        end
         return result
     end,
     result_strip_html = true
 }
 
--- return the providers as lua table
-return providers
+-- Return the providers as lua table
+-- You can use this table to sort or disable providers
+return { 
+    p_www_songtexte_com,
+}
