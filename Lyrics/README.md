@@ -2,6 +2,25 @@
 
 Here can you find scripts to get lyrics from an external lyrics provider.
 
-Attach the script to the Lyrics trigger to fetch lyrics on demand. Only the first trigger will be executed.
+## Generic lyrics fetcher
 
-At the moment there is no specific lyrics provider implemented. You can use the `lyrics_generic.lua` script as template to implement your own lyrics fetch script.
+This script is inspired by the [MusicBee Lyrics Reloaded Plugin](https://www.getmusicbee.com/addons/plugins/467/lyrics-reloaded-latest/).
+
+It uses a generic script that is configured by a provider configuration file.
+
+The workflow is:
+
+1. Normalizes the artist and title by the provided `artist_filter` and `title_filter` function.
+2. Identifies lyrics link by a search, defined by `identity_uri` and `identity_pattern`.
+3. Opens the lyrics link and extract lyrics, defined by `lyrics_uri` and `lyrics_pattern`.
+4. Normalizes the result defined by the `result_filter` function and optionally strips html tags.
+
+You can use the variables `{artist}` and `{title}` for uris and patterns.
+
+The script supports any number of providers.
+
+### Usage
+
+1. Import the `lyrics_generic.lua` and `lyrics_providers.lua` scripts.
+2. Attach the script `lyrics_generic.lua` to the Lyrics trigger to fetch lyrics on demand. Only the first trigger will be executed.
+3. Edit the `lyrics_providers.lua` to add / remove /change the lyrics providers.

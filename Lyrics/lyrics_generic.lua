@@ -1,29 +1,75 @@
 -- {"order":1,"arguments":["uri"]}
--- Template to create a lyrics fetch script.
--- You must implement the as TODO marked section yourself.
-local song_uri = mympd_arguments.uri
+-- Import lyrics provider configuration
+local providers = require "scripts/lyrics_providers"
+local rc, code, header, body, song, lyrics_text
+
+local function strip_html(str)
+    str = str:gsub("<!%[CDATA%[.-%]%]>", "")
+    str = str:gsub("<script._</script>", "")
+    str = str:gsub("<!%-%-.-%-%->", "")
+    str = str:gsub("<[^>]+>", "")
+    str = str:gsub("%*/", "")
+    str = str:gsub("\n\n\n+", "\n")
+    return str
+end
+
+local function replace_vars(str, artist, title, pattern)
+    if pattern then
+        -- escape magic chars for pattern matching
+        artist = artist:gsub("([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%%" .. "%1")
+        title = title:gsub("([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%%" .. "%1")
+    end
+    str = str:gsub("{artist}", artist)
+    str = str:gsub("{title}", title)
+    return str
+end
+
+local function get_lyrics_uri(provider, artist, title)
+    local identity_uri = replace_vars(provider.identity_uri, artist, title, false)
+    rc, code, header, body = mympd.http_client("GET", identity_uri, "", "")
+    if rc == 0 and #body > 0 then
+        local identity_pattern = replace_vars(provider.identity_pattern, artist, title, true)
+        local lyrics_path = body:match(identity_pattern)
+        if lyrics_path then
+            return provider.lyrics_uri .. lyrics_path
+        end
+    end
+    return nil
+end
 
 -- Get the song details
-local rc, song = mympd.api("MYMPD_API_SONG_DETAILS", {uri = song_uri})
+rc, song = mympd.api("MYMPD_API_SONG_DETAILS", {uri = mympd_arguments.uri})
 if rc ~= 0 then
     return mympd.http_jsonrpc_error("MYMPD_API_LYRICS_GET", "Song not found")
 end
 
 -- Fetch the lyrics
-local lyrics_found = 0
-local lyrics_text
--- TODO: construct the uri to fetch the lyrics from
-local lyrics_uri = ""
-local code, header, body
-rc, code, header, body = mympd.http_client("GET", lyrics_uri, "", "")
-if rc == 0 and #body > 0 then
-    -- TODO: extract lyrics text from response
+for _, provider in pairs(providers) do
+    mympd.log(6, "Try to fetch lyrics from " .. provider.name)
+    local artist = provider.artist_filter(song.Artist[1])
+    local title = provider.title_filter(song.Title)
+    local lyrics_uri
+    if provider.identity_uri then
+        lyrics_uri = get_lyrics_uri(provider, artist, title)
+    else
+        lyrics_uri = replace_vars(provider.lyrics_uri, artist, title, false)
+    end
+    if lyrics_uri then
+        rc, code, header, body = mympd.http_client("GET", lyrics_uri, "", "")
+        if rc == 0 then
+            local lyrics_pattern = replace_vars(provider.lyrics_pattern, artist, title, true)
+            lyrics_text = body:match(lyrics_pattern)
+        end
+    end
     if lyrics_text then
-        lyrics_found = 1
+        lyrics_text = provider.result_filter(lyrics_text)
+        if provider.result_strip_html then
+            lyrics_text = strip_html(lyrics_text)
+        end
     end
 end
 
-if lyrics_found == 0 then
+if not lyrics_text then
     return mympd.http_jsonrpc_error("MYMPD_API_LYRICS_GET", "No lyrics found")
 end
 
@@ -35,11 +81,12 @@ local entry = {
     text = lyrics_text
 }
 local result = {
+    method = "MYMPD_API_LYRICS_GET",
     data = { entry },
     totalEntities = 1,
     returnedEntities = 1
 }
 
 -- Cache the fetched lyrics and send the response
-mympd.lyricscache_write(json.encode(entry), song_uri)
+mympd.lyricscache_write(json.encode(entry), mympd_arguments.uri)
 return mympd.http_jsonrpc_response(result)
