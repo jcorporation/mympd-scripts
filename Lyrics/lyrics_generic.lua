@@ -10,6 +10,9 @@ local function strip_html(str)
     str = str:gsub("<[^>]+>", "")
     str = str:gsub("%*/", "")
     str = str:gsub("\n\n\n+", "\n")
+    str = str:gsub("&#(%d+);", function(s)
+            return string.char(s)
+        end)
     return str
 end
 
