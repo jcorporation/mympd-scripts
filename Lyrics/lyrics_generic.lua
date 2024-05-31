@@ -87,9 +87,7 @@ end
 if not lyrics_text then
     return mympd.http_jsonrpc_response({
         method = "MYMPD_API_LYRICS_GET",
-        message = "No lyrics found",
-        totalEntities = 1,
-        returnedEntities = 1
+        message = "No lyrics found"
     })
 end
 
@@ -103,6 +101,7 @@ local entry = {
 local result = {
     method = "MYMPD_API_LYRICS_GET",
     data = { entry },
+    uri = mympd_arguments.uri,
     totalEntities = 1,
     returnedEntities = 1
 }
