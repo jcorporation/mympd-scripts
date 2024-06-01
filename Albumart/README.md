@@ -1,16 +1,18 @@
 # Albumart
 
-Scripts to fetch albumart.
+This script fetches albumart.
 
-## Cover Art Archive
+## Usage
 
-This script fetches albumart from the [Cover Art Archive](https://coverartarchive.org/).
-
-Your songs must be tagged with the MUSICBRAINZ_ALBUMID tag.
-
-### Usage
-
-1. Import the Coverartarchvie.lua script
-2. Create a new trigger
+1. Create a new variable `fanart_tv_api_key` with your API key for Fanart.tv.
+2. Import the Albumart.lua script
+3. Create a new trigger
     - Event: `mympd_albumart`
-    - Action: above script
+    - Script: above script
+
+## Available providers
+
+| PROVIDER | REQUIRED TAGS |
+| -------- | ------------- |
+| [Cover Art Archive](https://coverartarchive.org/) | MUSICBRAINZ_ALBUMID |
+| [Fanart.tv](https://fanart.tv/) | MUSICBRAINZ_ARTISTID, MUSICBRAINZ_RELEASEGROUPID |

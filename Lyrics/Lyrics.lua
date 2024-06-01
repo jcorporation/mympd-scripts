@@ -1,6 +1,6 @@
 -- {"order":1,"arguments":["uri"]}
 -- Import lyrics provider configuration
-local providers = require "scripts/lyrics_providers"
+local providers = require "scripts/LyricsProviders"
 local rc, code, header, body, song, lyrics_text, desc
 
 local function strip_html(str)
