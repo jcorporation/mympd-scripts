@@ -10,6 +10,7 @@ end
 
 local out = mympd.tmp_file()
 
+rc = 1
 for _,provider in pairs(providers) do
     rc = provider.get(song, out)
     if rc == 0 then

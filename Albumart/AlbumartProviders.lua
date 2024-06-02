@@ -29,16 +29,15 @@ local p_fanart_tv = {
             mympd.log(7, "Invalid json data received")
             return 1
         end
-        local album = data.albums[song.MUSICBRAINZ_RELEASEGROUPID]
-        if not album then
+        if not data.albums[song.MUSICBRAINZ_RELEASEGROUPID] or
+           not data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover or
+           not data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover[1] or
+           not data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover[1].url
+        then
             mympd.log(7, "Album not found")
             return 1
         end
-        uri = album.albumcover[1].url
-        if not uri then
-            return 1
-        end
-        return mympd.http_download(uri, out)
+        return mympd.http_download(data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover[1].url, out)
     end
 }
 
