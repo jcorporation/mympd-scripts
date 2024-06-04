@@ -15,4 +15,6 @@ This script fetches albumart.
 | PROVIDER | REQUIRED TAGS |
 | -------- | ------------- |
 | [Cover Art Archive](https://coverartarchive.org/) | MUSICBRAINZ_ALBUMID |
-| [Fanart.tv](https://fanart.tv/) | MUSICBRAINZ_ARTISTID, MUSICBRAINZ_RELEASEGROUPID |
+| [Fanart.tv](https://fanart.tv/) | MUSICBRAINZ_ARTISTID, MUSICBRAINZ_RELEASEGROUPID [1] |
+
+[1] Supported since MPD 0.24

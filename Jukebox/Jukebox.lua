@@ -4,6 +4,7 @@ local addSongs = 1
 local min_jukebox_length = 50
 
 local function send_error(message)
+    -- Send signal that jukebox queue can not be filled
     mympd.api("INTERNAL_API_JUKEBOX_ERROR", {
         error = message
     })
