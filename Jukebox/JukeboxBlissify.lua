@@ -11,14 +11,14 @@ local function send_error(message)
 end
 
 -- Get length and last song of the jukebox queue
-rc, result = mympd.api("MYMPD_API_JUKEBOX_LIST", {
+local rc, result = mympd.api("MYMPD_API_JUKEBOX_LIST", {
     expression = "",
     offset = 0,
     limit = 1000,
     fields = {}
 })
 if rc == 1 then
-    send_error("Failure getting jukebox queue " .. playlist)
+    send_error("Failure getting jukebox queue.")
     return
 end
 local jukebox_length = result.totalEntities

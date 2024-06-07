@@ -30,7 +30,7 @@ local playlist = result.data[number].uri
 -- Get length of the jukebox queue
 rc, result = mympd.api("MYMPD_API_JUKEBOX_LENGTH", {})
 if rc == 1 then
-    send_error("Failure getting jukebox queue length " .. playlist)
+    send_error("Failure getting jukebox queue length.")
     return
 end
 local jukebox_length = result.length
