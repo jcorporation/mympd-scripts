@@ -25,7 +25,7 @@ end
 
 -- Cache the fetched albumart and send it to the client
 local filename
-rc, filename = mympd.covercache_write(out, mympd_arguments.uri)
+rc, filename = mympd.cache_cover_write(out, mympd_arguments.uri)
 if rc == 0 then
     return mympd.http_serve_file(filename)
 end

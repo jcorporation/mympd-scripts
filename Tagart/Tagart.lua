@@ -22,7 +22,7 @@ end
 
 -- Cache the fetched tagart and send it to the client
 local filename
-rc, filename = mympd.thumbscache_write(out, value)
+rc, filename = mympd.cache_thumbs_write(out, value)
 if rc == 0 then
     return mympd.http_serve_file(filename)
 end

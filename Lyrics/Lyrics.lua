@@ -107,5 +107,5 @@ local result = {
 }
 
 -- Cache the fetched lyrics and send the response
-mympd.lyricscache_write(json.encode(entry), mympd_arguments.uri)
+mympd.cache_lyrics_write(json.encode(entry), mympd_arguments.uri)
 return mympd.http_jsonrpc_response(result)

@@ -13,7 +13,9 @@ read_globals = {
     "mympd_api",
     "mympd_http_client",
     "mympd_http_download",
-    "mympd_util_covercache_write",
+    "mympd_caches_images_write",
+    "mympd_caches_lyrics_write",
+    "mympd_caches_update_mtime",
     "mympd_util_notify",
     "mympd_util_log",
     "mympd_util_hash",
@@ -26,4 +28,4 @@ read_globals = {
 }
 
 unused = false
-max_line_length = 256
+max_line_length = 1000
