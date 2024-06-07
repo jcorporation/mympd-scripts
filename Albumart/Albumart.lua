@@ -24,9 +24,10 @@ if rc == 1 then
 end
 
 -- Cache the fetched albumart and send it to the client
-local file = mympd.covercache_write(out, mympd_arguments.uri)
-if file then
-    return mympd.http_serve_file(file)
+local filename
+rc, filename = mympd.covercache_write(out, mympd_arguments.uri)
+if rc == 0 then
+    return mympd.http_serve_file(filename)
 end
 
 return mympd.http_redirect("/assets/coverimage-notavailable")

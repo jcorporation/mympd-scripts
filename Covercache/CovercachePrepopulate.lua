@@ -29,7 +29,9 @@ local function check_image(base)
     return false
 end
 
-local rc, result = mympd.api("MYMPD_API_DATABASE_ALBUM_LIST", {
+local rc, result, code, headers
+
+rc, result = mympd.api("MYMPD_API_DATABASE_ALBUM_LIST", {
     offset = 0,
     limit = 10000,
     expression = "",
@@ -42,23 +44,22 @@ local existing = 0
 local errors = 0
 local downloaded = 0
 for _, album in pairs(result.data) do
-    local path = mympd_env.cachedir_cover .. "/" .. mympd.hash_sha1(album.uri) .. "-0"
-    if not check_image(path) then
-        if not pcall(function()
+    if album.uri and album.uri ~= "" then
+        local path = mympd_env.cachedir_cover .. "/" .. mympd.hash_sha1(album.uri) .. "-0"
+        if not check_image(path) then
             local out = mympd.tmp_file()
             local uri = mympd_state.mympd_uri .. 'albumart-thumb?offset=0&uri=' .. mympd.urlencode(album.uri)
-            if mympd_http_download(uri, out) == 0 then
+            rc, code, headers = mympd_http_download(uri, out)
+            if rc == 0 then
                 local name = mympd.covercache_write(out, album.uri)
                 mympd.log(6, "Covercache: " .. name)
                 downloaded = downloaded + 1
             else
                 errors = errors + 1
             end
-        end) then
-            errors = errors + 1
+        else
+            existing = existing + 1
         end
-    else
-        existing = existing + 1
     end
 end
 

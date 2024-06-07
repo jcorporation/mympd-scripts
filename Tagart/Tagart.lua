@@ -21,9 +21,10 @@ if rc == 1 then
 end
 
 -- Cache the fetched tagart and send it to the client
-local file = mympd.thumbscache_write(out, value)
-if file then
-    return mympd.http_serve_file(file)
+local filename
+rc, filename = mympd.thumbscache_write(out, value)
+if rc == 0 then
+    return mympd.http_serve_file(filename)
 end
 
 return mympd.http_redirect("/assets/coverimage-notavailable")

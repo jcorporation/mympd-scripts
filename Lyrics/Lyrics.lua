@@ -1,7 +1,7 @@
 -- {"order":1,"arguments":["uri"]}
 -- Import lyrics provider configuration
 local providers = require "scripts/LyricsProviders"
-local rc, code, header, body, song, lyrics_text, desc
+local rc, code, headers, body, song, lyrics_text, desc
 
 local function strip_html(str)
     str = str:gsub("<!%[CDATA%[.-%]%]>", "")
@@ -37,7 +37,7 @@ end
 
 local function get_lyrics_uri(provider, artist, title)
     local identity_uri = replace_vars_uri(provider.identity_uri, artist, title)
-    rc, code, header, body = mympd.http_client("GET", identity_uri, "", "")
+    rc, code, headers, body = mympd.http_client("GET", identity_uri, "", "")
     if rc == 0 and #body > 0 then
         local identity_pattern = replace_vars_pattern(provider.identity_pattern, artist, title)
         local lyrics_path = body:match(identity_pattern)
@@ -66,7 +66,7 @@ for _, provider in pairs(providers) do
         lyrics_uri = replace_vars_uri(provider.lyrics_uri, artist, title)
     end
     if lyrics_uri then
-        rc, code, header, body = mympd.http_client("GET", lyrics_uri, "", "")
+        rc, code, headers, body = mympd.http_client("GET", lyrics_uri, "", "")
         if rc == 0 then
             local lyrics_pattern = replace_vars_pattern(provider.lyrics_pattern, artist, title)
             lyrics_text = body:match(lyrics_pattern)
