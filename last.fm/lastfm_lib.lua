@@ -33,11 +33,11 @@ local function urlencode_data(data)
 end
 
 lastfm_lib.sendData = function(data)
-  local headers = 'Content-type: application/x-www-form-urlencoded\r\n'
+  local extra_headers = 'Content-type: application/x-www-form-urlencoded\r\n'
   local hash = hashRequest(data, mympd_env.var_lastfm_secret)
   data["api_sig"] = hash
   data = urlencode_data(data)
-  local rc, code, header, body = mympd.http_client("POST", "https://ws.audioscrobbler.com/2.0/?format=json", headers, data)
+  local rc, code, headers, body = mympd.http_client("POST", "https://ws.audioscrobbler.com/2.0/?format=json", extra_headers, data)
   return rc, body
 end
 

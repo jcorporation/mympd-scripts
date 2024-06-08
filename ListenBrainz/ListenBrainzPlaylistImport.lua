@@ -1,12 +1,11 @@
 -- {"order":1,"arguments":[]}
 
-local headers = "Content-type: application/json\r\n" ..
-    "Authorization: Token " .. mympd_env.var_listenbrainz_token .. "\r\n"
+local extra_headers = "Authorization: Token " .. mympd_env.var_listenbrainz_token .. "\r\n"
 
 local function fetch_playlists()
     local uri = "https://api.listenbrainz.org/1/user/" ..
         mympd_env.var_listenbrainz_username .. "/playlists/createdfor"
-    local rc, code, header, body = mympd.http_client("GET", uri, headers, "")
+    local rc, code, headers, body = mympd.http_client("GET", uri, extra_headers, "")
     if rc == 1 then
         return "Failure fetching playlists"
     end
@@ -30,7 +29,7 @@ end
 local function import_playlist(playlist_uri)
     local mbid = string.gsub(playlist_uri, "(.*/)(.*)", "%2")
     local uri = "https://api.listenbrainz.org/1/playlist/" .. mbid
-    local rc, code, header, body = mympd.http_client("GET", uri, headers, "")
+    local rc, code, header, body = mympd.http_client("GET", uri, extra_headers, "")
     if rc == 1 then
         return "Failure fetching playlist " .. mbid
     end
