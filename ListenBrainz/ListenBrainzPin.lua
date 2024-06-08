@@ -13,7 +13,7 @@ local uri = ""
 if mympd_arguments.uri ~= "" then
   local rc, song = mympd.api("MYMPD_API_SONG_DETAILS", {uri = mympd_arguments.uri})
   if rc == 0 then
-    local mbid = song["MUSICBRAINZ_TRACKID"]
+    local mbid = song.MUSICBRAINZ_TRACKID
     if mbid ~= nil then
       payload = json.encode({
         recording_mbid = mbid,

@@ -20,15 +20,15 @@ then
 end
 
 local artist_mbids = {}
-if result["MUSICBRAINZ_ARTISTID"] ~= nil then
+if result.MUSICBRAINZ_ARTISTID ~= nil then
   for _, v in pairs(result["MUSICBRAINZ_ARTISTID"]) do
     if v ~= "" or v == nil then
       artist_mbids[#artist_mbids + 1] = v
     end
   end
 end
-if result["MUSICBRAINZ_ALBUMARTISTID"] ~= nil then
-  for _, v in pairs(result["MUSICBRAINZ_ALBUMARTISTID"]) do
+if result.MUSICBRAINZ_ALBUMARTISTID ~= nil then
+  for _, v in pairs(result.MUSICBRAINZ_ALBUMARTISTID) do
     if v ~= "" or v == nil then
       artist_mbids[#artist_mbids + 1] = v
     end
@@ -37,16 +37,16 @@ end
 local payload = json.encode({
   listen_type = "single",
   payload = {{
-    listened_at = result["startTime"],
+    listened_at = result.startTime,
     track_metadata = {
       additional_info = {
-        release_mbid = result["MUSICBRAINZ_RELEASETRACKID"],
-        recording_mbid = result["MUSICBRAINZ_TRACKID"],
+        release_mbid = result.MUSICBRAINZ_RELEASETRACKID,
+        recording_mbid = result.MUSICBRAINZ_TRACKID,
         artist_mbids = artist_mbids
       },
-      artist_name = result["Artist"][1],
-      track_name = result["Title"],
-      release_name = result["Album"]
+      artist_name = result.Artist[1],
+      track_name = result.Title,
+      release_name = result.Album
     }
   }}
 });

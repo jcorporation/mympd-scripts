@@ -25,7 +25,7 @@ end
 -- get song details
 local rc, song = mympd.api("MYMPD_API_SONG_DETAILS", { uri = mympd_arguments.uri })
 if rc == 0 then
-  local mbid = song["MUSICBRAINZ_TRACKID"]
+  local mbid = song.MUSICBRAINZ_TRACKID
   if mbid ~= nil and mbid ~= "" then
     local payload = json.encode({
       recording_mbid = mbid,
