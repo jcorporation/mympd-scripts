@@ -26,9 +26,14 @@ local payload = json.encode({
     artists = result.Artist[1],
     title = result.Title,
     album = result.Album,
-    albumartists = result.AlbumArtist[1],
     time = result.startTime
 });
+
+if result.AlbumArtist ~= nil and
+   #result.AlbumArtist > 0
+then
+    payload.albumartists = result.AlbumArtist[1]
+end
 
 local code, headers, body
 rc, code, headers, body = mympd.http_client("POST", uri, extra_headers, payload)

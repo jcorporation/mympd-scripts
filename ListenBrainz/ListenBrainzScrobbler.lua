@@ -22,14 +22,14 @@ end
 local artist_mbids = {}
 if result.MUSICBRAINZ_ARTISTID ~= nil then
   for _, v in pairs(result["MUSICBRAINZ_ARTISTID"]) do
-    if v ~= "" or v == nil then
+    if v ~= "" then
       artist_mbids[#artist_mbids + 1] = v
     end
   end
 end
 if result.MUSICBRAINZ_ALBUMARTISTID ~= nil then
   for _, v in pairs(result.MUSICBRAINZ_ALBUMARTISTID) do
-    if v ~= "" or v == nil then
+    if v ~= "" then
       artist_mbids[#artist_mbids + 1] = v
     end
   end
