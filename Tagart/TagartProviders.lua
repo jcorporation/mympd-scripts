@@ -50,7 +50,7 @@ local p_fanart_tv = {
             mympd.log(7, "Tagart not found")
             return 1
         end
-        return mympd.http_download(data.artistthumb[1].url, out)
+        return mympd.http_download(data.artistthumb[1].url, "", out)
     end
 }
 

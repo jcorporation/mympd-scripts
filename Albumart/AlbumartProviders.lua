@@ -6,7 +6,7 @@ local p_coverartarchive = {
         if not song.MUSICBRAINZ_ALBUMID then
             return 1
         end
-        return mympd.http_download("https://coverartarchive.org/release/" .. song.MUSICBRAINZ_ALBUMID .. "/front", out)
+        return mympd.http_download("https://coverartarchive.org/release/" .. song.MUSICBRAINZ_ALBUMID .. "/front", "", out)
     end
 }
 
@@ -37,7 +37,7 @@ local p_fanart_tv = {
             mympd.log(7, "Album not found")
             return 1
         end
-        return mympd.http_download(data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover[1].url, out)
+        return mympd.http_download(data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover[1].url, "", out)
     end
 }
 
