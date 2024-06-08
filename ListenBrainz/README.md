@@ -10,16 +10,6 @@
   - MUSICBRAINZ_RELEASETRACKID
   - MUSICBRAINZ_TRACKID
 
-## Scrobbling
-
-You can send your listening habits to ListenBrainz.
-
-- Create a new script
-  - Import the `ListenBrainzScrobbler.lua` script
-- Create a new trigger
-  - Event: `mympd_scrobble`
-  - Action: above script
-
 ## Feedback
 
 You can send hate/love feedback to ListenBrainz with the thumbs up and down buttons in the playback view.
@@ -30,6 +20,25 @@ You can send hate/love feedback to ListenBrainz with the thumbs up and down butt
   - Event: `mympd_feedback`
   - Action: above script
   - Leave the arguments empty
+
+## Playlist Import
+
+Fetches a list of created playlists for your username.
+
+- Set your ListenBrainz username: Scripts -> Variables
+  - New variable with key `listenbrainz_username` and your username as value.
+- Import the script.
+- Run it manually, it should fetch a list of created playlists and you can select which should be imported.
+
+## Scrobbling
+
+You can send your listening habits to ListenBrainz.
+
+- Create a new script
+  - Import the `ListenBrainzScrobbler.lua` script
+- Create a new trigger
+  - Event: `mympd_scrobble`
+  - Action: above script
 
 ## Set Pin
 
