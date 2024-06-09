@@ -23,7 +23,7 @@ local uri = mympd_env.var_maloja_host .. "/apis/mlj_1/newscrobble?key=" .. mympd
 local extra_headers = "Content-type: application/json\r\n"
 
 local payload = json.encode({
-    artists = result.Artist[1],
+    artists = result.Artist,
     title = result.Title,
     album = result.Album,
     time = result.startTime
@@ -32,7 +32,7 @@ local payload = json.encode({
 if result.AlbumArtist ~= nil and
    #result.AlbumArtist > 0
 then
-    payload.albumartists = result.AlbumArtist[1]
+    payload.albumartists = result.AlbumArtist
 end
 
 local code, headers, body
