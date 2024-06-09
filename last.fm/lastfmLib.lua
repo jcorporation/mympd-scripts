@@ -4,7 +4,7 @@ package.cpath = package.cpath .. ";/usr/lib/x86_64-linux-gnu/lua/5.2/?.so"
 
 local md5 = require "md5"
 
-lastfm_lib = {}
+lastfmLib = {}
 
 local function hashRequest(data, secret)
   local keys = {}
@@ -32,7 +32,7 @@ local function urlencode_data(data)
  return s
 end
 
-lastfm_lib.sendData = function(data)
+lastfmLib.sendData = function(data)
   local extra_headers = 'Content-type: application/x-www-form-urlencoded\r\n'
   local hash = hashRequest(data, mympd_env.var_lastfm_secret)
   data["api_sig"] = hash
@@ -41,4 +41,4 @@ lastfm_lib.sendData = function(data)
   return rc, body
 end
 
-return lastfm_lib
+return lastfmLib

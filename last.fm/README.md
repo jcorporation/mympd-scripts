@@ -1,14 +1,12 @@
 # last.fm
 
-Scrobble tracks from myMPD to last.fm.
+Scrobble tracks, send now playing and feedback from myMPD to last.fm.
 
 Tested on Debian 13, you need to install MD5 library:
 
 ```sh
 sudo apt-get install lua-md5
 ```
-
-Import `lastfm_lib.lua` as `lastfm_lib`.
 
 ## Create variables
 
@@ -18,7 +16,7 @@ Import `lastfm_lib.lua` as `lastfm_lib`.
 | lastfm_secret | your shared secret |
 | lastfm_session_key | your session key |
 
-You can use the script `lastfm_get_session_key.lua` to set the session key. This script asks for your last.fm username and password. Set the variables `lastfm_api_key` and `lastfm_secret` before.
+You can use the script `lastfmGetSessionKey.lua` to set the session key. This script asks for your last.fm username and password. Set the variables `lastfm_api_key` and `lastfm_secret` before.
 
 The last.fm APi is available for everyone. You can get your API key and shared secret from: https://www.last.fm/api
 
@@ -26,9 +24,9 @@ The last.fm APi is available for everyone. You can get your API key and shared s
 
 | EVENT | SCRIPT |
 | ----- | ------ |
-| Player | lastfm_player |
-| Scrobble | lastfm_scrobble |
-| Feedback | lastfm_feedback |
+| Player | lastfmPlayer |
+| Scrobble | lastfmScrobbler |
+| Feedback | lastfmFeedback |
 
 ***
 

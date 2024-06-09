@@ -1,5 +1,5 @@
 -- {"order":1,"arguments":[]}
-local lastfm_lib = require "scripts/lastfm_lib"
+local lastfmLib = require "scripts/lastfmLib"
 
 -- main
 local rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
@@ -24,7 +24,7 @@ local data = {
 }
 
 local body
-rc, body = lastfm_lib.sendData(data)
+rc, body = lastfmLib.sendData(data)
 if rc ~= 0 then
   return "Scrobble: Error"
 end

@@ -1,5 +1,5 @@
 -- {"order":1,"arguments":["uri","vote","type"]}
-local lastfm_lib = require "scripts/lastfm_lib"
+local lastfmLib = require "scripts/lastfmLib"
 
 -- main
 if mympd_arguments.type == "like" then
@@ -29,7 +29,7 @@ local data = {
 }
 
 local body
-rc, body = lastfm_lib.sendData(data)
+rc, body = lastfmLib.sendData(data)
 if rc ~= 0 then
   return "Feedback: Error"
 end

@@ -1,5 +1,5 @@
 -- {"order":1,"arguments":["username", "password"]}
-local lastfm_lib = require "scripts/lastfm_lib"
+local lastfmLib = require "scripts/lastfmLib"
 
 local data = {
   method   = "auth.getMobileSession",
@@ -8,7 +8,7 @@ local data = {
   api_key  = mympd_env.var_lastfm_api_key,
 }
 
-local rc, body = lastfm_lib.sendData(data)
+local rc, body = lastfmLib.sendData(data)
 local ret = json.decode(body)
 
 mympd.api("MYMPD_API_SCRIPT_VAR_SET", { key = "lastfm_session_key", value = ret.session.key })
