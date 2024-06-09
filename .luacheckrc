@@ -2,7 +2,7 @@
 globals = {
     "json",
     "mympd",
-    "lastfm_lib"
+    "lastfmLib"
 }
 
 -- these globals can only be accessed.
