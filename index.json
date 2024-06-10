@@ -43,115 +43,115 @@
 ,{
   "file": "Jukebox/JukeboxBlissify.lua",
   "name": "JukeboxBlissify",
-  "desc": "",
-  "version": 0
+  "desc": "Uses blissify-rs to populate the jukebox queue.",
+  "version": 1
 }
 ,{
   "file": "Jukebox/JukeboxRandomPlaylist.lua",
   "name": "JukeboxRandomPlaylist",
-  "desc": "",
-  "version": 0
+  "desc": "Populates the jukebox queue with random songs from a random playlist.",
+  "version": 1
 }
 ,{
   "file": "ListenBrainz/ListenBrainzFeedback.lua",
   "name": "ListenBrainzFeedback",
-  "desc": "",
-  "version": 0
+  "desc": "Sends feedback to ListenBrainz.",
+  "version": 1
 }
 ,{
   "file": "ListenBrainz/ListenBrainzPlaylistImport.lua",
   "name": "ListenBrainzPlaylistImport",
-  "desc": "",
-  "version": 0
+  "desc": "Imports generated playlists from ListenBrainz.",
+  "version": 1
 }
 ,{
   "file": "ListenBrainz/ListenBrainzScrobbler.lua",
   "name": "ListenBrainzScrobbler",
-  "desc": "",
-  "version": 0
+  "desc": "Scrobbles songs to ListenBrainz.",
+  "version": 1
 }
 ,{
   "file": "ListenBrainz/ListenBrainzSetPin.lua",
   "name": "ListenBrainzSetPin",
-  "desc": "",
-  "version": 0
+  "desc": "Sets or unsets the pin on ListenBrainz.",
+  "version": 1
 }
 ,{
   "file": "Lyrics/Lyrics.lua",
   "name": "Lyrics",
-  "desc": "",
-  "version": 0
+  "desc": "Fetches lyrics on demand.",
+  "version": 1
 }
 ,{
   "file": "Lyrics/LyricsProviders.lua",
   "name": "LyricsProviders",
-  "desc": "",
-  "version": 0
+  "desc": "Lyrics providers for the Lyrics script.",
+  "version": 1
 }
 ,{
   "file": "Maloja/MalojaScrobbler.lua",
   "name": "MalojaScrobbler",
-  "desc": "",
-  "version": 0
+  "desc": "Scrobbles songs to your Maloja server.",
+  "version": 1
 }
 ,{
   "file": "Misc/EnableJukebox.lua",
   "name": "EnableJukebox",
-  "desc": "",
-  "version": 0
+  "desc": "Enables the jukebox with specified options.",
+  "version": 1
 }
 ,{
   "file": "Misc/PlayRandomPlaylist.lua",
   "name": "PlayRandomPlaylist",
-  "desc": "",
-  "version": 0
+  "desc": "Plays a random playlist.",
+  "version": 1
 }
 ,{
   "file": "Tagart/Tagart.lua",
   "name": "Tagart",
-  "desc": "",
-  "version": 0
+  "desc": "Fetches tagart on demand.",
+  "version": 1
 }
 ,{
   "file": "Tagart/TagartProviders.lua",
   "name": "TagartProviders",
-  "desc": "",
-  "version": 0
+  "desc": "Tagart providers for the Tagart script.",
+  "version": 1
 }
 ,{
   "file": "last.fm/lastfmFeedback.lua",
   "name": "lastfmFeedback",
-  "desc": "",
-  "version": 0
+  "desc": "Sends feedback to last.fm.",
+  "version": 1
 }
 ,{
   "file": "last.fm/lastfmGetSessionKey.lua",
   "name": "lastfmGetSessionKey",
-  "desc": "",
-  "version": 0
+  "desc": "Fetches the session key from last.fm and sets the myMPD variable.",
+  "version": 1
 }
 ,{
   "file": "last.fm/lastfmLib.lua",
   "name": "lastfmLib",
-  "desc": "",
-  "version": 0
+  "desc": "Library requried by the other last.fm modules.",
+  "version": 1
 }
 ,{
   "file": "last.fm/lastfmPlayer.lua",
   "name": "lastfmPlayer",
-  "desc": "",
-  "version": 0
+  "desc": "Sends the now playing info to last.fm.",
+  "version": 1
 }
 ,{
   "file": "last.fm/lastfmScrobbler.lua",
   "name": "lastfmScrobbler",
-  "desc": "",
-  "version": 0
+  "desc": "Scrobbles songs to last.fm.",
+  "version": 1
 }
 ,{
   "file": "yt-dlp/yt-dlp.lua",
   "name": "yt-dlp",
-  "desc": "",
-  "version": 0
+  "desc": "Streams songs and playlists with the help of yt-dlp.",
+  "version": 1
 }
 ]}

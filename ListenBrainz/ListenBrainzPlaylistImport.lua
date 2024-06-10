@@ -1,4 +1,4 @@
--- {"order":1,"arguments":[]}
+-- {"name": "ListenBrainzPlaylistImport", "file": "ListenBrainz/ListenBrainzPlaylistImport.lua", "version": 1, "desc": "Imports generated playlists from ListenBrainz.", "order":1,"arguments":[]}
 
 local extra_headers = "Authorization: Token " .. mympd_env.var_listenbrainz_token .. "\r\n"
 

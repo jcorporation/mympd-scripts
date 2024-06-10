@@ -1,4 +1,4 @@
--- {"order":0,"arguments":[]}
+-- {"name": "lastfmLib", "file": "last.fm/lastfmLib.lua", "version": 1, "desc": "Library requried by the other last.fm modules.", "order":0,"arguments":[]}
 package.path = package.path .. ";/usr/share/lua/5.2/?.lua"
 package.cpath = package.cpath .. ";/usr/lib/x86_64-linux-gnu/lua/5.2/?.so"
 

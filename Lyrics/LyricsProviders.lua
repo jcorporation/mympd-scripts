@@ -1,4 +1,4 @@
--- {"order":1,"arguments":[]}
+-- {"name": "LyricsProviders", "file": "Lyrics/LyricsProviders.lua", "version": 1, "desc": "Lyrics providers for the Lyrics script.", "order":0,"arguments":[]}
 
 local p_www_songtexte_com = {
     name = "Songtexte",

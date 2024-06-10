@@ -1,4 +1,4 @@
--- {"order":1,"arguments":[]}
+-- {"name": "ListenBrainzScrobbler", "file": "ListenBrainz/ListenBrainzScrobbler.lua", "version": 1, "desc": "Scrobbles songs to ListenBrainz.", "order":1,"arguments":[]}
 if mympd_env.var_listenbrainz_token == nil then
   return "No ListenBrainz token set"
 end

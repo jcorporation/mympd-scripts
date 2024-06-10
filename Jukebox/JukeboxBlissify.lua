@@ -1,4 +1,4 @@
--- {"order":1,"arguments":[]}
+-- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 1, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":1,"arguments":[]}
 local blissify_path = "/usr/local/bin/blissify"
 local addSongs = 1
 local min_jukebox_length = 50

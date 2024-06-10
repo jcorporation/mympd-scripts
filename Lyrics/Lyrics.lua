@@ -1,4 +1,4 @@
--- {"order":1,"arguments":["uri"]}
+-- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 1, "desc": "Fetches lyrics on demand.", "order":1,"arguments":["uri"]}
 -- Import lyrics provider configuration
 local providers = require "scripts/LyricsProviders"
 local rc, code, headers, body, song, lyrics_text, desc
