@@ -80,13 +80,13 @@
   "file": "Lyrics/Lyrics.lua",
   "name": "Lyrics",
   "desc": "Fetches lyrics on demand.",
-  "version": 2
+  "version": 3
 }
 ,{
   "file": "Lyrics/LyricsProviders.lua",
   "name": "LyricsProviders",
   "desc": "Lyrics providers for the Lyrics script.",
-  "version": 2
+  "version": 3
 }
 ,{
   "file": "Maloja/MalojaScrobbler.lua",
