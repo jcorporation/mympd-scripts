@@ -1,4 +1,4 @@
--- {"order":1,"arguments":[]}
+-- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 1, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
 
 mympd.init()
 

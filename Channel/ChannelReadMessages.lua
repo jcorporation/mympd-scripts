@@ -1,4 +1,4 @@
--- {"name": "ChannelReadMessages", "file": "Channel/ChannelReadMessages.lua", "desc": "Reads all message from a MPD channel.", "order":1,"arguments":[]}
+-- {"name": "ChannelReadMessages", "file": "Channel/ChannelReadMessages.lua", "version": 1, "desc": "Reads all message from a MPD channel.", "order":1,"arguments":[]}
 
 local rc, result =  mympd.api("MYMPD_API_CHANNEL_MESSAGES_READ", {})
 

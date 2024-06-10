@@ -1,131 +1,157 @@
 {"scripts":[{
   "file": "Albumart/Albumart.lua",
   "name": "Albumart",
-  "desc": "Fetches albumart on demand."
+  "desc": "Fetches albumart on demand.",
+  "version": 1
 }
 ,{
   "file": "Albumart/AlbumartProviders.lua",
   "name": "AlbumartProviders",
-  "desc": "Albumart providers for the Albumart script."
+  "desc": "Albumart providers for the Albumart script.",
+  "version": 1
 }
 ,{
   "file": "BatteryIndicator/BatteryIndicator.lua",
   "name": "BatteryIndicator",
-  "desc": "Displays the battery status from sys filesystem."
+  "desc": "Displays the battery status from sys filesystem.",
+  "version": 1
 }
 ,{
   "file": "Channel/ChannelReadMessages.lua",
   "name": "ChannelReadMessages",
-  "desc": "Reads all message from a MPD channel."
+  "desc": "Reads all message from a MPD channel.",
+  "version": 1
 }
 ,{
   "file": "Channel/ChannelSendMessage.lua",
   "name": "ChannelSendMessage",
-  "desc": "Sends a message to a MPD channel."
+  "desc": "Sends a message to a MPD channel.",
+  "version": 1
 }
 ,{
   "file": "Channel/ChannelSubscribe.lua",
   "name": "ChannelSubscribe",
-  "desc": "Subscribes to a MPD channel."
+  "desc": "Subscribes to a MPD channel.",
+  "version": 1
 }
 ,{
   "file": "Covercache/CovercachePrepopulate.lua",
   "name": "CovercachePrepopulate",
-  "desc": ""
+  "desc": "Prepopulates the myMPD covercache.",
+  "version": 1
 }
 ,{
   "file": "Jukebox/JukeboxBlissify.lua",
   "name": "JukeboxBlissify",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "Jukebox/JukeboxRandomPlaylist.lua",
   "name": "JukeboxRandomPlaylist",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "ListenBrainz/ListenBrainzFeedback.lua",
   "name": "ListenBrainzFeedback",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "ListenBrainz/ListenBrainzPlaylistImport.lua",
   "name": "ListenBrainzPlaylistImport",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "ListenBrainz/ListenBrainzScrobbler.lua",
   "name": "ListenBrainzScrobbler",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "ListenBrainz/ListenBrainzSetPin.lua",
   "name": "ListenBrainzSetPin",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "Lyrics/Lyrics.lua",
   "name": "Lyrics",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "Lyrics/LyricsProviders.lua",
   "name": "LyricsProviders",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "Maloja/MalojaScrobbler.lua",
   "name": "MalojaScrobbler",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "Misc/EnableJukebox.lua",
   "name": "EnableJukebox",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "Misc/PlayRandomPlaylist.lua",
   "name": "PlayRandomPlaylist",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "Tagart/Tagart.lua",
   "name": "Tagart",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "Tagart/TagartProviders.lua",
   "name": "TagartProviders",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "last.fm/lastfmFeedback.lua",
   "name": "lastfmFeedback",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "last.fm/lastfmGetSessionKey.lua",
   "name": "lastfmGetSessionKey",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "last.fm/lastfmLib.lua",
   "name": "lastfmLib",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "last.fm/lastfmPlayer.lua",
   "name": "lastfmPlayer",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "last.fm/lastfmScrobbler.lua",
   "name": "lastfmScrobbler",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ,{
   "file": "yt-dlp/yt-dlp.lua",
   "name": "yt-dlp",
-  "desc": ""
+  "desc": "",
+  "version": 0
 }
 ]}

@@ -21,12 +21,18 @@ do
     NAME=$(basename "$F" .lua)
     SCRIPT_HEADER=$(head -1 "$F" < $F | sed 's/^-- //')
     DESC=$(printf "%s" "$SCRIPT_HEADER" | jq -r '.desc')
+    VERSION=$(printf "%s" "$SCRIPT_HEADER" | jq -r '.version')
     [ "$DESC" = "null" ] && DESC=""
-    jq -n --arg file "$F" --arg name "$NAME" --arg desc "$DESC" \
+    [ "$VERSION" = "null" ] && VERSION="0"
+    jq -n --arg file "$F" \
+        --arg name "$NAME" \
+        --arg desc "$DESC" \
+        --argjson version "$VERSION" \
         '{
             "file": $file,
             "name": $name,
-            "desc": $desc
+            "desc": $desc,
+            "version": $version
         }' >&3
     I=$((I+1))
 done
