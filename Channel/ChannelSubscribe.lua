@@ -1,4 +1,4 @@
--- {"order":1,"arguments":["channel"]}
+-- {"name": "ChannelSubscribe", "file": "Channel/ChannelSubscribe.lua", "desc": "Subscribes to a MPD channel.", "order":1,"arguments":["channel"]}
 
 local channel = mympd_arguments.channel
 if not channel or channel == "" then

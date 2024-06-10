@@ -1,4 +1,4 @@
--- {"order":1,"arguments":[]}
+-- {"name": "AlbumartProviders", "file": "Albumart/AlbumartProviders.lua", "desc": "Albumart providers for the Albumart script.", "order":1,"arguments":[]}
 
 local p_coverartarchive = {
     name = "Coverartarchive",

@@ -6,27 +6,27 @@
 ,{
   "file": "Albumart/AlbumartProviders.lua",
   "name": "AlbumartProviders",
-  "desc": ""
+  "desc": "Albumart providers for the Albumart script."
 }
 ,{
   "file": "BatteryIndicator/BatteryIndicator.lua",
   "name": "BatteryIndicator",
-  "desc": ""
+  "desc": "Displays the battery status from sys filesystem."
 }
 ,{
   "file": "Channel/ChannelReadMessages.lua",
   "name": "ChannelReadMessages",
-  "desc": ""
+  "desc": "Reads all message from a MPD channel."
 }
 ,{
   "file": "Channel/ChannelSendMessage.lua",
   "name": "ChannelSendMessage",
-  "desc": ""
+  "desc": "Sends a message to a MPD channel."
 }
 ,{
   "file": "Channel/ChannelSubscribe.lua",
   "name": "ChannelSubscribe",
-  "desc": ""
+  "desc": "Subscribes to a MPD channel."
 }
 ,{
   "file": "Covercache/CovercachePrepopulate.lua",

@@ -1,4 +1,4 @@
--- {"order":1,"arguments":[]}
+-- {"name": "BatteryIndicator", "file": "BatteryIndicator/BatteryIndicator.lua", "desc": "Displays the battery status from sys filesystem.", "order":1,"arguments":[]}
 local battery = mympd.os_capture("cat /sys/class/power_supply/YourBattery/capacity")
 battery = tonumber(battery)
 
