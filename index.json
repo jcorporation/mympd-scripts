@@ -1,1 +1,131 @@
-{"scripts":["Albumart/Albumart.lua","Albumart/AlbumartProviders.lua","BatteryIndicator/BatteryIndicator.lua","Channel/ChannelReadMessages.lua","Channel/ChannelSendMessage.lua","Channel/ChannelSubscribe.lua","Covercache/CovercachePrepopulate.lua","Jukebox/JukeboxBlissify.lua","Jukebox/JukeboxRandomPlaylist.lua","ListenBrainz/ListenBrainzFeedback.lua","ListenBrainz/ListenBrainzPlaylistImport.lua","ListenBrainz/ListenBrainzScrobbler.lua","ListenBrainz/ListenBrainzSetPin.lua","Lyrics/Lyrics.lua","Lyrics/LyricsProviders.lua","Maloja/MalojaScrobbler.lua","Misc/EnableJukebox.lua","Misc/PlayRandomPlaylist.lua","Tagart/Tagart.lua","Tagart/TagartProviders.lua","last.fm/lastfmFeedback.lua","last.fm/lastfmGetSessionKey.lua","last.fm/lastfmLib.lua","last.fm/lastfmPlayer.lua","last.fm/lastfmScrobbler.lua","yt-dlp/yt-dlp.lua"]}
+{"scripts":[{
+  "file": "Albumart/Albumart.lua",
+  "name": "Albumart",
+  "desc": "Fetches albumart on demand."
+}
+,{
+  "file": "Albumart/AlbumartProviders.lua",
+  "name": "AlbumartProviders",
+  "desc": ""
+}
+,{
+  "file": "BatteryIndicator/BatteryIndicator.lua",
+  "name": "BatteryIndicator",
+  "desc": ""
+}
+,{
+  "file": "Channel/ChannelReadMessages.lua",
+  "name": "ChannelReadMessages",
+  "desc": ""
+}
+,{
+  "file": "Channel/ChannelSendMessage.lua",
+  "name": "ChannelSendMessage",
+  "desc": ""
+}
+,{
+  "file": "Channel/ChannelSubscribe.lua",
+  "name": "ChannelSubscribe",
+  "desc": ""
+}
+,{
+  "file": "Covercache/CovercachePrepopulate.lua",
+  "name": "CovercachePrepopulate",
+  "desc": ""
+}
+,{
+  "file": "Jukebox/JukeboxBlissify.lua",
+  "name": "JukeboxBlissify",
+  "desc": ""
+}
+,{
+  "file": "Jukebox/JukeboxRandomPlaylist.lua",
+  "name": "JukeboxRandomPlaylist",
+  "desc": ""
+}
+,{
+  "file": "ListenBrainz/ListenBrainzFeedback.lua",
+  "name": "ListenBrainzFeedback",
+  "desc": ""
+}
+,{
+  "file": "ListenBrainz/ListenBrainzPlaylistImport.lua",
+  "name": "ListenBrainzPlaylistImport",
+  "desc": ""
+}
+,{
+  "file": "ListenBrainz/ListenBrainzScrobbler.lua",
+  "name": "ListenBrainzScrobbler",
+  "desc": ""
+}
+,{
+  "file": "ListenBrainz/ListenBrainzSetPin.lua",
+  "name": "ListenBrainzSetPin",
+  "desc": ""
+}
+,{
+  "file": "Lyrics/Lyrics.lua",
+  "name": "Lyrics",
+  "desc": ""
+}
+,{
+  "file": "Lyrics/LyricsProviders.lua",
+  "name": "LyricsProviders",
+  "desc": ""
+}
+,{
+  "file": "Maloja/MalojaScrobbler.lua",
+  "name": "MalojaScrobbler",
+  "desc": ""
+}
+,{
+  "file": "Misc/EnableJukebox.lua",
+  "name": "EnableJukebox",
+  "desc": ""
+}
+,{
+  "file": "Misc/PlayRandomPlaylist.lua",
+  "name": "PlayRandomPlaylist",
+  "desc": ""
+}
+,{
+  "file": "Tagart/Tagart.lua",
+  "name": "Tagart",
+  "desc": ""
+}
+,{
+  "file": "Tagart/TagartProviders.lua",
+  "name": "TagartProviders",
+  "desc": ""
+}
+,{
+  "file": "last.fm/lastfmFeedback.lua",
+  "name": "lastfmFeedback",
+  "desc": ""
+}
+,{
+  "file": "last.fm/lastfmGetSessionKey.lua",
+  "name": "lastfmGetSessionKey",
+  "desc": ""
+}
+,{
+  "file": "last.fm/lastfmLib.lua",
+  "name": "lastfmLib",
+  "desc": ""
+}
+,{
+  "file": "last.fm/lastfmPlayer.lua",
+  "name": "lastfmPlayer",
+  "desc": ""
+}
+,{
+  "file": "last.fm/lastfmScrobbler.lua",
+  "name": "lastfmScrobbler",
+  "desc": ""
+}
+,{
+  "file": "yt-dlp/yt-dlp.lua",
+  "name": "yt-dlp",
+  "desc": ""
+}
+]}
