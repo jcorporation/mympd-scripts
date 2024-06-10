@@ -1,4 +1,4 @@
--- {"name": "LyricsProviders", "file": "Lyrics/LyricsProviders.lua", "version": 2, "desc": "Lyrics providers for the Lyrics script.", "order":0, "arguments":[]}
+-- {"name": "LyricsProviders", "file": "Lyrics/LyricsProviders.lua", "version": 3, "desc": "Lyrics providers for the Lyrics script.", "order":0, "arguments":[]}
 
 local p_www_songtexte_com = {
     name = "Songtexte",
@@ -23,7 +23,7 @@ local p_www_songtexte_com = {
         if result:find("Kein Songtext vorhanden.") then
             result = nil
         end
-        return result
+        return result, false
     end,
     result_strip_html = true
 }
@@ -45,10 +45,13 @@ local p_lrclib = {
     lyrics_pattern = nil,
     result_filter = function(result)
         local data = json.decode(result)
-        if data ~= nil then
-            return data.plainLyrics
+        if data.syncedLyrics then
+            return data.syncedLyrics, true
         end
-        return result
+        if data.plainLyrics then
+            return data.plainLyrics, false
+        end
+        return nil, false
     end,
     result_strip_html = false
 }

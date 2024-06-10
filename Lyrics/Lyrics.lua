@@ -1,7 +1,7 @@
--- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 2, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
+-- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 3, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
 -- Import lyrics provider configuration
 local providers = require "scripts/LyricsProviders"
-local rc, code, headers, body, song, lyrics_text, desc
+local rc, code, headers, body, song, lyrics_text, desc, synced
 
 local function strip_html(str)
     str = str:gsub("<!%[CDATA%[.-%]%]>", "")
@@ -88,7 +88,7 @@ for _, provider in pairs(providers) do
         end
     end
     if lyrics_text then
-        lyrics_text = provider.result_filter(lyrics_text)
+        lyrics_text, synced = provider.result_filter(lyrics_text)
         if lyrics_text then
             if provider.result_strip_html then
                 lyrics_text = strip_html(lyrics_text)
@@ -108,7 +108,7 @@ end
 
 -- Create lyrics data entry and response
 local entry = {
-    synced = false,
+    synced = synced,
     lang = "",
     desc = desc,
     text = lyrics_text
