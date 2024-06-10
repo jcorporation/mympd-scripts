@@ -41,12 +41,6 @@
   "version": 1
 }
 ,{
-  "file": "Jukebox/JukeboxBlissify.lua",
-  "name": "JukeboxBlissify",
-  "desc": "Uses blissify-rs to populate the jukebox queue.",
-  "version": 1
-}
-,{
   "file": "Jukebox/JukeboxRandomPlaylist.lua",
   "name": "JukeboxRandomPlaylist",
   "desc": "Populates the jukebox queue with random songs from a random playlist.",
