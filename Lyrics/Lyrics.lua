@@ -1,4 +1,4 @@
--- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 1, "desc": "Fetches lyrics on demand.", "order":1,"arguments":["uri"]}
+-- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 2, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
 -- Import lyrics provider configuration
 local providers = require "scripts/LyricsProviders"
 local rc, code, headers, body, song, lyrics_text, desc
@@ -16,30 +16,39 @@ local function strip_html(str)
     return str
 end
 
-local function replace_vars_pattern(str, artist, title)
+local function replace_vars_pattern(str, artist, album, title, duration)
     -- escape magic chars for pattern matching
     artist = artist:gsub("([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%%" .. "%1")
+    album = album:gsub("([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%%" .. "%1")
     title = title:gsub("([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%%" .. "%1")
     str = str:gsub("{artist}", artist)
+    str = str:gsub("{album}", album)
     str = str:gsub("{title}", title)
+    str = str:gsub("{duration}", duration)
     return str
 end
 
-local function replace_vars_uri(str, artist, title)
+local function replace_vars_uri(str, artist, album, title, duration)
     str = str:gsub("{artist}", function(s)
             return mympd.urlencode(artist)
+        end)
+    str = str:gsub("{album}", function(s)
+            return mympd.urlencode(album)
         end)
     str = str:gsub("{title}", function(s)
             return mympd.urlencode(title)
         end)
+    str = str:gsub("{duration}", function(s)
+            return mympd.urlencode(duration)
+        end)
     return str
 end
 
-local function get_lyrics_uri(provider, artist, title)
-    local identity_uri = replace_vars_uri(provider.identity_uri, artist, title)
+local function get_lyrics_uri(provider, artist, album, title, duration)
+    local identity_uri = replace_vars_uri(provider.identity_uri, artist, album, title, duration)
     rc, code, headers, body = mympd.http_client("GET", identity_uri, "", "")
     if rc == 0 and #body > 0 then
-        local identity_pattern = replace_vars_pattern(provider.identity_pattern, artist, title)
+        local identity_pattern = replace_vars_pattern(provider.identity_pattern, artist, album, title, duration)
         local lyrics_path = body:match(identity_pattern)
         if lyrics_path then
             return provider.lyrics_uri .. lyrics_path
@@ -58,18 +67,24 @@ end
 for _, provider in pairs(providers) do
     mympd.log(6, "Try to fetch lyrics from " .. provider.name)
     local artist = provider.artist_filter(song.Artist[1])
+    local album = provider.album_filter(song.Album)
     local title = provider.title_filter(song.Title)
+    local duration = song.Duration
     local lyrics_uri
     if provider.identity_uri then
-        lyrics_uri = get_lyrics_uri(provider, artist, title)
+        lyrics_uri = get_lyrics_uri(provider, artist, album, title, duration)
     else
-        lyrics_uri = replace_vars_uri(provider.lyrics_uri, artist, title)
+        lyrics_uri = replace_vars_uri(provider.lyrics_uri, artist, album, title, duration)
     end
     if lyrics_uri then
         rc, code, headers, body = mympd.http_client("GET", lyrics_uri, "", "")
         if rc == 0 then
-            local lyrics_pattern = replace_vars_pattern(provider.lyrics_pattern, artist, title)
-            lyrics_text = body:match(lyrics_pattern)
+            if provider.lyrics_pattern == nil then
+                lyrics_text = body
+            else
+                local lyrics_pattern = replace_vars_pattern(provider.lyrics_pattern, artist, album, title, duration)
+                lyrics_text = body:match(lyrics_pattern)
+            end
         end
     end
     if lyrics_text then

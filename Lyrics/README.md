@@ -10,12 +10,12 @@ It uses a generic script that is configured by a provider configuration file.
 
 The workflow is:
 
-1. Normalizes the artist and title with the provided `artist_filter` and `title_filter` function.
+1. Normalizes the artist, album and title with the provided `artist_filter`, `album_filter` and `title_filter` functions.
 2. Identifies lyrics link by a search, defined by `identity_uri` and `identity_pattern`.
 3. Opens the lyrics link and extract lyrics, defined by `lyrics_uri` and `lyrics_pattern`.
 4. Normalizes the result defined by the `result_filter` function and optionally strips html tags.
 
-You can use the variables `{artist}` and `{title}` for uris and patterns.
+You can use the variables `{artist}`, `{album}`, `{title}` and `{duration}` for uris and patterns.
 
 The script supports any number of providers.
 
@@ -24,3 +24,8 @@ The script supports any number of providers.
 1. Import the `Lyrics.lua` and `LyricsProviders.lua` scripts.
 2. Attach the script `Lyrics.lua` to the Lyrics trigger to fetch lyrics on demand. Only the first trigger will be executed.
 3. Edit the `LyricsProviders.lua` to add / remove /change the lyrics providers.
+
+### Providers
+
+- [LRCLIB](https://lrclib.net/)
+- [www.songtexte.com](https://www.songtexte.com/)
