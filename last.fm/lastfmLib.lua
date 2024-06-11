@@ -1,8 +1,4 @@
 -- {"name": "lastfmLib", "file": "last.fm/lastfmLib.lua", "version": 1, "desc": "Library requried by the other last.fm modules.", "order":0,"arguments":[]}
-package.path = package.path .. ";/usr/share/lua/5.2/?.lua"
-package.cpath = package.cpath .. ";/usr/lib/x86_64-linux-gnu/lua/5.2/?.so"
-
-local md5 = require "md5"
 
 lastfmLib = {}
 
@@ -17,7 +13,7 @@ local function hashRequest(data, secret)
     s = s .. v .. data[v]
   end
   s = s .. secret
-  local hash = md5.sumhexa(s)
+  local hash = mympd.hash_md5(s)
   return hash
 end
 
@@ -28,7 +24,6 @@ local function urlencode_data(data)
     table.insert(a, mympd.urlencode(k) .. "=" .. mympd.urlencode(v))
   end
   s = table.concat(a, "&")
-
  return s
 end
 

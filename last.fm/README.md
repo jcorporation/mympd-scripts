@@ -2,12 +2,6 @@
 
 Scrobble tracks, send now playing and feedback from myMPD to last.fm.
 
-Tested on Debian 13, you need to install MD5 library:
-
-```sh
-sudo apt-get install lua-md5
-```
-
 ## Create variables
 
 | VARIABLE | VALUE |
