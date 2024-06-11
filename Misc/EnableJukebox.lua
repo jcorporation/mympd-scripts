@@ -1,4 +1,4 @@
--- {"name": "EnableJukebox", "file": "Misc/EnableJukebox.lua", "version": 1, "desc": "Enables the jukebox with specified options.", "order":1,"arguments":[]}
+-- {"name": "EnableJukebox", "file": "Misc/EnableJukebox.lua", "version": 1, "desc": "Enables the jukebox with specified options.", "order":1, "arguments":[]}
 
 mympd.api("MYMPD_API_PLAYER_STOP");
 mympd.api("MYMPD_API_PLAYER_OPTIONS_SET", {

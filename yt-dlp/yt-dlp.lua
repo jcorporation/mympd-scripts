@@ -1,4 +1,4 @@
--- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 1, "desc": "Streams songs and playlists with the help of yt-dlp.", "order":1,"arguments":["uri"]}
+-- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 1, "desc": "Streams songs and playlists with the help of yt-dlp.", "order": 1, "arguments":["uri"]}
 -- yt-dlp helper functions
 local yt_dlp_path = "yt-dlp"
 local function yt_dlp_call(uri, args, parse_json)

@@ -1,4 +1,4 @@
--- {"name": "Tagart", "file": "Tagart/Tagart.lua", "version": 1, "desc": "Fetches tagart on demand.", "order":1,"arguments":["tag", "value"]}
+-- {"name": "Tagart", "file": "Tagart/Tagart.lua", "version": 1, "desc": "Fetches tagart on demand.", "order":0, "arguments":["tag", "value"]}
 local providers = require "scripts/TagartProviders"
 
 local tag = mympd_arguments.tag

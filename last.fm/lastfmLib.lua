@@ -1,4 +1,4 @@
--- {"name": "lastfmLib", "file": "last.fm/lastfmLib.lua", "version": 1, "desc": "Library requried by the other last.fm modules.", "order":0,"arguments":[]}
+-- {"name": "lastfmLib", "file": "last.fm/lastfmLib.lua", "version": 1, "desc": "Library requried by the other last.fm modules.", "order":0, "arguments":[]}
 
 lastfmLib = {}
 

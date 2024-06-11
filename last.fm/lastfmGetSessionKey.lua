@@ -1,4 +1,4 @@
--- {"name": "lastfmGetSessionKey", "file": "last.fm/lastfmGetSessionKey.lua", "version": 1, "desc": "Fetches the session key from last.fm and sets the myMPD variable.", "order":1,"arguments":["username", "password|password"]}
+-- {"name": "lastfmGetSessionKey", "file": "last.fm/lastfmGetSessionKey.lua", "version": 1, "desc": "Fetches the session key from last.fm and sets the myMPD variable.", "order":0, "arguments":["username", "password|password"]}
 local lastfmLib = require "scripts/lastfmLib"
 
 local data = {

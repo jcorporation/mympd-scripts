@@ -1,4 +1,4 @@
--- {"name": "JukeboxRandomPlaylist", "file": "Jukebox/JukeboxRandomPlaylist.lua", "version": 1, "desc": "Populates the jukebox queue with random songs from a random playlist.", "order":1,"arguments":[]}
+-- {"name": "JukeboxRandomPlaylist", "file": "Jukebox/JukeboxRandomPlaylist.lua", "version": 1, "desc": "Populates the jukebox queue with random songs from a random playlist.", "order":0, "arguments":[]}
 
 local addSongs = 1
 local min_jukebox_length = 50

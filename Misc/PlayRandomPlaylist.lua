@@ -1,4 +1,4 @@
--- {"name": "PlayRandomPlaylist", "file": "Misc/PlayRandomPlaylist.lua", "version": 1, "desc": "Plays a random playlist.", "order":1,"arguments":[]}
+-- {"name": "PlayRandomPlaylist", "file": "Misc/PlayRandomPlaylist.lua", "version": 1, "desc": "Plays a random playlist.", "order":1, "arguments":[]}
 -- get the first 2000 playlists
 local rc, result = mympd.api("MYMPD_API_PLAYLIST_LIST", {
     offset = 0,

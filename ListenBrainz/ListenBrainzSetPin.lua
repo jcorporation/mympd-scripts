@@ -1,4 +1,4 @@
--- {"name": "ListenBrainzSetPin", "file": "ListenBrainz/ListenBrainzSetPin.lua", "version": 1, "desc": "Sets or unsets the pin on ListenBrainz.", "order":1,"arguments":["uri","blurb_content","pinned_until"]}
+-- {"name": "ListenBrainzSetPin", "file": "ListenBrainz/ListenBrainzSetPin.lua", "version": 1, "desc": "Sets or unsets the pin on ListenBrainz.", "order":1, "arguments":["uri","blurb_content","pinned_until"]}
 if mympd_env.var_listenbrainz_token == nil then
   return "No ListenBrainz token set"
 end

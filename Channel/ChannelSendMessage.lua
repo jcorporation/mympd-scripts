@@ -1,4 +1,4 @@
--- {"name": "ChannelReadMessages", "file": "Channel/ChannelSendMessage.lua", "version": 1, "desc": "Sends a message to a MPD channel.", "order":1,"arguments":["channel", "message"]}
+-- {"name": "ChannelReadMessages", "file": "Channel/ChannelSendMessage.lua", "version": 1, "desc": "Sends a message to a MPD channel.", "order":1, "arguments":["channel", "message"]}
 
 local channel = mympd_arguments.channel
 if not channel or channel == "" then

@@ -1,4 +1,4 @@
--- {"name": "lastfmScrobbler", "file": "last.fm/lastfmScrobbler.lua", "version": 1, "desc": "Scrobbles songs to last.fm.", "order":1,"arguments":[]}
+-- {"name": "lastfmScrobbler", "file": "last.fm/lastfmScrobbler.lua", "version": 1, "desc": "Scrobbles songs to last.fm.", "order":0, "arguments":[]}
 local lastfmLib = require "scripts/lastfmLib"
 
 -- main

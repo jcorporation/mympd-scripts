@@ -1,4 +1,4 @@
--- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 1, "desc": "Scrobbles songs to your Maloja server.", "order":1,"arguments":[]}
+-- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 1, "desc": "Scrobbles songs to your Maloja server.", "order":0, "arguments":[]}
 if mympd_env.var_maloja_token == nil then
     return "No Maloja token set"
 end

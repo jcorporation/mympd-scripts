@@ -1,4 +1,4 @@
--- {"name": "TagartProviders", "file": "Tagart/TagartProviders.lua", "version": 1, "desc": "Tagart providers for the Tagart script.", "order":0, "arguments":[]}
+-- {"name": "TagartProviders", "file": "Tagart/TagartProviders.lua", "version": 1, "desc": "Tagart providers for the Tagart script.", "order": 0, "arguments":[]}
 
 local p_fanart_tv = {
     name = "Fanart.tv",

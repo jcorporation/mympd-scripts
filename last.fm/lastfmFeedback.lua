@@ -1,4 +1,4 @@
--- {"name": "lastfmFeedback", "file": "last.fm/lastfmFeedback.lua", "version": 1, "desc": "Sends feedback to last.fm.", "order":1,"arguments":["uri","vote","type"]}
+-- {"name": "lastfmFeedback", "file": "last.fm/lastfmFeedback.lua", "version": 1, "desc": "Sends feedback to last.fm.", "order":0, "arguments":["uri","vote","type"]}
 local lastfmLib = require "scripts/lastfmLib"
 
 -- main

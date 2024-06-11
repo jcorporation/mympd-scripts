@@ -1,4 +1,4 @@
--- {"name": "lastfmPlayer", "file": "last.fm/lastfmPlayer.lua", "version": 1, "desc": "Sends the now playing info to last.fm.", "order":1,"arguments":[]}
+-- {"name": "lastfmPlayer", "file": "last.fm/lastfmPlayer.lua", "version": 1, "desc": "Sends the now playing info to last.fm.", "order":0, "arguments":[]}
 mympd.init()
 
 local lastfmLib = require "scripts/lastfmLib"
