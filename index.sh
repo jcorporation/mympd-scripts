@@ -13,30 +13,22 @@ set -u
 # Create index of lua scripts
 rm -f "index.json"
 exec 3<> "index.json"
-printf "{\"scripts\":[" >&3
+printf "{" >&3
 I=0
 for F in */*.lua
 do
     [ "$I" -gt 0 ] &&  printf "," >&3
-    NAME=$(basename "$F" .lua)
+    NAME=$(basename "$F" .lua | jq -Ra .)
+    FILE=$(printf "%s" "$F" | jq -Ra .)
     SCRIPT_HEADER=$(head -1 "$F" < $F | sed 's/^-- //')
-    DESC=$(printf "%s" "$SCRIPT_HEADER" | jq -r '.desc')
+    DESC=$(printf "%s" "$SCRIPT_HEADER" | jq -r '.desc' | jq -Ra .)
     VERSION=$(printf "%s" "$SCRIPT_HEADER" | jq -r '.version')
     [ "$DESC" = "null" ] && DESC=""
     [ "$VERSION" = "null" ] && VERSION="0"
-    jq -n --arg file "$F" \
-        --arg name "$NAME" \
-        --arg desc "$DESC" \
-        --argjson version "$VERSION" \
-        '{
-            "file": $file,
-            "name": $name,
-            "desc": $desc,
-            "version": $version
-        }' >&3
+    printf '%s:{"name":%s,"desc":%s,"version":%s}' "$FILE" "$NAME" "$DESC" "$VERSION">&3
     I=$((I+1))
 done
-printf "]}\n" >&3
+printf "}\n" >&3
 exec 3>&-
 
 jq "." < index.json > /dev/null
