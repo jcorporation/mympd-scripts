@@ -1,0 +1,86 @@
+-- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 1, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
+
+local function radiobrowser_search(name, country, tag)
+    local uri = string.format("https://all.api.radio-browser.info/json/stations/search?hidebroken=true&offset=0&limit=100&name=%s&country=%s&tag=%s",
+        mympd.urlencode(name), mympd.urlencode(country), mympd.urlencode(tag))
+    local rc, code, headers, body
+    for i = 1, 5, 1 do
+        rc, code, headers, body = mympd.http_client("GET", uri, "", "")
+        if rc == 0 then
+            break
+        end
+        mympd.log(4, "Retry " .. i .. " for searching radiobrowser")
+    end
+
+    local radios = json.decode(body)
+    if radios == nil then
+        return "Failure decoding response from radiobrowser."
+    end
+    local values = {}
+    local titles = {}
+    for _, radio in pairs(radios) do
+        table.insert(values, radio.stationuuid)
+        table.insert(titles, radio.name .. "(" .. radio.country .. ")")
+    end
+    local data = {
+        { name = "Action", type = "hidden", value = "Add" },
+        { name = "Radios", type = "list", displayValue = titles, value = values, defaultValue = "" }
+    }
+    return mympd.dialog("Add to webradio favorites", data, "Radiobrowser")
+end
+
+local function radiobrowser_import(stationuuid)
+    local uri = string.format("https://all.api.radio-browser.info/json/stations/byuuid?uuids=%s",
+        mympd.urlencode(stationuuid))
+    local rc, code, headers, body
+    for i = 1, 5, 1 do
+        rc, code, headers, body = mympd.http_client("GET", uri, "", "")
+        if rc == 0 then
+            break
+        end
+        mympd.log(4, "Retry " .. i .. " for seaching radiobrowser")
+    end
+    if rc == 1 then
+        return "Failure fetching radio details from radiobrowser."
+    end
+    local radio = json.decode(body)
+    if radio == nil then
+        return "Failure decoding response from radiobrowser."
+    end
+    local data = {
+        name = radio[1].name,
+        streamUri = radio[1].url_resolved,
+        streamUriOld = "",
+        image = radio[1].favicon,
+        genre = radio[1].tags,
+        homepage = radio[1].homepage,
+        country = radio[1].country,
+        state = "",
+        language = radio[1].language,
+        description = "",
+        codec = radio[1].codec,
+        bitrate = radio[1].bitrate
+    }
+    local result
+    rc, result = mympd.api("MYMPD_API_WEBRADIO_FAVORITE_SAVE", data)
+    if rc == 1 then
+        mympd.notify_client(2, result)
+    end
+    return rc
+end
+
+if mympd_arguments.Action == "Add" then
+    local added = 0
+    for stationuuid in string.gmatch(mympd_arguments.Radios, "[^;;]+") do
+        local rc = radiobrowser_import(stationuuid)
+        if rc == 0 then
+            added = added + 1
+        end
+    end
+    if added > 0 then
+        return "Webradio favorites added."
+    end
+    return "Failure adding webradio favorites."
+end
+
+return radiobrowser_search(mympd_arguments.Name, mympd_arguments.Country, mympd_arguments.Tag)
