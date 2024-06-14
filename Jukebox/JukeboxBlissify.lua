@@ -1,5 +1,5 @@
 -- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 1, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":1,"arguments":[]}
-local blissify_path = "/usr/local/bin/blissify"
+local blissify_path = mympd_env.var_blissify_path
 local addSongs = 1
 local min_jukebox_length = 50
 
@@ -9,6 +9,8 @@ local function send_error(message)
         error = message
     })
 end
+
+mympd.init()
 
 -- Get length and last song of the jukebox queue
 local rc, result = mympd.api("MYMPD_API_JUKEBOX_LIST", {
@@ -41,12 +43,13 @@ if last_song == nil then
 end
 
 -- Get songs from blissify
+local full_song_path = mympd_state.music_directory .. "/" .. last_song
+local prefix_len = #mympd_state.music_directory + 2
 local songs = {}
--- TODO: specifiy dry-run - https://github.com/Polochon-street/blissify-rs/issues/60
-local cmd = string.format("%s playlist %d 2>/dev/null", blissify_path, to_add)
+local cmd = string.format("%s playlist --dry-run --from-song \"%s\" %d 2>/dev/null", blissify_path, full_song_path, to_add)
 local output = mympd.os_capture(cmd)
 for line in string.gmatch(output, "[^\n]+") do
-    table.insert(songs, line)
+    table.insert(songs, string.sub(line, prefix_len))
 end
 
 -- Add addSongs entries from playlist to the MPD queue
@@ -56,7 +59,7 @@ for i = 1, addSongs do
 end
 rc, result = mympd.api("MYMPD_API_QUEUE_APPEND_URIS", {
     uris = addUris,
-    play = true
+    play = false
 })
 if rc == 1 then
     send_error(result.message)
@@ -66,7 +69,7 @@ end
 -- Add additional songs to the jukebox queue
 addUris = {}
 addSongs = addSongs + 1
-for i = addSongs, songs.returnedEntities do
+for i = addSongs, #songs do
     table.insert(addUris, songs[i])
 end
 rc, result = mympd.api("MYMPD_API_JUKEBOX_APPEND_URIS", {
