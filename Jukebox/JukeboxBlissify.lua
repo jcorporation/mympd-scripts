@@ -1,5 +1,11 @@
 -- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 2, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":1,"arguments":["addToQueue"]}
 local blissify_path = mympd_env.var_blissify_path
+local blissify_config = ""
+if mympd_env.var_blissify_config ~= nil and
+   mympd_env.var_blissify_config ~= ""
+then
+    blissify_config = "-c " .. mympd_env.var_blissify_config
+end
 local addSongs = 1
 local min_jukebox_length = 50
 
@@ -46,7 +52,7 @@ end
 local full_song_path = mympd_state.music_directory .. "/" .. last_song
 local prefix_len = #mympd_state.music_directory + 2
 local songs = {}
-local cmd = string.format("%s playlist --dry-run --from-song \"%s\" %d 2>/dev/null", blissify_path, full_song_path, to_add)
+local cmd = string.format("%s %s playlist --dry-run --from-song \"%s\" %d 2>/dev/null", blissify_path, blissify_config, full_song_path, to_add)
 local output = mympd.os_capture(cmd)
 for line in string.gmatch(output, "[^\n]+") do
     table.insert(songs, string.sub(line, prefix_len))

@@ -1,4 +1,4 @@
--- {"name": "JukeboxRandomPlaylist", "file": "Jukebox/JukeboxRandomPlaylist.lua", "version": 1, "desc": "Populates the jukebox queue with random songs from a random playlist.", "order":0, "arguments":[]}
+-- {"name": "JukeboxRandomPlaylist", "file": "Jukebox/JukeboxRandomPlaylist.lua", "version": 2, "desc": "Populates the jukebox queue with random songs from a random playlist.", "order":0, "arguments":["addToQueue"]}
 
 local addSongs = 1
 local min_jukebox_length = 50
@@ -49,23 +49,25 @@ if rc == 1 then
     return
 end
 
--- Add addSongs entries from playlist to the MPD queue
-local addUris = {}
-for i = 1, addSongs do
-    table.insert(addUris, songs.data[i].uri)
-end
-rc, result = mympd.api("MYMPD_API_QUEUE_APPEND_URIS", {
-    uris = addUris,
-    play = true
-})
-if rc == 1 then
-    send_error(result.message)
-    return
+if mympd_arguments.addToQueue == "1" then
+    -- Add addSongs entries from playlist to the MPD queue
+    local addUris = {}
+    for i = 1, addSongs do
+        table.insert(addUris, songs.data[i].uri)
+    end
+    rc, result = mympd.api("MYMPD_API_QUEUE_APPEND_URIS", {
+        uris = addUris,
+        play = true
+    })
+    if rc == 1 then
+        send_error(result.message)
+        return
+    end
+    addSongs = addSongs + 1
 end
 
 -- Add additional songs to the jukebox queue
-addUris = {}
-addSongs = addSongs + 1
+local addUris = {}
 for i = addSongs, songs.returnedEntities do
     table.insert(addUris, songs.data[i].uri)
 end

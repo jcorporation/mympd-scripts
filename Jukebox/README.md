@@ -1,6 +1,6 @@
 # Jukebox
 
-This scripts can be used to fill the jukebox queue. You must add a trigger for the `mympd_jukebox` event and change the jukebox mode to `Script`.
+This scripts can be used to extend the jukebox function of myMPD. You must add a trigger for the `mympd_jukebox` event and change the jukebox mode to `Script`.
 
 ## Random Playlists
 
@@ -13,6 +13,7 @@ Blissify is a program used to make playlists of songs that sound alike from your
 This script creates a "seeded" playlist.
 
 1. Install Blissify: https://github.com/Polochon-street/blissify-rs
-2. Add a variable `blissify_path` to define the path to your blissify binary.
-3. Index your MPD library: `blissify init` - this can take a long time.
-4. Clear the queue and play a song from which Blissify should start.
+2. Index your MPD library: `blissify init` - this can take a long time.
+3. Add the variable `blissify_path` to define the path to your blissify binary.
+4. Optional: Add the variable `blissify_config` to specify the blissify configuration file.
+5. Clear the queue and play a song from which Blissify should start.
