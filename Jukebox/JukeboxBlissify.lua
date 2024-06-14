@@ -1,4 +1,4 @@
--- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 1, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":1,"arguments":[]}
+-- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 2, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":1,"arguments":["addToQueue"]}
 local blissify_path = mympd_env.var_blissify_path
 local addSongs = 1
 local min_jukebox_length = 50
@@ -52,23 +52,25 @@ for line in string.gmatch(output, "[^\n]+") do
     table.insert(songs, string.sub(line, prefix_len))
 end
 
--- Add addSongs entries from playlist to the MPD queue
-local addUris = {}
-for i = 1, addSongs do
-    table.insert(addUris, songs[i])
-end
-rc, result = mympd.api("MYMPD_API_QUEUE_APPEND_URIS", {
-    uris = addUris,
-    play = false
-})
-if rc == 1 then
-    send_error(result.message)
-    return
+if mympd_arguments.addToQueue == "1" then
+    -- Add addSongs entries from playlist to the MPD queue
+    local addUris = {}
+    for i = 1, addSongs do
+        table.insert(addUris, songs[i])
+    end
+    rc, result = mympd.api("MYMPD_API_QUEUE_APPEND_URIS", {
+        uris = addUris,
+        play = false
+    })
+    if rc == 1 then
+        send_error(result.message)
+        return
+    end
+    addSongs = addSongs + 1
 end
 
--- Add additional songs to the jukebox queue
-addUris = {}
-addSongs = addSongs + 1
+-- Add songs to the jukebox queue
+local addUris = {}
 for i = addSongs, #songs do
     table.insert(addUris, songs[i])
 end
