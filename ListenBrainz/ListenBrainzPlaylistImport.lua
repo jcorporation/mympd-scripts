@@ -1,4 +1,4 @@
--- {"name": "ListenBrainzPlaylistImport", "file": "ListenBrainz/ListenBrainzPlaylistImport.lua", "version": 1, "desc": "Imports generated playlists from ListenBrainz.", "order":1, "arguments":[]}
+-- {"name": "ListenBrainzPlaylistImport", "file": "ListenBrainz/ListenBrainzPlaylistImport.lua", "version": 2, "desc": "Imports generated playlists from ListenBrainz.", "order":1, "arguments":[]}
 
 local extra_headers = "Authorization: Token " .. mympd_env.var_listenbrainz_token .. "\r\n"
 
@@ -14,14 +14,14 @@ local function fetch_playlists()
         return "Failure decoding response from ListenBrainz"
     end
     local values = {}
-    local titles = {}
+    local displayValues = {}
     for _, playlist in pairs(playlists.playlists) do
         table.insert(values, playlist.playlist.identifier)
-        table.insert(titles, playlist.playlist.title)
+        table.insert(displayValues, { title = playlist.playlist.title })
     end
     local data = {
         { name = "Action", type = "hidden", value = "Import" },
-        { name = "Playlists", type = "list", displayValue = titles, value = values, defaultValue = "" }
+        { name = "Playlists", type = "list", displayValue = displayValues, value = values, defaultValue = "" }
     }
     return mympd.dialog("ListenBrainz Playlists", data, "ListenBrainzPlaylistImport")
 end
