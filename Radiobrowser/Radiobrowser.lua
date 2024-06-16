@@ -1,4 +1,4 @@
--- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 2, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
+-- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 3, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
 
 local function radiobrowser_search(name, country, tag)
     local uri = string.format("https://all.api.radio-browser.info/json/stations/search?hidebroken=true&offset=0&limit=100&name=%s&country=%s&tag=%s",
@@ -27,7 +27,7 @@ local function radiobrowser_search(name, country, tag)
         })
     end
     local data = {
-        { name = "Action", type = "select", value = { "AddToFavorites", "AppendToQueue" }, displayValue = { "Add to favorites", "Append to queue" } },
+        { name = "Action", type = "select", defaultValue = "AddToFavorites", value = { "AddToFavorites", "AppendToQueue" }, displayValue = { "Add to favorites", "Append to queue" } },
         { name = "Radios", type = "list", displayValue = displayValues, value = values, defaultValue = "" }
     }
     return mympd.dialog("Add to webradio favorites", data, "Radiobrowser")
