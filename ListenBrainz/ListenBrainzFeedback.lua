@@ -4,7 +4,7 @@ if mympd_env.var_listenbrainz_token == nil then
 end
 
 local uri = "https://api.listenbrainz.org/1/feedback/recording-feedback"
-local headers = "Content-type: application/json\r\n"..
+local extra_headers = "Content-type: application/json\r\n"..
   "Authorization: Token " .. mympd_env.var_listenbrainz_token .. "\r\n"
 
 local vote
@@ -32,7 +32,7 @@ if rc == 0 then
       score = vote
     });
     local code, header, body
-    rc, code, header, body = mympd.http_client("POST", uri, headers, payload)
+    rc, code, header, body = mympd.http_client("POST", uri, extra_headers, payload)
     if rc > 0 then
       return body
     end

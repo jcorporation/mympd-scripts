@@ -18,8 +18,6 @@ You can send hate/love feedback to ListenBrainz with the thumbs up and down butt
   - Import the `ListenBrainzFeedback.lua` script
 - Create a new trigger
   - Event: `mympd_feedback`
-  - Action: above script
-  - Leave the arguments empty
 
 ## Playlist Import
 
@@ -38,7 +36,15 @@ You can send your listening habits to ListenBrainz.
   - Import the `ListenBrainzScrobbler.lua` script
 - Create a new trigger
   - Event: `mympd_scrobble`
-  - Action: above script
+
+## Now Playing
+
+You can send now playing info to ListenBrainz.
+
+- Create a new script
+  - Import the `ListenBrainzPlayer.lua` script
+- Create a new trigger
+  - Event: `mpd_player`
 
 ## Set Pin
 
