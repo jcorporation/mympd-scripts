@@ -8,8 +8,9 @@ Each group of scripts are in a separate folder together with a README.md for usa
 
 You can find here scripts for:
 
-- Scrobbling to last.fm and ListenBrainz
-- yt-dlp integration
+- Scrobbling
+- Fetching album- and artistart
+- Fetching lyrics
 - and many more
 
 ## Documentation
