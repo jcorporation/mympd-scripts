@@ -1,4 +1,4 @@
--- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 2, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":1,"arguments":["addToQueue"]}
+-- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 3, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":1,"arguments":["addToQueue"]}
 local blissify_path = mympd_env.var_blissify_path
 local blissify_config = ""
 if mympd_env.var_blissify_config ~= nil and
@@ -34,11 +34,27 @@ local to_add = addSongs + min_jukebox_length - jukebox_length
 local last_song = nil
 if jukebox_length > 0 then
     last_song = result.data[jukebox_length].uri
-else
+end
+
+if last_song == nil then
     -- fallback to playing song
     rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
     if rc == 0 and result.uri then
         last_song = result.uri
+    end
+end
+
+if last_song == nil then
+    -- fallback to add random song
+    rc, result = mympd.api("MYMPD_API_QUEUE_ADD_RANDOM", {
+        plist = "Database",
+        quantity = 1,
+        mode = 1,
+        play = true
+    })
+    if rc == 0 then
+        mympd.api("INTERNAL_API_JUKEBOX_CREATED", {})
+        return
     end
 end
 
@@ -73,6 +89,9 @@ if mympd_arguments.addToQueue == "1" then
         return
     end
     addSongs = addSongs + 1
+    if mympd_state.play_state ~= 2 then
+        mympd.api("MYMPD_API_PLAYER_PLAY", {})
+    end
 end
 
 -- Add songs to the jukebox queue
