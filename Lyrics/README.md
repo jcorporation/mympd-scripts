@@ -23,7 +23,7 @@ The script supports any number of providers.
 
 1. Import the `Lyrics.lua` and `LyricsProviders.lua` scripts.
 2. Attach the script `Lyrics.lua` to the Lyrics trigger to fetch lyrics on demand. Only the first trigger will be executed.
-3. Edit the `LyricsProviders.lua` to add / remove /change the lyrics providers.
+3. Edit the `LyricsProviders.lua` to add, remove or change the lyrics providers.
 
 ### Providers
 
