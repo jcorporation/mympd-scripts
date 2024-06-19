@@ -1,4 +1,4 @@
--- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 3, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
+-- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 4, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
 -- Import lyrics provider configuration
 local providers = require "scripts/LyricsProviders"
 local rc, code, headers, body, song, lyrics_text, desc, synced
@@ -111,12 +111,12 @@ local entry = {
     synced = synced,
     lang = "",
     desc = desc,
-    text = lyrics_text
+    text = lyrics_text,
+    uri = mympd_arguments.uri
 }
 local result = {
     method = "MYMPD_API_LYRICS_GET",
     data = { entry },
-    uri = mympd_arguments.uri,
     totalEntities = 1,
     returnedEntities = 1
 }
