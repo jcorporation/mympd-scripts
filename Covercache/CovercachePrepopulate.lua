@@ -1,4 +1,4 @@
--- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 1, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
+-- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 2, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
 
 mympd.init()
 
@@ -63,7 +63,7 @@ for _, album in pairs(result.data) do
             existing = existing + 1
         else
             local out = mympd.tmp_file()
-            local uri = mympd_state.mympd_uri .. 'albumart-thumb?offset=0&uri=' .. mympd.urlencode(album.uri)
+            local uri = mympd_state.mympd_uri .. 'albumart?offset=0&uri=' .. mympd.urlencode(album.uri)
             rc, code, headers = mympd_http_download(uri, "", out)
             if rc == 0 then
                 local name = mympd.cache_cover_write(out, album.uri)
