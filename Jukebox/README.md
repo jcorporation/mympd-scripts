@@ -10,9 +10,7 @@ Adds random songs from a random playlist.
 
 Blissify is a program used to make playlists of songs that sound alike from your MPD track library, à la Spotify radio.
 
-This script creates a "seeded" playlist.
-
-1. Install Blissify: https://github.com/Polochon-street/blissify-rs
+1. Install [Blissify](https://github.com/Polochon-street/blissify-rs)
 2. Index your MPD library: `blissify init` - this can take a long time.
 3. Add the variable `blissify_path` to define the path to your blissify binary.
 4. Optional: Add the variable `blissify_config` to specify the blissify configuration file.
