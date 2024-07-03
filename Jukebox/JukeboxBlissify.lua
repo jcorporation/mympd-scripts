@@ -1,4 +1,4 @@
--- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 3, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":1,"arguments":["addToQueue"]}
+-- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 4, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":0,"arguments":["addToQueue"]}
 local blissify_path = mympd_env.var_blissify_path
 local blissify_config = ""
 if mympd_env.var_blissify_config ~= nil and
