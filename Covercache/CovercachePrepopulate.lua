@@ -1,4 +1,4 @@
--- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 3, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
+-- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 4, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
 
 mympd.init()
 
@@ -70,10 +70,12 @@ for _, album in pairs(result.data) do
                 rc, name = mympd.cache_cover_write(out, album.uri)
                 if rc == 0 then
                     mympd.log(6, "Covercache: " .. name)
+                    downloaded = downloaded + 1
                 else
                     mympd.log(3, "Covercache: " .. name)
+                    create_placeholder(path .. ".svg")
+                    errors = errors + 1
                 end
-                downloaded = downloaded + 1
             else
                 errors = errors + 1
                 create_placeholder(path .. ".svg")
