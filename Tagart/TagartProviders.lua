@@ -54,8 +54,58 @@ local p_fanart_tv = {
     end
 }
 
+local p_openopus = {
+    name = "Open Opus",
+    tags = {
+        Composer = true
+    },
+    get = function(tag, value, out)
+        local rc, code, header, body, song
+        rc, song = mympd.api("MYMPD_API_DATABASE_SEARCH", {
+            expression = "((" .. tag .. " == '" .. value .. "'))",
+            sort = "Title",
+            sortdesc = false,
+            offset = 0,
+            limit = 1,
+            fields = {
+                "composer"
+            }
+        })
+        if rc ~= 0 or
+           not song.data or
+           not song.data[1] or
+           not song.data[1].Composer or
+           song.data[1].Composer[1] == ""
+        then
+            mympd.log(7, "Composer not found")
+            return 1
+        end
+
+        local uri = "https://api.openopus.org/composer/list/search/" .. mympd.urlencode(song.data[1].Composer[1]) .. ".json"
+        rc, code, header, body = mympd.http_client("GET", uri, "", "")
+        if rc == 1 then
+            return 1
+        end
+        local data = json.decode(body)
+        if not data then
+            mympd.log(7, "Invalid json data received")
+            return 1
+        end
+        if not data.composers or
+           not data.composers[1] or
+           not data.composers[1].portrait
+        then
+            mympd.log(7, "Tagart not found")
+            return 1
+        end
+        return mympd.http_download(data.composers[1].portrait, "", out)
+
+    end
+}
+
 -- Return the providers as lua table
 -- You can use this table to sort or disable providers
 return {
-    p_fanart_tv
+    p_fanart_tv,
+    p_openopus
 }
