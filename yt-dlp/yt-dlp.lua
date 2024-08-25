@@ -1,4 +1,4 @@
--- {"order":1,"arguments":["uri"]}
+-- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 2, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
 
 -- yt-dlp helper functions
 local yt_dlp_path = "yt-dlp"

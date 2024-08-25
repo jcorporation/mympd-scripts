@@ -1,6 +1,6 @@
 # yt-dlp
 
-This script extracts the audio links and the associated metadata from an YouTube link and appends the result to the MPD queue. On playback MPD calls the script again to get the real streaming uri.
+This script extracts the audio links and the associated metadata from an YouTube links and other services with the help of yt-dlp. It appends the result to the MPD queue. On playback MPD calls the script again to get the real streaming uri.
 
 The script was written by [sevmonster](https://github.com/sevmonster) - [Discussion](https://github.com/jcorporation/mympd-scripts/discussions/7).
 
