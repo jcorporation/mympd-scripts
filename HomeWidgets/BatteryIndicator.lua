@@ -24,7 +24,7 @@ if mympd_arguments.battery ~= nil then
                 end
             end
             body = "<div class=\"text-center p-3 fs-3\">" ..
-                    "<span class=\"mi fs-1\">" .. icon .. "</span>" .. 
+                    "<span class=\"mi fs-1\">" .. icon .. "</span>" ..
                     "<span>" .. battery .. " %</span>" ..
                 "</div>"
         end
@@ -32,4 +32,3 @@ if mympd_arguments.battery ~= nil then
 end
 
 return mympd.http_reply("200", headers, body)
-
