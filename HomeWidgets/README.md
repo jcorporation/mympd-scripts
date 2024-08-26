@@ -6,4 +6,13 @@ This scripts return a http reply with html content that is displayed in the widg
 
 | WIDGET | DESCRIPTION |
 | ------ | ----------- |
+| BatteryIndicator | Shows the battery level. |
 | NewestAlbums | Shows newest albums, by Added timestamp. |
+
+## BatteryIndicator
+
+Reads the battery capacity from the sys filesystem.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| battery | The battery sys folder, e.g. `BAT0` |
