@@ -38,7 +38,8 @@ if rc == 0 then
     for _,data in ipairs(result.data)
     do
         table.insert(rows, "<div class=\"list-group-item list-group-item-action clickable\" data-href='{\"cmd\":\"gotoAlbum\",\"options\":[\"" .. data.AlbumId .. "\"]}'>" ..
-            data.Album .. "<br/><small>" .. table.concat(data.AlbumArtist, ", ") .. "</small></div>")
+            mympd.htmlencode(data.Album) .. "<br/><small>" ..
+            mympd.htmlencode(table.concat(data.AlbumArtist, ", ")) .. "</small></div>")
     end
 end
 

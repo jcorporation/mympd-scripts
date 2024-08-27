@@ -37,8 +37,9 @@ local rc, result = mympd.api(method, options)
 if rc == 0 then
     for _,data in ipairs(result.data)
     do
-        table.insert(rows, "<div class=\"list-group-item list-group-item-action clickable\" data-href='{\"cmd\":\"songDetails\",\"options\":[\"" .. data.uri .. "\"]}'>" ..
-            data.Album .. "<br/><small>" .. table.concat(data.Artist, ", ") .. "</small></div>")
+        table.insert(rows, "<div class=\"list-group-item list-group-item-action clickable\" data-href='{\"cmd\":\"songDetails\",\"options\":[" ..
+            json.encode(mympd.htmlencode(data.uri)) .. "]}'>" .. mympd.htmlencode(data.Album) .. "<br/><small>" ..
+            mympd.htmlencode(table.concat(data.Artist, ", ")) .. "</small></div>")
     end
 end
 
