@@ -1,4 +1,4 @@
--- {"name": "BatteryIndicator", "file": "HomeWidgets/BatteryIndicator.lua", "version": 1, "desc": "Displays the battery status from sys filesystem.", "order":0, "arguments":[]}
+-- {"name": "WidgetBatteryIndicator", "file": "HomeWidgets/WidgetBatteryIndicator.lua", "version": 1, "desc": "Displays the battery status from sys filesystem.", "order":0, "arguments":[]}
 local headers ="Content-type: text/html\r\n"
 local body = "<div class=\"text-center p-3\">Error</div>"
 
@@ -23,7 +23,7 @@ if mympd_arguments.battery ~= nil then
                     icon = "battery_" .. i .. "_bar"
                 end
             end
-            body = "<div class=\"text-center p-3 fs-3\">" ..
+            body = "<div class=\"text-center py-3 fs-3\">" ..
                     "<span class=\"mi fs-1\">" .. icon .. "</span>" ..
                     "<span>" .. battery .. " %</span>" ..
                 "</div>"

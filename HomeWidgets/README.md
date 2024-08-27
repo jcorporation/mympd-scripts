@@ -1,18 +1,29 @@
 # Home Widgets
 
-This scripts can be used as the backend for widgets on the home screen.
+This scripts can be used as the backend for widgets on the home screen. They return a http response with html content that is displayed in the widget.
 
-This scripts return a http reply with html content that is displayed in the widget. JavaScript functions can be called with the `data-href` attribute. Styling is done with [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/).
+## AlbumsWidget
 
-| WIDGET | DESCRIPTION |
-| ------ | ----------- |
-| BatteryIndicator | Shows the battery level. |
-| NewestAlbums | Shows newest albums, by Added timestamp. |
+Lists newest or random albums.
 
-## BatteryIndicator
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| entries | Number of albums to list. |
+| view | `random` or `newest` |
+
+## BatteryIndicatorWidget
 
 Reads the battery capacity from the sys filesystem.
 
 | ARGUMENT | DESCRIPTION |
 | -------- | ----------- |
 | battery | The battery sys folder, e.g. `BAT0` |
+
+## SongsWidget
+
+Lists newest or random songs.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| entries | Number of songs to list. |
+| view | `random` or `newest` |
