@@ -45,34 +45,26 @@ if mympd_arguments.trigger == "player" then
     return "Now Playing: Not Playing"
   end
 
-  local rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
-  if rc ~= 0 then
+  if mympd_state.current_song == nil then
     return "Now Playing: Not Playing"
   end
 
-  if result.webradio or
-     string.sub(result.uri, 1, 8) == "https://" or
-     string.sub(result.uri, 1, 7) == "http://" then
+  if string.sub(mympd_state.current_song.uri, 1, 8) == "https://" or
+     string.sub(mympd_state.current_song.uri, 1, 7) == "http://" then
     return "webradio"
   end
-
-  local artist = result.Artist[1]
-  local title = result.Title
-  local album = result.Album
-  local albumArtist = result.AlbumArtist[1]
 
   local data = {
     method      = "track.updateNowPlaying",
     api_key     = mympd_env.var_lastfm_api_key,
-    track       = title,
-    artist      = artist,
-    album       = album,
-    albumArtist = albumArtist,
+    track       = mympd_state.current_song.Title,
+    artist      = mympd_state.current_song.Artist[1],
+    album       = mympd_state.current_song.Album,
+    albumArtist = mympd_state.current_song.AlbumArtist[1],
     sk          = mympd_env.var_lastfm_session_key,
   }
 
-  local body
-  rc, body = sendData(data)
+  local rc, body = sendData(data)
   if rc ~= 0 then
     return "Now Playing: Error"
   end
@@ -80,36 +72,29 @@ if mympd_arguments.trigger == "player" then
   local ret = json.decode(body)
   local code = ret.nowplaying.ignoredMessage.code
   if code ~= "0" then
-    return "Now Playing: " .. artist .. " - " .. title .. " - ignored code " .. code
+    return "Now Playing: " .. mympd_state.current_song.Artist[1] .. " - " .. mympd_state.current_song.Title .. " - ignored code " .. code
   end
 
-  return "Now Playing: " .. artist .. " - " .. title .. " - OK"
+  return "Now Playing: " .. mympd_state.current_song.Artist[1] .. " - " .. mympd_state.current_song.Title .. " - OK"
 end
 
 if mympd_arguments.trigger == "scrobble" then
-  local rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
-  if rc ~= 0 then
+  if mympd_state.current_song == nil then
     return "Scrobble: Not playing"
   end
-
-  local artist = result.Artist[1]
-  local title = result.Title
-  local album = result.Album
-  local albumArtist = result.AlbumArtist[1]
 
   local data = {
     method      = "track.scrobble",
     api_key     = mympd_env.var_lastfm_api_key,
-    timestamp   = tostring(os.time()-mympd_state.elapsed_time),
-    track       = title,
-    artist      = artist,
-    album       = album,
-    albumArtist = albumArtist,
+    timestamp   = tostring(mympd_state.start_time),
+    track       = mympd_state.current_song.Title,
+    artist      = mympd_state.current_song.Artist[1],
+    album       = mympd_state.current_song.Album,
+    albumArtist = mympd_state.current_song.AlbumArtist[1],
     sk          = mympd_env.var_lastfm_session_key,
   }
 
-  local body
-  rc, body = sendData(data)
+  local rc, body = sendData(data)
   if rc ~= 0 then
     return "Scrobble: Error"
   end
@@ -117,10 +102,10 @@ if mympd_arguments.trigger == "scrobble" then
   local ret = json.decode(body)
   local code = ret.scrobbles.scrobble.ignoredMessage.code
   if code ~= "0" then
-    return "Scrobble: " .. artist .. " - " .. title .. " ignored, code " .. code
+    return "Scrobble: " .. mympd_state.current_song.Artist[1] .. " - " .. mympd_state.current_song.Title .. " ignored, code " .. code
   end
 
-  return "Scrobble: " .. artist .. " - " .. title .. " OK"
+  return "Scrobble: " .. mympd_state.current_song.Artist[1] .. " - " .. mympd_state.current_song.Title .. " OK"
 end
 
 if mympd_arguments.trigger == "feedback" then
@@ -134,29 +119,24 @@ if mympd_arguments.trigger == "feedback" then
     end
   end
 
-  local rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
-  if rc ~= 0 then
+  if mympd_state.current_song == nil then
     return "Feedback: Not playing"
   end
-
-  local artist = result.Artist[1]
-  local title = result.Title
 
   local data = {
     method      = "track.love",
     api_key     = mympd_env.var_lastfm_api_key,
-    track       = title,
-    artist      = artist,
+    track       = mympd_state.current_song.Title,
+    artist      = mympd_state.current_song.Artist[1],
     sk          = mympd_env.var_lastfm_session_key,
   }
 
-  local body
-  rc, body = sendData(data)
+  local rc, body = sendData(data)
   if rc ~= 0 then
     return "Feedback: Error"
   end
 
-  return "Feedback: " .. artist .. " - " .. title .. " OK"
+  return "Feedback: " .. mympd_state.current_song.Artist[1] .. " - " .. mympd_state.current_song.Title .. " OK"
 end
 
 if mympd_arguments.trigger == "key" then

@@ -1,4 +1,4 @@
--- {"name": "ListenBrainzPlayer", "file": "ListenBrainz/ListenBrainzPlayer.lua", "version": 1, "desc": "Sends the now playing info to ListenBrainz.", "order":0, "arguments":[]}
+-- {"name": "ListenBrainzPlayer", "file": "ListenBrainz/ListenBrainzPlayer.lua", "version": 2, "desc": "Sends the now playing info to ListenBrainz.", "order":0, "arguments":[]}
 if mympd_env.var_listenbrainz_token == nil then
   return "No ListenBrainz token set"
 end
@@ -9,35 +9,32 @@ local extra_headers = "Content-type: application/json\r\n"..
 
 mympd.init()
 
-local play_state = mympd_state.play_state
-local elapsed_time = mympd_state.elapsed_time
-
-if play_state ~= 2 or elapsed_time > 5 then
+if mympd_state.play_state ~= 2 or
+   mympd_state.elapsed_time > 5
+then
   return
 end
 
-local rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
-if rc ~= 0 then
+if mympd_state.current_song == nil then
   return
 end
 
-if result.webradio or
-   string.sub(result.uri, 1, 8) == "https://" or
-   string.sub(result.uri, 1, 7) == "http://"
+if string.sub(mympd_state.current_song.uri, 1, 8) == "https://" or
+   string.sub(mympd_state.current_song.uri, 1, 7) == "http://"
 then
   return
 end
 
 local artist_mbids = {}
-if result.MUSICBRAINZ_ARTISTID ~= nil then
-  for _, v in pairs(result["MUSICBRAINZ_ARTISTID"]) do
+if mympd_state.current_song.MUSICBRAINZ_ARTISTID ~= nil then
+  for _, v in pairs(mympd_state.current_song["MUSICBRAINZ_ARTISTID"]) do
     if v ~= "" then
       artist_mbids[#artist_mbids + 1] = v
     end
   end
 end
-if result.MUSICBRAINZ_ALBUMARTISTID ~= nil then
-  for _, v in pairs(result.MUSICBRAINZ_ALBUMARTISTID) do
+if mympd_state.current_song.MUSICBRAINZ_ALBUMARTISTID ~= nil then
+  for _, v in pairs(mympd_state.current_song.MUSICBRAINZ_ALBUMARTISTID) do
     if v ~= "" then
       artist_mbids[#artist_mbids + 1] = v
     end
@@ -48,18 +45,17 @@ local payload = json.encode({
   payload = {{
     track_metadata = {
       additional_info = {
-        release_mbid = result.MUSICBRAINZ_RELEASETRACKID,
-        recording_mbid = result.MUSICBRAINZ_TRACKID,
+        release_mbid = mympd_state.current_song.MUSICBRAINZ_RELEASETRACKID,
+        recording_mbid = mympd_state.current_song.MUSICBRAINZ_TRACKID,
         artist_mbids = artist_mbids
       },
-      artist_name = result.Artist[1],
-      track_name = result.Title,
-      release_name = result.Album
+      artist_name = mympd_state.current_song.Artist[1],
+      track_name = mympd_state.current_song.Title,
+      release_name = mympd_state.current_song.Album
     }
   }}
 });
-local code, header, body
-rc, code, header, body = mympd.http_client("POST", uri, extra_headers, payload)
+local rc, code, header, body = mympd.http_client("POST", uri, extra_headers, payload)
 if rc > 0 then
   return body
 end

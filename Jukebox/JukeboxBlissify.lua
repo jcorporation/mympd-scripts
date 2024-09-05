@@ -1,4 +1,4 @@
--- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 6, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":0,"arguments":["addToQueue"]}
+-- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 7, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":0,"arguments":["addToQueue"]}
 local blissify_path = mympd_env.var_blissify_path
 local blissify_config = ""
 if mympd_env.var_blissify_config ~= nil and
@@ -39,9 +39,9 @@ end
 
 if last_song == nil then
     -- fallback to playing song
-    rc, result = mympd.api("MYMPD_API_PLAYER_CURRENT_SONG")
-    if rc == 0 and result.uri then
-        last_song = result.uri
+    if mympd_state.current_song ~= nil
+    then
+        last_song = mympd_state.current_song.uri
     end
 end
 
