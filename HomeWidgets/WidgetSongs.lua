@@ -17,7 +17,7 @@ if mympd_arguments.view == "newest" then
         sortdesc = false,
         fields = {
             "Artist",
-            "Album"
+            "Title"
         },
         offset = 0,
         limit = entries
@@ -38,7 +38,7 @@ if rc == 0 then
     for _,data in ipairs(result.data)
     do
         table.insert(rows, "<div class=\"list-group-item list-group-item-action clickable\" data-href='{\"cmd\":\"songDetails\",\"options\":[" ..
-            json.encode(mympd.htmlencode(data.uri)) .. "]}'>" .. mympd.htmlencode(data.Album) .. "<br/><small>" ..
+            json.encode(mympd.htmlencode(data.uri)) .. "]}'>" .. mympd.htmlencode(data.Title) .. "<br/><small>" ..
             mympd.htmlencode(table.concat(data.Artist, ", ")) .. "</small></div>")
     end
 end
