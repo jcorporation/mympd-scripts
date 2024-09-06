@@ -7,6 +7,8 @@ local uri = "https://api.listenbrainz.org/1/submit-listens"
 local extra_headers = "Content-type: application/json\r\n"..
   "Authorization: Token " .. mympd_env.var_listenbrainz_token .. "\r\n"
 
+mympd.init()
+
 if mympd_state.current_song == nil then
   return
 end
