@@ -1,9 +1,9 @@
 -- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 2, "desc": "Scrobbles songs to your Maloja server.", "order":0, "arguments":[]}
-if mympd_env.var_maloja_token == nil then
+if mympd_env.var.maloja_token == nil then
     return "No Maloja token set"
 end
 
-if mympd_env.var_maloja_uri == nil then
+if mympd_env.var.maloja_uri == nil then
     return "No Maloja URI set"
 end
 
@@ -17,7 +17,7 @@ then
     return
 end
 
-local uri = mympd_env.var_maloja_host .. "/apis/mlj_1/newscrobble?key=" .. mympd_env.var_maloja_token
+local uri = mympd_env.var.maloja_host .. "/apis/mlj_1/newscrobble?key=" .. mympd_env.var.maloja_token
 local extra_headers = "Content-type: application/json\r\n"
 
 local payload = json.encode({

@@ -13,13 +13,13 @@ local p_coverartarchive = {
 local p_fanart_tv = {
     name = "Fanart.tv",
     get = function(song, out)
-        if not mympd_env.var_fanart_tv_api_key or
+        if not mympd_env.var.fanart_tv_api_key or
            not song.MUSICBRAINZ_ARTISTID or
            not song.MUSICBRAINZ_RELEASEGROUPID
         then
             return 1
         end
-        local uri = "http://webservice.fanart.tv/v3/music/" .. song.MUSICBRAINZ_ARTISTID[1] .. "?api_key=" .. mympd_env.var_fanart_tv_api_key
+        local uri = "http://webservice.fanart.tv/v3/music/" .. song.MUSICBRAINZ_ARTISTID[1] .. "?api_key=" .. mympd_env.var.fanart_tv_api_key
         local rc, code, header, body = mympd.http_client("GET", uri, "", "")
         if rc == 1 then
             return 1

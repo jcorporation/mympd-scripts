@@ -1,10 +1,10 @@
 -- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 7, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":0,"arguments":["addToQueue"]}
-local blissify_path = mympd_env.var_blissify_path
+local blissify_path = mympd_env.var.blissify_path
 local blissify_config = ""
-if mympd_env.var_blissify_config ~= nil and
-   mympd_env.var_blissify_config ~= ""
+if mympd_env.var.blissify_config ~= nil and
+   mympd_env.var.blissify_config ~= ""
 then
-    blissify_config = "-c " .. mympd_env.var_blissify_config
+    blissify_config = "-c " .. mympd_env.var.blissify_config
 end
 local addSongs = 1
 local min_jukebox_length = 50

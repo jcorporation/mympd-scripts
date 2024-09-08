@@ -1,10 +1,10 @@
 -- {"name": "ListenBrainzPlaylistImport", "file": "ListenBrainz/ListenBrainzPlaylistImport.lua", "version": 2, "desc": "Imports generated playlists from ListenBrainz.", "order":1, "arguments":[]}
 
-local extra_headers = "Authorization: Token " .. mympd_env.var_listenbrainz_token .. "\r\n"
+local extra_headers = "Authorization: Token " .. mympd_env.var.listenbrainz_token .. "\r\n"
 
 local function fetch_playlists()
     local uri = "https://api.listenbrainz.org/1/user/" ..
-        mympd_env.var_listenbrainz_username .. "/playlists/createdfor"
+        mympd_env.var.listenbrainz_username .. "/playlists/createdfor"
     local rc, code, headers, body = mympd.http_client("GET", uri, extra_headers, "")
     if rc == 1 then
         return "Failure fetching playlists"

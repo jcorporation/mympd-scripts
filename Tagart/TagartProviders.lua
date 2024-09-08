@@ -7,7 +7,7 @@ local p_fanart_tv = {
         AlbumArtist = true
     },
     get = function(tag, value, out)
-        if not mympd_env.var_fanart_tv_api_key
+        if not mympd_env.var.fanart_tv_api_key
         then
             return 1
         end
@@ -33,7 +33,7 @@ local p_fanart_tv = {
             return 1
         end
 
-        local uri = "http://webservice.fanart.tv/v3/music/" .. song.data[1].MUSICBRAINZ_ARTISTID[1] .. "?api_key=" .. mympd_env.var_fanart_tv_api_key
+        local uri = "http://webservice.fanart.tv/v3/music/" .. song.data[1].MUSICBRAINZ_ARTISTID[1] .. "?api_key=" .. mympd_env.var.fanart_tv_api_key
         rc, code, header, body = mympd.http_client("GET", uri, "", "")
         if rc == 1 then
             return 1

@@ -27,7 +27,7 @@ end
 
 local function sendData(data)
   local extra_headers = 'Content-type: application/x-www-form-urlencoded\r\n'
-  local hash = hashRequest(data, mympd_env.var_lastfm_secret)
+  local hash = hashRequest(data, mympd_env.var.lastfm_secret)
   data["api_sig"] = hash
   data = urlencode_data(data)
   local rc, code, headers, body = mympd.http_client("POST", "https://ws.audioscrobbler.com/2.0/?format=json", extra_headers, data)
@@ -56,12 +56,12 @@ if mympd_arguments.trigger == "player" then
 
   local data = {
     method      = "track.updateNowPlaying",
-    api_key     = mympd_env.var_lastfm_api_key,
+    api_key     = mympd_env.var.lastfm_api_key,
     track       = mympd_state.current_song.Title,
     artist      = mympd_state.current_song.Artist[1],
     album       = mympd_state.current_song.Album,
     albumArtist = mympd_state.current_song.AlbumArtist[1],
-    sk          = mympd_env.var_lastfm_session_key,
+    sk          = mympd_env.var.lastfm_session_key,
   }
 
   local rc, body = sendData(data)
@@ -85,13 +85,13 @@ if mympd_arguments.trigger == "scrobble" then
 
   local data = {
     method      = "track.scrobble",
-    api_key     = mympd_env.var_lastfm_api_key,
+    api_key     = mympd_env.var.lastfm_api_key,
     timestamp   = tostring(mympd_state.start_time),
     track       = mympd_state.current_song.Title,
     artist      = mympd_state.current_song.Artist[1],
     album       = mympd_state.current_song.Album,
     albumArtist = mympd_state.current_song.AlbumArtist[1],
-    sk          = mympd_env.var_lastfm_session_key,
+    sk          = mympd_env.var.lastfm_session_key,
   }
 
   local rc, body = sendData(data)
@@ -125,10 +125,10 @@ if mympd_arguments.trigger == "feedback" then
 
   local data = {
     method      = "track.love",
-    api_key     = mympd_env.var_lastfm_api_key,
+    api_key     = mympd_env.var.lastfm_api_key,
     track       = mympd_state.current_song.Title,
     artist      = mympd_state.current_song.Artist[1],
-    sk          = mympd_env.var_lastfm_session_key,
+    sk          = mympd_env.var.lastfm_session_key,
   }
 
   local rc, body = sendData(data)
@@ -153,7 +153,7 @@ if mympd_arguments.trigger == "fetchkey" then
     method   = "auth.getMobileSession",
     username = mympd_arguments.Username,
     password = mympd_arguments.Password,
-    api_key  = mympd_env.var_lastfm_api_key,
+    api_key  = mympd_env.var.lastfm_api_key,
   }
 
   local rc, body = sendData(data)
