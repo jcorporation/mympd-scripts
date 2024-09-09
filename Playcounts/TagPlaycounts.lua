@@ -12,12 +12,14 @@ then
 end
 
 for tag in string.gmatch(mympd_arguments.tags, "[^,]+") do
-    if mympd_state.current_song[tag] and mympd_state.current_song[tag][1]
+    if mympd_state.current_song[tag]
     then
-        mympd.api("MYMPD_API_STICKER_INC", {
-            uri = mympd_state.current_song[tag][1],
-            type = tag,
-            name = "playCount"
-        })
+        for _, v in pairs(mympd_state.current_song[tag]) do
+            mympd.api("MYMPD_API_STICKER_INC", {
+                uri = v,
+                type = tag,
+                name = "playCount"
+            })
+        end
     end
 end
