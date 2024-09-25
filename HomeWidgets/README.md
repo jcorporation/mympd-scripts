@@ -2,7 +2,7 @@
 
 This scripts can be used as the backend for widgets on the home screen. They return a http response with html content that is displayed in the widget.
 
-## AlbumsWidget
+## WidgetAlbums
 
 Lists newest or random albums.
 
@@ -11,7 +11,7 @@ Lists newest or random albums.
 | entries | Number of albums to list. |
 | view | `random` or `newest` |
 
-## BatteryIndicatorWidget
+## WidgetBatteryIndicator
 
 Reads the battery capacity from the sys filesystem.
 
@@ -19,7 +19,19 @@ Reads the battery capacity from the sys filesystem.
 | -------- | ----------- |
 | battery | The battery sys folder, e.g. `BAT0` |
 
-## SongsWidget
+## WidgetPlaylists
+
+Lists newest playlists.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| entries | Number of playlists to list. |
+
+## WidgetStats
+
+Show MPD database statistics.
+
+## WidgetSongs
 
 Lists newest or random songs.
 
