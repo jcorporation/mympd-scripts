@@ -18,9 +18,9 @@ The last.fm APi is available for everyone. You can get your API key and shared s
 
 | EVENT | SCRIPT | ARGUMENT |
 | ----- | ------ | -------- |
-| mpd_player | lastfmPlayer | trigger = player |
-| mympd_scrobble | lastfmScrobbler | trigger = scrobble |
-| mympd_feedback | lastfmFeedback | trigger = feedback |
+| mpd_player | lastfm | trigger = player |
+| mympd_scrobble | lastfm | trigger = scrobble |
+| mympd_feedback | lastfm | trigger = feedback |
 
 ***
 
