@@ -37,11 +37,8 @@ end
 -- main
 mympd.init()
 
-local play_state = mympd_state.play_state
-local elapsed_time = mympd_state.elapsed_time
-
 if mympd_arguments.trigger == "player" then
-  if play_state ~= 2 or elapsed_time > 5 then
+  if mympd_state.play_state ~= 2 or mympd_state.elapsed_time > 5 then
     return "Now Playing: Not Playing"
   end
 
