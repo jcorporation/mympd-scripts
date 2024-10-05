@@ -64,7 +64,7 @@ for _, album in pairs(result.data) do
         else
             local out = mympd.tmp_file()
             local uri = mympd_state.mympd_uri .. 'albumart?offset=0&uri=' .. mympd.urlencode(album.uri)
-            rc, code, headers = mympd_http_download(uri, "", out)
+            rc, code, headers = mympd.http_download(uri, "", out)
             if rc == 0 then
                 local name
                 rc, name = mympd.cache_cover_write(out, album.uri)
