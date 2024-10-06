@@ -14,6 +14,6 @@ You can use the script `librefm` with the trigger argument set to `key` to fetch
 
 | EVENT | SCRIPT | ARGUMENT |
 | ----- | ------ | -------- |
-| mpd_player | librefm_v2 | trigger = player |
-| mympd_scrobble | librefm_v2 | trigger = scrobble |
-| mympd_feedback | librefm_v2 | trigger = feedback |
+| mpd_player | librefm | trigger = player |
+| mympd_scrobble | librefm | trigger = scrobble |
+| mympd_feedback | librefm | trigger = feedback |
