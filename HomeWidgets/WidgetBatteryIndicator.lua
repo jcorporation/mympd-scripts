@@ -1,19 +1,9 @@
--- {"name": "WidgetBatteryIndicator", "file": "HomeWidgets/WidgetBatteryIndicator.lua", "version": 1, "desc": "Displays the battery status from sys filesystem.", "order":0, "arguments":[]}
+-- {"name": "WidgetBatteryIndicator", "file": "HomeWidgets/WidgetBatteryIndicator.lua", "version": 2, "desc": "Displays the battery status from sys filesystem.", "order":0, "arguments":[]}
 local headers ="Content-type: text/html\r\n"
 local body = "<div class=\"text-center p-3\">Error</div>"
 
-local function read_file(path)
-    local file = io.open(path, "r")
-    if not file then
-        return nil
-    end
-    local content = file:read "*a"
-    file:close()
-    return content
-end
-
 if mympd_arguments.battery ~= nil then
-    local battery = read_file("/sys/class/power_supply/" .. mympd_arguments.battery .. "/capacity")
+    local battery = mympd.read_file("/sys/class/power_supply/" .. mympd_arguments.battery .. "/capacity")
     if battery ~= nil then
         battery = tonumber(battery)
         if battery ~= nil then
