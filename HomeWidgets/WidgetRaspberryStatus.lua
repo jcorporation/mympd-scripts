@@ -2,7 +2,7 @@
 
 local rows = {}
 
-function addRow(key, value)
+local function addRow(key, value)
     table.insert(rows, "<tr><th>" ..
         mympd.htmlencode(key) .. "</th><td>" ..
         mympd.htmlencode(value) .. "</td></tr>")
