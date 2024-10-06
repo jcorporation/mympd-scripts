@@ -27,6 +27,10 @@ Lists newest playlists.
 | -------- | ----------- |
 | entries | Number of playlists to list. |
 
+## WidgetRaspberryStatus
+
+Uses vcgencmd to get Raspberry Pi status information.
+
 ## WidgetStats
 
 Show MPD database statistics.
