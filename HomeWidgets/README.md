@@ -29,7 +29,7 @@ Lists newest playlists.
 
 ## WidgetRaspberryStatus
 
-Uses vcgencmd to get Raspberry Pi status information.
+Uses vcgencmd to get Raspberry Pi status information. The mympd user needs read access to `/dev/vcio`.
 
 ## WidgetStats
 

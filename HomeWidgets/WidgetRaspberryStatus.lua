@@ -1,5 +1,6 @@
--- {"name": "WidgetRaspberryStatus", "file": "HomeWidgets/WidgetRaspberryStatus.lua", "version": 1, "desc": "Shows Raspberry Pi status information.", "order":0, "arguments":[]}
+-- {"name": "WidgetRaspberryStatus", "file": "HomeWidgets/WidgetRaspberryStatus.lua", "version": 2, "desc": "Shows Raspberry Pi status information.", "order":0, "arguments":[]}
 
+local headers = "Content-type: text/html\r\n"
 local rows = {}
 
 local function addRow(key, value)
@@ -9,6 +10,10 @@ local function addRow(key, value)
 end
 
 local temp = mympd.os_capture("vcgencmd measure_temp")
+if string.sub(temp, 1, 5) ~= "temp=" then
+    local body = "<div class=\"alert alert-danger m-3\">vcgencmd can not read from /dev/vcio</div>"
+    return mympd.http_reply("200", headers, body)
+end
 temp = string.sub(temp, 6)
 addRow("Temp", temp)
 
@@ -51,7 +56,6 @@ if throttled ~= "0x0" then
     end
 end
 
-local headers = "Content-type: text/html\r\n"
 local body = "<table class=\"table\">" ..
     table.concat(rows) ..
     "</table>"
