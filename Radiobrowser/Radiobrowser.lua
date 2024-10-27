@@ -1,4 +1,4 @@
--- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 3, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
+-- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 4, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
 
 local function radiobrowser_search(name, country, tag)
     local uri = string.format("https://all.api.radio-browser.info/json/stations/search?hidebroken=true&offset=0&limit=100&name=%s&country=%s&tag=%s",
@@ -55,14 +55,14 @@ local function radiobrowser_import(stationuuid)
     if mympd_arguments.Action == "AddToFavorites" then
         local data = {
             name = radio[1].name,
+            oldName = "",
             streamUri = radio[1].url_resolved,
-            streamUriOld = "",
             image = radio[1].favicon,
-            genre = radio[1].tags,
+            genres = { radio[1].tags },
             homepage = radio[1].homepage,
             country = radio[1].country,
-            state = "",
-            language = radio[1].language,
+            region = "",
+            languages = { radio[1].language },
             description = "",
             codec = radio[1].codec,
             bitrate = radio[1].bitrate
@@ -77,7 +77,7 @@ local function radiobrowser_import(stationuuid)
         rc, result = mympd.api("MYMPD_API_QUEUE_APPEND_URIS", data)
     end
     if rc == 1 then
-        mympd.notify_client(2, result)
+        mympd.notify_client(2, result.message)
     end
     return rc
 end
