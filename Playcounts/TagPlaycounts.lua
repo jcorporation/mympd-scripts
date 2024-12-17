@@ -8,7 +8,7 @@ end
 if string.sub(mympd_state.current_song.uri, 1, 8) == "https://" or
    string.sub(mympd_state.current_song.uri, 1, 7) == "http://"
 then
-  return
+    return
 end
 
 local function inc_playcount(uri, stickerType)
