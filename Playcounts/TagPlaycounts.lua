@@ -1,4 +1,4 @@
--- {"name": "TagPlaycounts", "file": "Playcounts/TagPlaycounts.lua", "version": 2, "desc": "Sets playcounts for tags.", "order":0, "arguments":["tags"]}
+-- {"name": "TagPlaycounts", "file": "Playcounts/TagPlaycounts.lua", "version": 3, "desc": "Sets playCount and lastPlayed for tags.", "order":0, "arguments":["tags"]}
 mympd.init()
 
 if mympd_state.current_song == nil then
@@ -11,15 +11,19 @@ then
   return
 end
 
+local function inc_playcount(uri, stickerType)
+    mympd.api("MYMPD_API_STICKER_PLAYCOUNT", {
+        uri = uri,
+        type = stickerType
+    })
+end
+
 for tag in string.gmatch(mympd_arguments.tags, "[^,]+") do
-    if mympd_state.current_song[tag]
-    then
+    if tag == "Album" then
+        inc_playcount(mympd_state.current_album, "mympd_album")
+    elseif mympd_state.current_song[tag] then
         for _, v in pairs(mympd_state.current_song[tag]) do
-            mympd.api("MYMPD_API_STICKER_INC", {
-                uri = v,
-                type = tag,
-                name = "playCount"
-            })
+            inc_playcount(v, tag)
         end
     end
 end
