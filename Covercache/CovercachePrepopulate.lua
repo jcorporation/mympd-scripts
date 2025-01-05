@@ -1,4 +1,4 @@
--- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 5, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
+-- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 6, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
 
 mympd.init()
 
@@ -54,6 +54,7 @@ rc, result = mympd.api("MYMPD_API_DATABASE_ALBUM_LIST", {
 local existing = 0
 local errors = 0
 local downloaded = 0
+local placeholder = 0
 for _, album in pairs(result.data) do
     if album.uri and album.uri ~= "" then
         local path = mympd_env.cachedir_cover .. "/" .. mympd.hash_sha1(album.uri) .. "-0"
@@ -63,9 +64,12 @@ for _, album in pairs(result.data) do
             existing = existing + 1
         else
             local out = mympd.tmp_file()
-            local uri = mympd_state.mympd_uri .. 'albumart?offset=0&uri=' .. mympd.urlencode(album.uri)
+            local uri = mympd_state.mympd_uri .. "albumart?offset=0&uri=" .. mympd.urlencode(album.uri)
             rc, code, headers = mympd.http_download(uri, "", out)
-            if rc == 0 then
+            if headers["X-myMPD-Placeholder"] == "1" then
+                placeholder = placeholder + 1
+                create_placeholder(path .. ".svg")
+            elseif rc == 0 then
                 local name
                 rc, name = mympd.cache_cover_write(out, album.uri)
                 if rc == 0 then
@@ -84,4 +88,5 @@ for _, album in pairs(result.data) do
     end
 end
 
-return "Existing: " .. existing .. ", Downloaded: " .. downloaded .. ", Errors: " .. errors
+return "Existing: " .. existing .. ", Downloaded: " .. downloaded ..
+       ", Placeholder: " .. placeholder .. ", Errors: " .. errors
