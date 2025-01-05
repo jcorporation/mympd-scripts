@@ -1,4 +1,4 @@
--- {"name": "Albumart", "file": "Albumart/Albumart.lua", "version": 1, "desc": "Fetches albumart on demand.", "order": 0, "arguments": ["uri"]}
+-- {"name": "Albumart", "file": "Albumart/Albumart.lua", "version": 2, "desc": "Fetches albumart on demand.", "order": 0, "arguments": ["uri"]}
 local providers = require "scripts/AlbumartProviders"
 
 -- Get the song details
@@ -25,7 +25,7 @@ end
 
 -- Cache the fetched albumart and send it to the client
 local filename
-rc, filename = mympd.cache_cover_write(out, mympd_arguments.uri)
+rc, filename = mympd.cache_cover_write(out, mympd_arguments.uri, nil)
 if rc == 0 then
     return mympd.http_serve_file(filename)
 end

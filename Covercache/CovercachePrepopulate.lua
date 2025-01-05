@@ -71,7 +71,7 @@ for _, album in pairs(result.data) do
                 create_placeholder(path .. ".svg")
             elseif rc == 0 then
                 local name
-                rc, name = mympd.cache_cover_write(out, album.uri)
+                rc, name = mympd.cache_cover_write(out, album.uri, mympd.http_header_get(headers, "Content-Type"))
                 if rc == 0 then
                     mympd.log(6, "Covercache: " .. name)
                     downloaded = downloaded + 1

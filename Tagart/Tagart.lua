@@ -1,4 +1,4 @@
--- {"name": "Tagart", "file": "Tagart/Tagart.lua", "version": 1, "desc": "Fetches tagart on demand.", "order":0, "arguments":["tag", "value"]}
+-- {"name": "Tagart", "file": "Tagart/Tagart.lua", "version": 2, "desc": "Fetches tagart on demand.", "order":0, "arguments":["tag", "value"]}
 local providers = require "scripts/TagartProviders"
 
 local tag = mympd_arguments.tag
@@ -22,7 +22,7 @@ end
 
 -- Cache the fetched tagart and send it to the client
 local filename
-rc, filename = mympd.cache_thumbs_write(out, value)
+rc, filename = mympd.cache_thumbs_write(out, value, nil)
 if rc == 0 then
     return mympd.http_serve_file(filename)
 end

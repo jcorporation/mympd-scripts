@@ -1,4 +1,4 @@
--- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 2, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
+-- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 3, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
 
 -- yt-dlp helper functions
 local yt_dlp_path = "yt-dlp"
@@ -183,7 +183,7 @@ else
                     mympd.log(6, "Downloading " .. thumb .. " to " ..tmp_file)
                     local rc, code, headers = mympd.http_download(thumb, "", tmp_file)
                     if rc == 0 then
-                        rc = mympd.cache_cover_write(tmp_file, uri)
+                        rc = mympd.cache_cover_write(tmp_file, uri, nil)
                         if rc == 1 then
                             mympd.notify_client(2, "Failed to rename thumbnail!")
                         end
@@ -194,7 +194,7 @@ else
             end
         else
             -- if yt-dlp downloaded the thumbnail, rename it from id to hash
-            local rc = mympd.cache_cover_write(thumb, uri)
+            local rc = mympd.cache_cover_write(thumb, uri, nil)
             if rc == 1 then
                 mympd.notify_client(2, "Failed to rename thumbnail!")
             end
