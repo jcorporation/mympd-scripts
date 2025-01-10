@@ -67,8 +67,9 @@ for _, album in pairs(result.data) do
             local uri = mympd_state.mympd_uri .. "albumart?offset=0&uri=" .. mympd.urlencode(album.uri)
             rc, code, headers = mympd.http_download(uri, "", out)
             if headers["X-myMPD-Placeholder"] == "1" then
-                placeholder = placeholder + 1
                 create_placeholder(path .. ".svg")
+                placeholder = placeholder + 1
+                os.remove(out);
             elseif rc == 0 then
                 local name
                 rc, name = mympd.cache_cover_write(out, album.uri, mympd.http_header_get(headers, "Content-Type"))
@@ -78,9 +79,11 @@ for _, album in pairs(result.data) do
                 else
                     mympd.log(3, "Covercache: " .. name)
                     create_placeholder(path .. ".svg")
+                    os.remove(out);
                     errors = errors + 1
                 end
             else
+                os.remove(out);
                 errors = errors + 1
                 create_placeholder(path .. ".svg")
             end

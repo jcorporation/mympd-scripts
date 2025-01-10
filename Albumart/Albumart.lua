@@ -1,4 +1,4 @@
--- {"name": "Albumart", "file": "Albumart/Albumart.lua", "version": 2, "desc": "Fetches albumart on demand.", "order": 0, "arguments": ["uri"]}
+-- {"name": "Albumart", "file": "Albumart/Albumart.lua", "version": 3, "desc": "Fetches albumart on demand.", "order": 0, "arguments": ["uri"]}
 local providers = require "scripts/AlbumartProviders"
 
 -- Get the song details
@@ -20,6 +20,7 @@ for _,provider in pairs(providers) do
 end
 
 if rc == 1 then
+    os.remove(out);
     return mympd.http_redirect("/assets/coverimage-notavailable")
 end
 

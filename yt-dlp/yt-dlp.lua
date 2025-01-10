@@ -1,4 +1,4 @@
--- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 3, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
+-- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 4, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
 
 -- yt-dlp helper functions
 local yt_dlp_path = "yt-dlp"
@@ -188,6 +188,7 @@ else
                             mympd.notify_client(2, "Failed to rename thumbnail!")
                         end
                     else
+                        os.remove(tmp_file);
                         mympd.notify_client(2, "Failed to download thumbnail!")
                     end
                 end

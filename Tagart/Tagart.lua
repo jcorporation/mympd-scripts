@@ -1,4 +1,4 @@
--- {"name": "Tagart", "file": "Tagart/Tagart.lua", "version": 2, "desc": "Fetches tagart on demand.", "order":0, "arguments":["tag", "value"]}
+-- {"name": "Tagart", "file": "Tagart/Tagart.lua", "version": 3, "desc": "Fetches tagart on demand.", "order":0, "arguments":["tag", "value"]}
 local providers = require "scripts/TagartProviders"
 
 local tag = mympd_arguments.tag
@@ -17,6 +17,7 @@ for _, provider in pairs(providers) do
 end
 
 if rc == 1 then
+    os.remove(out);
     return mympd.http_redirect("/assets/coverimage-notavailable")
 end
 
