@@ -2,6 +2,31 @@
 
 This scripts can be used as the backend for widgets on the home screen. They return a http response with html content that is displayed in the widget.
 
+## WidgetMostPlayedAlbums
+
+Lists most played albums. You must use the Playcounts script to set album playcounts in the sticker database.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| entries | Number of albums to list. |
+
+## WidgetMostPlayedTag
+
+Lists most played tag. You must use the Playcounts script to set tag playcounts in the sticker database.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| tag | Tagtype, e.g. Artist |
+| entries | Number of artists to list. |
+
+## WidgetMostPlayedSongs
+
+Lists most played albums. Song playcounts are always maintained if the sticker database is enabled.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| entries | Number of songs to list. |
+
 ## WidgetAlbums
 
 Lists newest or random albums.
