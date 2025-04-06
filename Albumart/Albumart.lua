@@ -1,4 +1,4 @@
--- {"name": "Albumart", "file": "Albumart/Albumart.lua", "version": 3, "desc": "Fetches albumart on demand.", "order": 0, "arguments": ["uri"]}
+-- {"name": "Albumart", "file": "Albumart/Albumart.lua", "version": 4, "desc": "Fetches albumart on demand.", "order": 0, "arguments": ["uri"]}
 local providers = require "scripts/AlbumartProviders"
 
 -- Get the song details
@@ -9,6 +9,10 @@ if rc ~= 0 then
 end
 
 local out = mympd.tmp_file()
+if out == nil then
+    mympd.log(3, "Failure creating tmp file.")
+    return mympd.http_redirect("/assets/coverimage-notavailable")
+end
 
 rc = 1
 for _,provider in pairs(providers) do
