@@ -9,7 +9,7 @@ local p_fanart_tv = {
             return 1
         end
         local uri = "http://webservice.fanart.tv/v3/music/" .. song.MUSICBRAINZ_ARTISTID[1] .. "?api_key=" .. mympd_env.var.fanart_tv_api_key
-        local rc, code, header, body = mympd.http_client("GET", uri, "", "")
+        local rc, code, header, body = mympd.http_client("GET", uri, "", "", true)
         if rc == 1 then
             return 1
         end
@@ -25,7 +25,7 @@ local p_fanart_tv = {
             mympd.log(7, "Background not found")
             return 1
         end
-        return mympd.http_download(data.artistbackground[1].url, "", out)
+        return mympd.http_download(data.artistbackground[1].url, "", out, true)
     end
 }
 
