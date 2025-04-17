@@ -25,7 +25,7 @@ local p_fanart_tv = {
             mympd.log(7, "Background not found")
             return 1
         end
-        return mympd.http_download(data.artistbackground[1].url, "", out, true)
+        return mympd.http_download(data.artistbackground[1].url, "", "", true)
     end
 }
 

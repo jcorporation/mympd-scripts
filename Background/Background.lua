@@ -10,15 +10,12 @@ if rc ~= 0 then
     return mympd.http_redirect(fallback_uri)
 end
 
-local out = mympd.tmp_file()
-if out == nil then
-    mympd.log(3, "Failure creating tmp file.")
-    return mympd.http_redirect(fallback_uri)
-end
-
 rc = 1
+local out
+local code
+local headers
 for _,provider in pairs(providers) do
-    rc = provider.get(song, out)
+    rc, code, headers out = provider.get(song)
     if rc == 0 then
         mympd.log(6, "Background found on " .. provider.name)
         break
@@ -26,8 +23,7 @@ for _,provider in pairs(providers) do
 end
 
 if rc == 1 then
-    os.remove(out);
     return mympd.http_redirect(fallback_uri)
 end
 
-return mympd.http_serve_file_rm(out)
+return mympd.http_serve_file_from_cache(out)
