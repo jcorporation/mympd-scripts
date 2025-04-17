@@ -15,7 +15,7 @@ local out
 local code
 local headers
 for _,provider in pairs(providers) do
-    rc, code, headers out = provider.get(song)
+    rc, code, headers, out = provider.get(song)
     if rc == 0 then
         mympd.log(6, "Background found on " .. provider.name)
         break
