@@ -1,4 +1,4 @@
--- {"name": "AlbumartProviders", "file": "Albumart/AlbumartProviders.lua", "version": 1, "desc": "Albumart providers for the Albumart script.", "order":0,"arguments":[]}
+-- {"name": "AlbumartProviders", "file": "Albumart/AlbumartProviders.lua", "version": 2, "desc": "Albumart providers for the Albumart script.", "order":0,"arguments":[]}
 
 local p_coverartarchive = {
     name = "Coverartarchive",
@@ -15,6 +15,7 @@ local p_fanart_tv = {
     get = function(song, out)
         if not mympd_env.var.fanart_tv_api_key or
            not song.MUSICBRAINZ_ARTISTID or
+           not song.MUSICBRAINZ_ARTISTID[1] or
            not song.MUSICBRAINZ_RELEASEGROUPID
         then
             return 1
