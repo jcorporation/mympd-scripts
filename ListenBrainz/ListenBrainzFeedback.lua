@@ -1,4 +1,4 @@
--- {"name": "ListenBrainzFeedback", "file": "ListenBrainz/ListenBrainzFeedback.lua", "version": 1, "desc": "Sends feedback to ListenBrainz.", "order":0, "arguments":["uri","vote","type"]}
+-- {"name": "ListenBrainzFeedback", "file": "ListenBrainz/ListenBrainzFeedback.lua", "version": 3, "desc": "Sends feedback to ListenBrainz.", "order":0, "arguments":["uri","vote","type"]}
 if mympd_env.var.listenbrainz_token == nil then
   return "No ListenBrainz token set"
 end
