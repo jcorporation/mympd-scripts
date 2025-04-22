@@ -1,9 +1,13 @@
--- {"name": "AlbumartProviders", "file": "Albumart/AlbumartProviders.lua", "version": 1, "desc": "Albumart providers for the Albumart script.", "order":0,"arguments":[]}
+-- {"name": "AlbumartProviders", "file": "Albumart/AlbumartProviders.lua", "version": 2, "desc": "Albumart providers for the Albumart script.", "order":0,"arguments":[]}
+
+local function isnilorempty(s)
+    return s == nil or s == ''
+end
 
 local p_coverartarchive = {
     name = "Coverartarchive",
     get = function(song, out)
-        if not song.MUSICBRAINZ_ALBUMID then
+        if isnilorempty(song.MUSICBRAINZ_ALBUMID) then
             return 1
         end
         return mympd.http_download("https://coverartarchive.org/release/" .. song.MUSICBRAINZ_ALBUMID .. "/front", "", out)
@@ -13,9 +17,9 @@ local p_coverartarchive = {
 local p_fanart_tv = {
     name = "Fanart.tv",
     get = function(song, out)
-        if not mympd_env.var.fanart_tv_api_key or
-           not song.MUSICBRAINZ_ARTISTID or
-           not song.MUSICBRAINZ_RELEASEGROUPID
+        if isnilorempty(mympd_env.var.fanart_tv_api_key) or
+           isnilorempty(song.MUSICBRAINZ_ARTISTID) or
+           isnilorempty(song.MUSICBRAINZ_RELEASEGROUPID)
         then
             return 1
         end
