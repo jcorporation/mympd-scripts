@@ -188,7 +188,7 @@ else
                             mympd.notify_client(2, "Failed to rename thumbnail!")
                         end
                     else
-                        os.remove(tmp_file);
+                        mympd.remove_file(tmp_file)
                         mympd.notify_client(2, "Failed to download thumbnail!")
                     end
                 end

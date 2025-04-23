@@ -69,7 +69,7 @@ for _, album in pairs(result.data) do
             if headers["X-myMPD-Placeholder"] == "1" then
                 create_placeholder(path .. ".svg")
                 placeholder = placeholder + 1
-                os.remove(out);
+                mympd.remove_file(out)
             elseif rc == 0 then
                 local name
                 rc, name = mympd.cache_cover_write(out, album.uri, mympd.http_header_get(headers, "Content-Type"))
@@ -79,11 +79,11 @@ for _, album in pairs(result.data) do
                 else
                     mympd.log(3, "Covercache: " .. name)
                     create_placeholder(path .. ".svg")
-                    os.remove(out);
+                    mympd.remove_file(out)
                     errors = errors + 1
                 end
             else
-                os.remove(out);
+                mympd.remove_file(out)
                 errors = errors + 1
                 create_placeholder(path .. ".svg")
             end

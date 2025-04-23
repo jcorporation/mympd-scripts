@@ -24,7 +24,7 @@ for _,provider in pairs(providers) do
 end
 
 if rc == 1 then
-    os.remove(out);
+    mympd.remove_file(out)
     return mympd.http_redirect("/assets/coverimage-notavailable")
 end
 
