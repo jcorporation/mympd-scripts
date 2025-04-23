@@ -1,9 +1,9 @@
--- {"name": "ListenBrainzPlayer", "file": "ListenBrainz/ListenBrainzPlayer.lua", "version": 2, "desc": "Sends the now playing info to ListenBrainz.", "order":0, "arguments":[]}
+-- {"name": "ListenBrainzPlayer", "file": "ListenBrainz/ListenBrainzPlayer.lua", "version": 3, "desc": "Sends the now playing info to ListenBrainz.", "order":0, "arguments":[]}
 if mympd_env.var.listenbrainz_token == nil then
   return "No ListenBrainz token set"
 end
 
-local uri = "https://api.listenbrainz.org/1/feedback/recording-feedback"
+local uri = "https://api.listenbrainz.org/1/submit-listens"
 local extra_headers = "Content-type: application/json\r\n"..
   "Authorization: Token " .. mympd_env.var.listenbrainz_token .. "\r\n"
 
