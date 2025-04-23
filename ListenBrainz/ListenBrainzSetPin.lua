@@ -1,4 +1,4 @@
--- {"name": "ListenBrainzSetPin", "file": "ListenBrainz/ListenBrainzSetPin.lua", "version": 1, "desc": "Sets or unsets the pin on ListenBrainz.", "order":1, "arguments":["uri","blurb_content","pinned_until"]}
+-- {"name": "ListenBrainzSetPin", "file": "ListenBrainz/ListenBrainzSetPin.lua", "version": 2, "desc": "Sets or unsets the pin on ListenBrainz.", "order":1, "arguments":["uri","blurb_content","pinned_until"]}
 if mympd_env.var.listenbrainz_token == nil then
   return "No ListenBrainz token set"
 end
@@ -10,7 +10,7 @@ local extra_headers = "Content-type: application/json\r\n"..
 local payload = ""
 local uri = ""
 
-if mympd_arguments.uri ~= "" then
+if not mympd.isnilorempty(mympd_arguments.uri) then
   local rc, song = mympd.api("MYMPD_API_SONG_DETAILS", {uri = mympd_arguments.uri})
   if rc == 0 then
     local mbid = song.MUSICBRAINZ_TRACKID

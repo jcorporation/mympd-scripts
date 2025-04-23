@@ -1,4 +1,4 @@
--- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 6, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
+-- {"name": "CovercachePrepopulate", "file": "Covercache/CovercachePrepopulate.lua", "version": 7, "desc": "Prepopulates the myMPD covercache.", "order":1,"arguments":[]}
 
 mympd.init()
 
@@ -56,7 +56,7 @@ local errors = 0
 local downloaded = 0
 local placeholder = 0
 for _, album in pairs(result.data) do
-    if album.uri and album.uri ~= "" then
+    if not mympd.isnilorempty(album.uri) then
         local path = mympd_env.cachedir_cover .. "/" .. mympd.hash_sha1(album.uri) .. "-0"
         local existing_file = check_image(path)
         if existing_file ~= nil then

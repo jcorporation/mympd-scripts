@@ -1,8 +1,8 @@
--- {"name": "WidgetBatteryIndicator", "file": "HomeWidgets/WidgetBatteryIndicator.lua", "version": 2, "desc": "Displays the battery status from sys filesystem.", "order":0, "arguments":[]}
+-- {"name": "WidgetBatteryIndicator", "file": "HomeWidgets/WidgetBatteryIndicator.lua", "version": 3, "desc": "Displays the battery status from sys filesystem.", "order":0, "arguments":[]}
 local headers ="Content-type: text/html\r\n"
 local body = "<div class=\"text-center p-3\">Error</div>"
 
-if mympd_arguments.battery ~= nil then
+if not mympd.isnilorempty(mympd_arguments.battery) then
     local battery = mympd.read_file("/sys/class/power_supply/" .. mympd_arguments.battery .. "/capacity")
     if battery ~= nil then
         battery = tonumber(battery)

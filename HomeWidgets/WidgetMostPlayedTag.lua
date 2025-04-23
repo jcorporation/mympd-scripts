@@ -1,8 +1,8 @@
--- {"name": "WidgetMostPlayedTag", "file": "HomeWidgets/WidgetMostPlayedTag.lua", "version": 1, "desc": "Home widget for most played tag.", "order":0,"arguments":["tag","entries"]}
+-- {"name": "WidgetMostPlayedTag", "file": "HomeWidgets/WidgetMostPlayedTag.lua", "version": 2, "desc": "Home widget for most played tag.", "order":0,"arguments":["tag","entries"]}
 local headers = "Content-type: text/html\r\n"
 local tag = mympd_arguments.tag
 local entries
-if mympd_arguments.entries ~= nil then
+if not mympd.isnilorempty(mympd_arguments.entries) then
     entries = tonumber(mympd_arguments.entries)
 else
     entries = 10

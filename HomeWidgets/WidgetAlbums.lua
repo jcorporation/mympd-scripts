@@ -1,9 +1,9 @@
--- {"name": "WidgetAlbums", "file": "HomeWidgets/WidgetAlbums.lua", "version": 1, "desc": "Home widget for albums.", "order":0,"arguments":["view|select;newest;random","entries"]}
+-- {"name": "WidgetAlbums", "file": "HomeWidgets/WidgetAlbums.lua", "version": 2, "desc": "Home widget for albums.", "order":0,"arguments":["view|select;newest;random","entries"]}
 local headers = "Content-type: text/html\r\n"
 local entries
 local method
 local options
-if mympd_arguments.entries ~= nil then
+if not mympd.isnilorempty(mympd_arguments.entries) then
     entries = tonumber(mympd_arguments.entries)
 else
     entries = 10

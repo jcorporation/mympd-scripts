@@ -1,4 +1,4 @@
--- {"name": "TagartProviders", "file": "Tagart/TagartProviders.lua", "version": 2, "desc": "Tagart providers for the Tagart script.", "order": 0, "arguments":[]}
+-- {"name": "TagartProviders", "file": "Tagart/TagartProviders.lua", "version": 3, "desc": "Tagart providers for the Tagart script.", "order": 0, "arguments":[]}
 
 local p_fanart_tv = {
     name = "Fanart.tv",
@@ -7,8 +7,7 @@ local p_fanart_tv = {
         AlbumArtist = true
     },
     get = function(tag, value, out)
-        if not mympd_env.var.fanart_tv_api_key
-        then
+        if mympd.isnilorempty(mympd_env.var.fanart_tv_api_key) then
             return 1
         end
         local rc, code, header, body, song
@@ -26,8 +25,7 @@ local p_fanart_tv = {
            not song.data or
            not song.data[1] or
            not song.data[1].MUSICBRAINZ_ARTISTID or
-           not song.data[1].MUSICBRAINZ_ARTISTID[1] or
-           song.data[1].MUSICBRAINZ_ARTISTID[1] == ""
+           mympd.isnilorempty(song.data[1].MUSICBRAINZ_ARTISTID[1])
         then
             mympd.log(7, "MUSICBRAINZ_ARTISTID not found")
             return 1
@@ -45,7 +43,7 @@ local p_fanart_tv = {
         end
         if not data.artistthumb or
            not data.artistthumb[1] or
-           not data.artistthumb[1].url
+           mympd.isnilorempty(data.artistthumb[1].url)
         then
             mympd.log(7, "Tagart not found")
             return 1
@@ -74,8 +72,7 @@ local p_openopus = {
         if rc ~= 0 or
            not song.data or
            not song.data[1] or
-           not song.data[1].Composer or
-           song.data[1].Composer[1] == ""
+           mympd.isnilorempty(song.data[1].Composer)
         then
             mympd.log(7, "Composer not found")
             return 1
@@ -93,7 +90,7 @@ local p_openopus = {
         end
         if not data.composers or
            not data.composers[1] or
-           not data.composers[1].portrait
+           mympd.isnilorempty(data.composers[1].portrait)
         then
             mympd.log(7, "Tagart not found")
             return 1

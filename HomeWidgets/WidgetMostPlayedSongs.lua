@@ -1,7 +1,7 @@
--- {"name": "WidgetMostPlayedSongs", "file": "HomeWidgets/WidgetMostPlayedSongs.lua", "version": 1, "desc": "Home widget for most played songs.", "order":0,"arguments":["entries"]}
+-- {"name": "WidgetMostPlayedSongs", "file": "HomeWidgets/WidgetMostPlayedSongs.lua", "version": 2, "desc": "Home widget for most played songs.", "order":0,"arguments":["entries"]}
 local headers = "Content-type: text/html\r\n"
 local entries
-if mympd_arguments.entries ~= nil then
+if not mympd.isnilorempty(mympd_arguments.entries) then
     entries = tonumber(mympd_arguments.entries)
 else
     entries = 10

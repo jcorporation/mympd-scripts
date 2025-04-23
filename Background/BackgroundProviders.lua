@@ -3,9 +3,9 @@
 local p_fanart_tv = {
     name = "Fanart.tv",
     get = function(song, out)
-        if not mympd_env.var.fanart_tv_api_key or
+        if mympd.isnilorempty(mympd_env.var.fanart_tv_api_key) or
            not song.MUSICBRAINZ_ARTISTID or
-           not song.MUSICBRAINZ_ARTISTID[1]
+           mympd.isnilorempty(song.MUSICBRAINZ_ARTISTID[1])
         then
             return 1
         end
@@ -21,7 +21,7 @@ local p_fanart_tv = {
         end
         if not data.artistbackground or
            not data.artistbackground[1] or
-           not data.artistbackground[1].url
+           mympd.isnilorempty(data.artistbackground[1].url)
         then
             mympd.log(7, "Background not found")
             return 1

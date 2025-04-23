@@ -1,9 +1,9 @@
--- {"name": "AlbumartProviders", "file": "Albumart/AlbumartProviders.lua", "version": 2, "desc": "Albumart providers for the Albumart script.", "order":0,"arguments":[]}
+-- {"name": "AlbumartProviders", "file": "Albumart/AlbumartProviders.lua", "version": 3, "desc": "Albumart providers for the Albumart script.", "order":0,"arguments":[]}
 
 local p_coverartarchive = {
     name = "Coverartarchive",
     get = function(song, out)
-        if not song.MUSICBRAINZ_ALBUMID then
+        if mympd.isnilorempty(song.MUSICBRAINZ_ALBUMID) then
             return 1
         end
         return mympd.http_download("https://coverartarchive.org/release/" .. song.MUSICBRAINZ_ALBUMID .. "/front", "", out)
@@ -13,10 +13,10 @@ local p_coverartarchive = {
 local p_fanart_tv = {
     name = "Fanart.tv",
     get = function(song, out)
-        if not mympd_env.var.fanart_tv_api_key or
+        if mympd.isnilorempty(mympd_env.var.fanart_tv_api_key) or
            not song.MUSICBRAINZ_ARTISTID or
-           not song.MUSICBRAINZ_ARTISTID[1] or
-           not song.MUSICBRAINZ_RELEASEGROUPID
+           mympd.isnilorempty(song.MUSICBRAINZ_ARTISTID[1]) or
+           mympd.isnilorempty(song.MUSICBRAINZ_RELEASEGROUPID)
         then
             return 1
         end
@@ -30,10 +30,10 @@ local p_fanart_tv = {
             mympd.log(7, "Invalid json data received")
             return 1
         end
-        if not data.albums[song.MUSICBRAINZ_RELEASEGROUPID] or
+        if mympd.isnilorempty(data.albums[song.MUSICBRAINZ_RELEASEGROUPID]) or
            not data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover or
            not data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover[1] or
-           not data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover[1].url
+           mympd.isnilorempty(data.albums[song.MUSICBRAINZ_RELEASEGROUPID].albumcover[1].url)
         then
             mympd.log(7, "Album not found")
             return 1
