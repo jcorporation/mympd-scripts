@@ -1,4 +1,4 @@
--- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 4, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
+-- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 5, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
 -- Import lyrics provider configuration
 local providers = require "scripts/LyricsProviders"
 local rc, code, headers, body, song, lyrics_text, desc, synced
@@ -99,7 +99,7 @@ for _, provider in pairs(providers) do
     end
 end
 
-if not lyrics_text then
+if mympd.isnilorempty(lyrics_text) then
     return mympd.http_jsonrpc_response({
         method = "MYMPD_API_LYRICS_GET",
         message = "No lyrics found"

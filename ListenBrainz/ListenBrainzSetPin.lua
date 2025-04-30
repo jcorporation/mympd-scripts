@@ -1,5 +1,5 @@
--- {"name": "ListenBrainzSetPin", "file": "ListenBrainz/ListenBrainzSetPin.lua", "version": 2, "desc": "Sets or unsets the pin on ListenBrainz.", "order":1, "arguments":["uri","blurb_content","pinned_until"]}
-if mympd_env.var.listenbrainz_token == nil then
+-- {"name": "ListenBrainzSetPin", "file": "ListenBrainz/ListenBrainzSetPin.lua", "version": 3, "desc": "Sets or unsets the pin on ListenBrainz.", "order":1, "arguments":["uri","blurb_content","pinned_until"]}
+if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
   return "No ListenBrainz token set"
 end
 

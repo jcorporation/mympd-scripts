@@ -1,12 +1,12 @@
--- {"name": "WidgetSongs", "file": "HomeWidgets/WidgetSongs.lua", "version": 2, "desc": "Home widget for songs.", "order":0,"arguments":["view|select;newest;random","entries"]}
+-- {"name": "WidgetSongs", "file": "HomeWidgets/WidgetSongs.lua", "version": 3, "desc": "Home widget for songs.", "order":0,"arguments":["view|select;newest;random","entries"]}
 local headers = "Content-type: text/html\r\n"
 local entries
 local method
 local options
-if not mympd.isnilorempty(mympd_arguments.entries) then
-    entries = tonumber(mympd_arguments.entries)
-else
+if  mympd.isnilorempty(mympd_arguments.entries) then
     entries = 10
+else
+    entries = tonumber(mympd_arguments.entries)
 end
 
 if mympd_arguments.view == "newest" then

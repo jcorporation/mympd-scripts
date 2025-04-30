@@ -1,5 +1,5 @@
--- {"name": "ListenBrainzScrobbler", "file": "ListenBrainz/ListenBrainzScrobbler.lua", "version": 2, "desc": "Scrobbles songs to ListenBrainz.", "order":0, "arguments":[]}
-if mympd_env.var.listenbrainz_token == nil then
+-- {"name": "ListenBrainzScrobbler", "file": "ListenBrainz/ListenBrainzScrobbler.lua", "version": 3, "desc": "Scrobbles songs to ListenBrainz.", "order":0, "arguments":[]}
+if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
   return "No ListenBrainz token set"
 end
 

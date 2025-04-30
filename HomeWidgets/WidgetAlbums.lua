@@ -3,10 +3,10 @@ local headers = "Content-type: text/html\r\n"
 local entries
 local method
 local options
-if not mympd.isnilorempty(mympd_arguments.entries) then
-    entries = tonumber(mympd_arguments.entries)
-else
+if mympd.isnilorempty(mympd_arguments.entries) then
     entries = 10
+else
+    entries = tonumber(mympd_arguments.entries)
 end
 
 if mympd_arguments.view == "newest" then

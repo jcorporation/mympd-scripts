@@ -1,5 +1,5 @@
 -- {"name": "ListenBrainzFeedback", "file": "ListenBrainz/ListenBrainzFeedback.lua", "version": 4, "desc": "Sends feedback to ListenBrainz.", "order":0, "arguments":["uri","vote","type"]}
-if mympd_env.var.listenbrainz_token == nil then
+if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
   return "No ListenBrainz token set"
 end
 

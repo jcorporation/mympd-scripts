@@ -2,10 +2,10 @@
 local headers = "Content-type: text/html\r\n"
 local tag = mympd_arguments.tag
 local entries
-if not mympd.isnilorempty(mympd_arguments.entries) then
-    entries = tonumber(mympd_arguments.entries)
-else
+if mympd.isnilorempty(mympd_arguments.entries) then
     entries = 10
+else
+    entries = tonumber(mympd_arguments.entries)
 end
 local options = {
     uri = "",

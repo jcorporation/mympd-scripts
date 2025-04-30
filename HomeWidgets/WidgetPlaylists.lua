@@ -1,10 +1,10 @@
--- {"name": "WidgetPlaylists", "file": "HomeWidgets/WidgetPlaylists.lua", "version": 2, "desc": "Home widget for playlists.", "order":0,"arguments":["entries"]}
+-- {"name": "WidgetPlaylists", "file": "HomeWidgets/WidgetPlaylists.lua", "version": 3, "desc": "Home widget for playlists.", "order":0,"arguments":["entries"]}
 local headers = "Content-type: text/html\r\n"
 local entries
-if not mympd.isnilorempty(mympd_arguments.entries) then
-    entries = tonumber(mympd_arguments.entries)
-else
+if mympd.isnilorempty(mympd_arguments.entries) then
     entries = 10
+else
+    entries = tonumber(mympd_arguments.entries)
 end
 
 local method = "MYMPD_API_PLAYLIST_LIST"

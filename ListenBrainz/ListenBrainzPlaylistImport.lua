@@ -1,4 +1,7 @@
--- {"name": "ListenBrainzPlaylistImport", "file": "ListenBrainz/ListenBrainzPlaylistImport.lua", "version": 2, "desc": "Imports generated playlists from ListenBrainz.", "order":1, "arguments":[]}
+-- {"name": "ListenBrainzPlaylistImport", "file": "ListenBrainz/ListenBrainzPlaylistImport.lua", "version": 3, "desc": "Imports generated playlists from ListenBrainz.", "order":1, "arguments":[]}
+if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
+    return "No ListenBrainz token set"
+end
 
 local extra_headers = "Authorization: Token " .. mympd_env.var.listenbrainz_token .. "\r\n"
 

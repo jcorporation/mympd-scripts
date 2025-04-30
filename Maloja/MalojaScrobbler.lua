@@ -1,10 +1,10 @@
--- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 2, "desc": "Scrobbles songs to your Maloja server.", "order":0, "arguments":[]}
-if mympd_env.var.maloja_token == nil then
+-- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 3, "desc": "Scrobbles songs to your Maloja server.", "order":0, "arguments":[]}
+if mympd.isnilorempty(mympd_env.var.maloja_token) then
     return "No Maloja token set"
 end
 
-if mympd_env.var.maloja_uri == nil then
-    return "No Maloja URI set"
+if mympd.isnilorempty(mympd_env.var.maloja_host) then
+    return "No Maloja host set"
 end
 
 if mympd_state.current_song == nil then

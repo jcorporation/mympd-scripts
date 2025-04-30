@@ -1,10 +1,10 @@
 -- {"name": "WidgetMostPlayedSongs", "file": "HomeWidgets/WidgetMostPlayedSongs.lua", "version": 2, "desc": "Home widget for most played songs.", "order":0,"arguments":["entries"]}
 local headers = "Content-type: text/html\r\n"
 local entries
-if not mympd.isnilorempty(mympd_arguments.entries) then
-    entries = tonumber(mympd_arguments.entries)
-else
+if mympd.isnilorempty(mympd_arguments.entries) then
     entries = 10
+else
+    entries = tonumber(mympd_arguments.entries)
 end
 local options = {
     uri = "",
