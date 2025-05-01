@@ -1,15 +1,16 @@
--- {"name": "WidgetMostPlayedTag", "file": "HomeWidgets/WidgetMostPlayedTag.lua", "version": 2, "desc": "Home widget for most played tag.", "order":0,"arguments":["tag","entries"]}
+-- {"name": "WidgetMostPlayedTag", "file": "HomeWidgets/WidgetMostPlayedTag.lua", "version": 3, "desc": "Home widget for most played tag.", "order":0,"arguments":["tag","entries"]}
 local headers = "Content-type: text/html\r\n"
-local tag = mympd_arguments.tag
-local entries
-if mympd.isnilorempty(mympd_arguments.entries) then
-    entries = 10
-else
-    entries = tonumber(mympd_arguments.entries)
+
+local rc, msg = mympd.check_arguments({tag = "notempty", entries = "number"})
+if rc == false then
+    local body = "<div class=\"text-center p-3\">" .. msg .. "</div>"
+    return mympd.http_reply("500", headers, body)
 end
+
+local entries = tonumber(mympd_arguments.entries)
 local options = {
     uri = "",
-    type = tag,
+    type = mympd_arguments.tag,
     name = "playCount",
     op = "gt",
     value = "0",
@@ -19,12 +20,13 @@ local options = {
     limit = entries
 }
 local rows = {}
-local rc, result = mympd.api("MYMPD_API_STICKER_FIND", options)
+local result
+rc, result = mympd.api("MYMPD_API_STICKER_FIND", options)
 if rc == 0 then
     for _,data in ipairs(result.data)
     do
         table.insert(rows, "<div class=\"list-group-item list-group-item-action clickable\" data-href='{\"cmd\":\"gotoAlbumList\",\"options\":[" ..
-            json.encode(tag) .. ", " .. json.encode(mympd.htmlencode(data.uri)) .. "]}'>" .. mympd.htmlencode(data.uri) .. "</div>")
+            json.encode(mympd_arguments.tag) .. ", " .. json.encode(mympd.htmlencode(data.uri)) .. "]}'>" .. mympd.htmlencode(data.uri) .. "</div>")
     end
 end
 

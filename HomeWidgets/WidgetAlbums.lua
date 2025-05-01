@@ -1,13 +1,15 @@
--- {"name": "WidgetAlbums", "file": "HomeWidgets/WidgetAlbums.lua", "version": 2, "desc": "Home widget for albums.", "order":0,"arguments":["view|select;newest;random","entries"]}
+-- {"name": "WidgetAlbums", "file": "HomeWidgets/WidgetAlbums.lua", "version": 3, "desc": "Home widget for albums.", "order":0,"arguments":["view|select;newest;random","entries"]}
 local headers = "Content-type: text/html\r\n"
-local entries
 local method
 local options
-if mympd.isnilorempty(mympd_arguments.entries) then
-    entries = 10
-else
-    entries = tonumber(mympd_arguments.entries)
+
+local rc, msg = mympd.check_arguments({view = "notempty", entries = "number"})
+if rc == false then
+    local body = "<div class=\"text-center p-3\">" .. msg .. "</div>"
+    return mympd.http_reply("500", headers, body)
 end
+
+local entries = tonumber(mympd_arguments.entries)
 
 if mympd_arguments.view == "newest" then
     method = "MYMPD_API_DATABASE_ALBUM_LIST"
@@ -33,7 +35,8 @@ else
     return mympd.http_reply("200", headers, "<p>Invalid view</p>")
 end
 local rows = {}
-local rc, result = mympd.api(method, options)
+local result
+rc, result = mympd.api(method, options)
 if rc == 0 then
     for _,data in ipairs(result.data)
     do

@@ -1,12 +1,13 @@
--- {"name": "ChannelSubscribe", "file": "Channel/ChannelSubscribe.lua", "version": 1, "desc": "Subscribes to a MPD channel.", "order":0, "arguments":["channel"]}
+-- {"name": "ChannelSubscribe", "file": "Channel/ChannelSubscribe.lua", "version": 2, "desc": "Subscribes to a MPD channel.", "order":0, "arguments":["channel"]}
 
-local channel = mympd_arguments.channel
-if not channel or channel == "" then
-    channel = "myMPD"
+local rc, msg = mympd.check_arguments({channel = "notempty"})
+if rc == false then
+    return msg
 end
 
-local rc, result = mympd.api("MYMPD_API_CHANNEL_SUBSCRIBE", {
-    channel = channel
+local result
+rc, result = mympd.api("MYMPD_API_CHANNEL_SUBSCRIBE", {
+    channel = mympd_arguments.channel
 })
 
 if rc == 1 then

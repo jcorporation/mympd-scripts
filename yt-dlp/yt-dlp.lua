@@ -1,4 +1,9 @@
--- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 4, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
+-- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 5, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
+
+local rc, msg = mympd.check_arguments({uri = "notempty"})
+if rc == false then
+    return msg
+end
 
 -- yt-dlp helper functions
 local yt_dlp_path = "yt-dlp"
@@ -57,11 +62,6 @@ local function check_image(base)
         end
     end
     return nil
-end
-
--- uri argument is required
-if mympd_arguments.uri == "" then
-    return "No URI provided"
 end
 
 if mympd_env.scriptevent == "http" then
@@ -181,7 +181,8 @@ else
                 if thumb and thumb ~= "" then
                     local tmp_file = mympd.tmp_file()
                     mympd.log(6, "Downloading " .. thumb .. " to " ..tmp_file)
-                    local rc, code, headers = mympd.http_download(thumb, "", tmp_file)
+                    local code, headers
+                    rc, code, headers = mympd.http_download(thumb, "", tmp_file)
                     if rc == 0 then
                         rc = mympd.cache_cover_write(tmp_file, uri, nil)
                         if rc == 1 then
@@ -195,7 +196,7 @@ else
             end
         else
             -- if yt-dlp downloaded the thumbnail, rename it from id to hash
-            local rc = mympd.cache_cover_write(thumb, uri, nil)
+            rc = mympd.cache_cover_write(thumb, uri, nil)
             if rc == 1 then
                 mympd.notify_client(2, "Failed to rename thumbnail!")
             end

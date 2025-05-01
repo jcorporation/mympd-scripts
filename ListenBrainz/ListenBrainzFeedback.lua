@@ -1,4 +1,4 @@
--- {"name": "ListenBrainzFeedback", "file": "ListenBrainz/ListenBrainzFeedback.lua", "version": 4, "desc": "Sends feedback to ListenBrainz.", "order":0, "arguments":["uri","vote","type"]}
+-- {"name": "ListenBrainzFeedback", "file": "ListenBrainz/ListenBrainzFeedback.lua", "version": 5, "desc": "Sends feedback to ListenBrainz.", "order":0, "arguments":["uri","vote","type"]}
 if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
   return "No ListenBrainz token set"
 end
@@ -6,6 +6,11 @@ end
 local uri = "https://api.listenbrainz.org/1/feedback/recording-feedback"
 local extra_headers = "Content-type: application/json\r\n"..
   "Authorization: Token " .. mympd_env.var.listenbrainz_token .. "\r\n"
+
+local rc, msg = mympd.check_arguments({uri = "notempty", vote = "number", ["type"] = "required"})
+if rc == false then
+    return msg
+end
 
 local vote
 if mympd_arguments.type == "like" then
@@ -23,7 +28,8 @@ else
 end
 
 -- get song details
-local rc, song = mympd.api("MYMPD_API_SONG_DETAILS", { uri = mympd_arguments.uri })
+local song
+rc, song = mympd.api("MYMPD_API_SONG_DETAILS", { uri = mympd_arguments.uri })
 if rc == 0 then
   local mbid = song.MUSICBRAINZ_TRACKID
   if not mympd.isnilorempty(mbid) then

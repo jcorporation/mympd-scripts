@@ -1,4 +1,4 @@
--- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 4, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
+-- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 5, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
 
 local function radiobrowser_search(name, country, tag)
     local uri = string.format("https://all.api.radio-browser.info/json/stations/search?hidebroken=true&offset=0&limit=100&name=%s&country=%s&tag=%s",
@@ -94,6 +94,11 @@ if mympd_arguments.Action ~= nil then
         return "Webradios added."
     end
     return "Failure adding webradios."
+end
+
+local rc, msg = mympd.check_arguments({Name = "required", Country = "required", Tag = "required"})
+if rc == false then
+    return msg
 end
 
 return radiobrowser_search(mympd_arguments.Name, mympd_arguments.Country, mympd_arguments.Tag)

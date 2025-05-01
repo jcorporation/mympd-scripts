@@ -1,11 +1,13 @@
--- {"name": "WidgetPlaylists", "file": "HomeWidgets/WidgetPlaylists.lua", "version": 3, "desc": "Home widget for playlists.", "order":0,"arguments":["entries"]}
+-- {"name": "WidgetPlaylists", "file": "HomeWidgets/WidgetPlaylists.lua", "version": 4, "desc": "Home widget for playlists.", "order":0,"arguments":["entries"]}
 local headers = "Content-type: text/html\r\n"
-local entries
-if mympd.isnilorempty(mympd_arguments.entries) then
-    entries = 10
-else
-    entries = tonumber(mympd_arguments.entries)
+
+local rc, msg = mympd.check_arguments({entries = "number"})
+if rc == false then
+    local body = "<div class=\"text-center p-3\">" .. msg .. "</div>"
+    return mympd.http_reply("500", headers, body)
 end
+
+local entries = tonumber(mympd_arguments.entries)
 
 local method = "MYMPD_API_PLAYLIST_LIST"
 local options = {
@@ -22,7 +24,8 @@ local options = {
 }
 
 local rows = {}
-local rc, result = mympd.api(method, options)
+local result
+rc, result = mympd.api(method, options)
 if rc == 0 then
     for _,data in ipairs(result.data)
     do

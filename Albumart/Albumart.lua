@@ -1,8 +1,14 @@
--- {"name": "Albumart", "file": "Albumart/Albumart.lua", "version": 4, "desc": "Fetches albumart on demand.", "order": 0, "arguments": ["uri"]}
+-- {"name": "Albumart", "file": "Albumart/Albumart.lua", "version": 5, "desc": "Fetches albumart on demand.", "order": 0, "arguments": ["uri"]}
 local providers = require "scripts/AlbumartProviders"
 
+local rc, msg = mympd.check_arguments({uri = "notempty"})
+if rc == false then
+    return msg
+end
+
 -- Get the song details
-local rc, song = mympd.api("MYMPD_API_SONG_DETAILS", {uri = mympd_arguments.uri})
+local song
+rc, song = mympd.api("MYMPD_API_SONG_DETAILS", {uri = mympd_arguments.uri})
 if rc ~= 0 then
     mympd.log(3, "Song not found")
     return mympd.http_redirect("/assets/coverimage-notavailable")

@@ -1,4 +1,10 @@
 -- {"name": "TagPlaycounts", "file": "Playcounts/TagPlaycounts.lua", "version": 3, "desc": "Sets playCount and lastPlayed for tags.", "order":0, "arguments":["tags"]}
+
+local rc, msg = mympd.check_arguments({tags = "notempty"})
+if rc == false then
+    return msg
+end
+
 mympd.init()
 
 if mympd_state.current_song == nil then

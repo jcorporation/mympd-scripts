@@ -7,6 +7,11 @@ if mympd.isnilorempty(mympd_env.var.lastfm_session_key) then
   return "No Last.fm Session Key set"
 end
 
+local rc, msg = mympd.check_arguments({trigger = "notempty"})
+if rc == false then
+    return msg
+end
+
 local function hashRequest(data, secret)
   local keys = {}
   for key in pairs(data) do
@@ -37,7 +42,8 @@ local function sendData(data)
   local hash = hashRequest(data, mympd_env.var.lastfm_secret)
   data["api_sig"] = hash
   data = urlencode_data(data)
-  local rc, code, headers, body = mympd.http_client("POST", "https://ws.audioscrobbler.com/2.0/?format=json", extra_headers, data)
+  local code, headers, body
+  rc, code, headers, body = mympd.http_client("POST", "https://ws.audioscrobbler.com/2.0/?format=json", extra_headers, data)
   return rc, body
 end
 
@@ -68,7 +74,8 @@ if mympd_arguments.trigger == "player" then
     sk          = mympd_env.var.lastfm_session_key,
   }
 
-  local rc, body = sendData(data)
+  local body
+  rc, body = sendData(data)
   if rc ~= 0 then
     return "Now Playing: Error"
   end
@@ -98,7 +105,8 @@ if mympd_arguments.trigger == "scrobble" then
     sk          = mympd_env.var.lastfm_session_key,
   }
 
-  local rc, body = sendData(data)
+  local body
+  rc, body = sendData(data)
   if rc ~= 0 then
     return "Scrobble: Error"
   end
@@ -135,7 +143,8 @@ if mympd_arguments.trigger == "feedback" then
     sk          = mympd_env.var.lastfm_session_key,
   }
 
-  local rc, body = sendData(data)
+  local body
+  rc, body = sendData(data)
   if rc ~= 0 then
     return "Feedback: Error"
   end
@@ -160,7 +169,8 @@ if mympd_arguments.trigger == "fetchkey" then
     api_key  = mympd_env.var.lastfm_api_key,
   }
 
-  local rc, body = sendData(data)
+  local body
+  rc, body = sendData(data)
   local ret = json.decode(body)
   mympd.api("MYMPD_API_SCRIPT_VAR_SET", { key = "lastfm_session_key", value = ret.session.key })
 

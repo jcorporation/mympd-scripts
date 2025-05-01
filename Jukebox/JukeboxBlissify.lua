@@ -1,4 +1,9 @@
--- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 8, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":0,"arguments":["addToQueue"]}
+-- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 9, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":0,"arguments":["addToQueue"]}
+
+if mympd.isnilorempty(mympd_env.var.blissify_path) then
+    return "Variable blissify_path not set"
+end
+
 local blissify_path = mympd_env.var.blissify_path
 local blissify_config = ""
 if not mympd.isnilorempty(mympd_env.var.blissify_config) then

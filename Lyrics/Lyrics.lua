@@ -1,7 +1,12 @@
--- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 5, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
+-- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 6, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
 -- Import lyrics provider configuration
 local providers = require "scripts/LyricsProviders"
-local rc, code, headers, body, song, lyrics_text, desc, synced
+local code, headers, body, song, lyrics_text, desc, synced
+
+local rc, msg = mympd.check_arguments({uri = "notempty"})
+if rc == false then
+    return msg
+end
 
 local function strip_html(str)
     str = str:gsub("<!%[CDATA%[.-%]%]>", "")

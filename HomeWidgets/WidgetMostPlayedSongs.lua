@@ -1,11 +1,14 @@
--- {"name": "WidgetMostPlayedSongs", "file": "HomeWidgets/WidgetMostPlayedSongs.lua", "version": 2, "desc": "Home widget for most played songs.", "order":0,"arguments":["entries"]}
+-- {"name": "WidgetMostPlayedSongs", "file": "HomeWidgets/WidgetMostPlayedSongs.lua", "version": 3, "desc": "Home widget for most played songs.", "order":0,"arguments":["entries"]}
 local headers = "Content-type: text/html\r\n"
-local entries
-if mympd.isnilorempty(mympd_arguments.entries) then
-    entries = 10
-else
-    entries = tonumber(mympd_arguments.entries)
+
+local rc, msg = mympd.check_arguments({entries = "number"})
+if rc == false then
+    local body = "<div class=\"text-center p-3\">" .. msg .. "</div>"
+    return mympd.http_reply("500", headers, body)
 end
+
+local entries = tonumber(mympd_arguments.entries)
+
 local options = {
     uri = "",
     type = "song",
@@ -18,7 +21,8 @@ local options = {
     limit = entries
 }
 local rows = {}
-local rc, result = mympd.api("MYMPD_API_STICKER_FIND", options)
+local result
+rc, result = mympd.api("MYMPD_API_STICKER_FIND", options)
 if rc == 0 then
     for _,data in ipairs(result.data)
     do

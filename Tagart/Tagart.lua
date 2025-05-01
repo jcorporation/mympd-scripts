@@ -1,6 +1,11 @@
 -- {"name": "Tagart", "file": "Tagart/Tagart.lua", "version": 4, "desc": "Fetches tagart on demand.", "order":0, "arguments":["tag", "value"]}
 local providers = require "scripts/TagartProviders"
 
+local rc, msg = mympd.check_arguments({tag = "notempty", value = "notempty"})
+if rc == false then
+    return msg
+end
+
 local tag = mympd_arguments.tag
 local value = mympd_arguments.value
 mympd.log(7, "Fetching tagart for " .. tag .. "=" .. value)
@@ -11,7 +16,7 @@ if out == nil then
     return mympd.http_redirect("/assets/coverimage-notavailable")
 end
 
-local rc = 1
+rc = 1
 for _, provider in pairs(providers) do
     if provider.tags[tag] then
         rc = provider.get(tag, value, out)
