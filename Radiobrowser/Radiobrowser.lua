@@ -1,4 +1,4 @@
--- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 5, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
+-- {"name": "Radiobrowser", "file": "Radiobrowser/Radiobrowser.lua", "version": 6, "desc": "Radiobrowser interface.", "order":0, "arguments": ["Name", "Country", "Tag"]}
 
 local function radiobrowser_search(name, country, tag)
     local uri = string.format("https://all.api.radio-browser.info/json/stations/search?hidebroken=true&offset=0&limit=100&name=%s&country=%s&tag=%s",
@@ -77,7 +77,7 @@ local function radiobrowser_import(stationuuid)
         rc, result = mympd.api("MYMPD_API_QUEUE_APPEND_URIS", data)
     end
     if rc == 1 then
-        mympd.notify_client(2, result.message)
+        mympd.notify_client(3, result.message)
     end
     return rc
 end
