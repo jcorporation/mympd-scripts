@@ -7,7 +7,7 @@ local rc, result = mympd.api("MYMPD_API_PLAYLIST_LIST", {
     type = 0
 })
 if rc == 1 then
-    return "Failure getting playlists"
+    return mympd.jsonrpc_error("Failure getting playlists")
 end
 -- random number
 math.randomseed(os.time())
@@ -23,5 +23,5 @@ if rc == 0 then
     -- return the playlist name
     return "Playing " .. playlist
 else
-    return "Failure playing " .. playlist
+    return mympd.jsonrpc_error("Failure playing " .. playlist)
 end

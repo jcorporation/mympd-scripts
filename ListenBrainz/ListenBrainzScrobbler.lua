@@ -1,6 +1,6 @@
--- {"name": "ListenBrainzScrobbler", "file": "ListenBrainz/ListenBrainzScrobbler.lua", "version": 3, "desc": "Scrobbles songs to ListenBrainz.", "order":0, "arguments":[]}
+-- {"name": "ListenBrainzScrobbler", "file": "ListenBrainz/ListenBrainzScrobbler.lua", "version": 4, "desc": "Scrobbles songs to ListenBrainz.", "order":0, "arguments":[]}
 if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
-  return "No ListenBrainz token set"
+  return mympd.jsonrpc_error("No ListenBrainz token set")
 end
 
 local uri = "https://api.listenbrainz.org/1/submit-listens"
@@ -52,5 +52,5 @@ local payload = json.encode({
 });
 local rc, code, header, body = mympd.http_client("POST", uri, extra_headers, payload)
 if rc > 0 then
-  return body
+  return mympd.jsonrpc_error(body)
 end

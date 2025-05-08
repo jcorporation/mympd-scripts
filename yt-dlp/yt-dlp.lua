@@ -1,8 +1,8 @@
--- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 5, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
+-- {"name": "yt-dlp", "file": "yt-dlp/yt-dlp.lua", "version": 6, "desc": "Stream music from YouTube and other services with the help of yt-dlp.", "order":0, "arguments":["uri"]}
 
 local rc, msg = mympd.check_arguments({uri = "notempty"})
 if rc == false then
-    return msg
+    return mympd.jsonrpc_error(msg)
 end
 
 -- yt-dlp helper functions
@@ -27,7 +27,7 @@ local function yt_dlp_call(uri, parse_json, ...)
     if not parse_json then
         -- return string if we don't have to parse json
         return output
-    elseif not output or output == "" then
+    elseif mympd.isnilorempty(output) then
         -- return an empty table if there isn't output
         return {}
     else
@@ -75,7 +75,7 @@ if mympd_env.scriptevent == "http" then
     return mympd.http_redirect(uri)
 else
     -- calling from user invocation/API
-    mympd.notify_client(0, "Starting yt-dlp...")
+    mympd.notify_client(6, "Starting yt-dlp...")
     mympd.init()
 
     local misc_cache = mympd_env.cachedir_misc .. "/"
@@ -147,7 +147,7 @@ else
             comment = comment.. " | " .. string.gsub(x.description, "[\r\n\t]+", " ")
         end
         if #comment > 3000 then
-            comment = string.sub(comment, 1, 3000 - 3) .. "..."
+            comment = string.sub(comment, 1, 3000 - 5) .. "..."
         end
 
         -- build metadata table
@@ -186,11 +186,11 @@ else
                     if rc == 0 then
                         rc = mympd.cache_cover_write(tmp_file, uri, nil)
                         if rc == 1 then
-                            mympd.notify_client(2, "Failed to rename thumbnail!")
+                            mympd.notify_client(3, "Failed to rename thumbnail!")
                         end
                     else
                         mympd.remove_file(tmp_file)
-                        mympd.notify_client(2, "Failed to download thumbnail!")
+                        mympd.notify_client(3, "Failed to download thumbnail!")
                     end
                 end
             end
@@ -198,13 +198,17 @@ else
             -- if yt-dlp downloaded the thumbnail, rename it from id to hash
             rc = mympd.cache_cover_write(thumb, uri, nil)
             if rc == 1 then
-                mympd.notify_client(2, "Failed to rename thumbnail!")
+                mympd.notify_client(3, "Failed to rename thumbnail!")
             end
         end
 
         -- append result to the queue and set tags
         -- NOTE: change to MYMPD_API_QUEUE_INSERT_URI_TAGS
         --       or MYMPD_API_QUEUE_REPLACE_URI_TAGS if you prefer
-        mympd.api("MYMPD_API_QUEUE_APPEND_URI_TAGS", {uri = uri, tags = meta, play = false})
+        local result
+        rc, result = mympd.api("MYMPD_API_QUEUE_APPEND_URI_TAGS", {uri = uri, tags = meta, play = false})
+        if rc > 0 then
+            mympd.notify_client(3, "Failed to add uri to queue")
+        end
     end
 end

@@ -2,7 +2,7 @@
 
 local rc, msg = mympd.check_arguments({tags = "notempty"})
 if rc == false then
-    return msg
+    return mympd.jsonrpc_error(msg)
 end
 
 mympd.init()

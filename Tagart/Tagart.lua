@@ -3,7 +3,7 @@ local providers = require "scripts/TagartProviders"
 
 local rc, msg = mympd.check_arguments({tag = "notempty", value = "notempty"})
 if rc == false then
-    return msg
+    return mympd.http_redirect("/assets/coverimage-notavailable")
 end
 
 local tag = mympd_arguments.tag
@@ -12,7 +12,6 @@ mympd.log(7, "Fetching tagart for " .. tag .. "=" .. value)
 
 local out = mympd.tmp_file()
 if out == nil then
-    mympd.log(3, "Failure creating tmp file.")
     return mympd.http_redirect("/assets/coverimage-notavailable")
 end
 

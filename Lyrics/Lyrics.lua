@@ -5,7 +5,7 @@ local code, headers, body, song, lyrics_text, desc, synced
 
 local rc, msg = mympd.check_arguments({uri = "notempty"})
 if rc == false then
-    return msg
+    return mympd.jsonrpc_error(msg)
 end
 
 local function strip_html(str)

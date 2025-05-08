@@ -1,8 +1,8 @@
--- {"name": "ChannelSendMessage", "file": "Channel/ChannelSendMessage.lua", "version": 3, "desc": "Sends a message to a MPD channel.", "order":1, "arguments":["channel", "message"]}
+-- {"name": "ChannelSendMessage", "file": "Channel/ChannelSendMessage.lua", "version": 4, "desc": "Sends a message to a MPD channel.", "order":1, "arguments":["channel", "message"]}
 
 local rc, msg = mympd.check_arguments({channel = "notempty", message = "notempty"})
 if rc == false then
-    return msg
+    return mympd.jsonrpc_error(msg)
 end
 
 local result

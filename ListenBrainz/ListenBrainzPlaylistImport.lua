@@ -1,6 +1,6 @@
--- {"name": "ListenBrainzPlaylistImport", "file": "ListenBrainz/ListenBrainzPlaylistImport.lua", "version": 3, "desc": "Imports generated playlists from ListenBrainz.", "order":1, "arguments":[]}
+-- {"name": "ListenBrainzPlaylistImport", "file": "ListenBrainz/ListenBrainzPlaylistImport.lua", "version": 4, "desc": "Imports generated playlists from ListenBrainz.", "order":1, "arguments":[]}
 if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
-    return "No ListenBrainz token set"
+    return mympd.jsonrpc_error("No ListenBrainz token set")
 end
 
 local extra_headers = "Authorization: Token " .. mympd_env.var.listenbrainz_token .. "\r\n"
@@ -14,7 +14,7 @@ local function fetch_playlists()
     end
     local playlists = json.decode(body)
     if playlists == nil then
-        return "Failure decoding response from ListenBrainz"
+        return mympd.jsonrpc_error("Failure decoding response from ListenBrainz")
     end
     local values = {}
     local displayValues = {}
@@ -34,7 +34,7 @@ local function import_playlist(playlist_uri)
     local uri = "https://api.listenbrainz.org/1/playlist/" .. mbid
     local rc, code, header, body = mympd.http_client("GET", uri, extra_headers, "")
     if rc == 1 then
-        return "Failure fetching playlist " .. mbid
+        return mympd.jsonrpc_error("Failure fetching playlist " .. mbid)
     end
     local playlist = json.decode(body)
     if playlist == nil then

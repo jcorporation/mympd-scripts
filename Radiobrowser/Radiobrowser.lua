@@ -14,7 +14,7 @@ local function radiobrowser_search(name, country, tag)
 
     local radios = json.decode(body)
     if radios == nil then
-        return "Failure decoding response from radiobrowser."
+        return mympd.jsonrpc_error("Failure decoding response from radiobrowser.")
     end
     local values = {}
     local displayValues = {}
@@ -45,11 +45,11 @@ local function radiobrowser_import(stationuuid)
         mympd.log(4, "Retry " .. i .. " for seaching radiobrowser")
     end
     if rc == 1 then
-        return "Failure fetching radio details from radiobrowser."
+        return mympd.jsonrpc_error("Failure fetching radio details from radiobrowser.")
     end
     local radio = json.decode(body)
     if radio == nil then
-        return "Failure decoding response from radiobrowser."
+        return mympd.jsonrpc_error("Failure decoding response from radiobrowser.")
     end
     local result
     if mympd_arguments.Action == "AddToFavorites" then
@@ -93,7 +93,7 @@ if mympd_arguments.Action ~= nil then
     if added > 0 then
         return "Webradios added."
     end
-    return "Failure adding webradios."
+    return mympd.jsonrpc_error("Failure adding webradios.")
 end
 
 local rc, msg = mympd.check_arguments({Name = "required", Country = "required", Tag = "required"})

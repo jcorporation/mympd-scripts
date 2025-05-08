@@ -1,6 +1,6 @@
--- {"name": "ListenBrainzSetPin", "file": "ListenBrainz/ListenBrainzSetPin.lua", "version": 3, "desc": "Sets or unsets the pin on ListenBrainz.", "order":1, "arguments":["uri","blurb_content","pinned_until"]}
+-- {"name": "ListenBrainzSetPin", "file": "ListenBrainz/ListenBrainzSetPin.lua", "version": 4, "desc": "Sets or unsets the pin on ListenBrainz.", "order":1, "arguments":["uri","blurb_content","pinned_until"]}
 if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
-  return "No ListenBrainz token set"
+  return mympd.jsonrpc_error("No ListenBrainz token set")
 end
 
 local rc, msg = mympd.check_arguments({uri = "notempty", blurb_content = "required", pinned_until = "required"})
@@ -37,6 +37,6 @@ if uri ~= "" then
   local code, header, body
   rc, code, header, body = mympd.http_client("POST", uri, extra_headers, payload)
   if rc > 0 then
-    return body
+    return mympd.jsonrpc_error(body)
   end
 end

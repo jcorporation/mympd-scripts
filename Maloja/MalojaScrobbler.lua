@@ -1,10 +1,10 @@
--- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 4, "desc": "Scrobbles songs to your Maloja server.", "order":0, "arguments":[]}
+-- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 5, "desc": "Scrobbles songs to your Maloja server.", "order":0, "arguments":[]}
 if mympd.isnilorempty(mympd_env.var.maloja_token) then
-    return "No Maloja token set"
+    return mympd.jsonrpc_error("No Maloja token set")
 end
 
 if mympd.isnilorempty(mympd_env.var.maloja_host) then
-    return "No Maloja host set"
+    return mympd.jsonrpc_error("No Maloja host set")
 end
 
 mympd.init()
@@ -37,5 +37,5 @@ end
 
 local rc, code, headers, body = mympd.http_client("POST", uri, extra_headers, payload)
 if rc > 0 then
-    return body
+    return mympd.jsonrpc_error(body)
 end

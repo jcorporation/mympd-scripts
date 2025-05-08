@@ -1,6 +1,6 @@
--- {"name": "ListenBrainzFeedback", "file": "ListenBrainz/ListenBrainzFeedback.lua", "version": 5, "desc": "Sends feedback to ListenBrainz.", "order":0, "arguments":["uri","vote","type"]}
+-- {"name": "ListenBrainzFeedback", "file": "ListenBrainz/ListenBrainzFeedback.lua", "version": 6, "desc": "Sends feedback to ListenBrainz.", "order":0, "arguments":["uri","vote","type"]}
 if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
-  return "No ListenBrainz token set"
+  return mympd.jsonrpc_error("No ListenBrainz token set")
 end
 
 local uri = "https://api.listenbrainz.org/1/feedback/recording-feedback"
@@ -40,7 +40,7 @@ if rc == 0 then
     local code, header, body
     rc, code, header, body = mympd.http_client("POST", uri, extra_headers, payload)
     if rc > 0 then
-      return body
+      return mympd.jsonrpc_error(body)
     end
   end
 end

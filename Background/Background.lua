@@ -1,9 +1,9 @@
--- {"name": "Background", "file": "Background/Background.lua", "version": 2, "desc": "Fetches a background image on demand.", "order": 0, "arguments": ["uri","hash"]}
+-- {"name": "Background", "file": "Background/Background.lua", "version": 3, "desc": "Fetches a background image on demand.", "order": 0, "arguments": ["uri","hash"]}
 local providers = require "scripts/BackgroundProviders"
 
 local rc, msg = mympd.check_arguments({uri = "notempty", hash = "notempty"})
 if rc == false then
-    return msg
+    return mympd.http_redirect("/assets/coverimage-notavailable")
 end
 
 local fallback_uri = "/albumart?offset=0&uri=" .. mympd.urlencode(mympd_arguments.uri)

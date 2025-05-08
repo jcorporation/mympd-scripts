@@ -1,10 +1,10 @@
--- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 2, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
+-- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 3, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
 
 if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
-  return "No Last.fm API Key set"
+  return mympd.jsonrpc_error("No Last.fm API Key set")
 end
 if mympd.isnilorempty(mympd_env.var.lastfm_session_key) then
-  return "No Last.fm Session Key set"
+  return mympd.jsonrpc_error("No Last.fm Session Key set")
 end
 
 local rc, msg = mympd.check_arguments({trigger = "notempty"})
