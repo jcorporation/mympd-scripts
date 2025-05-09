@@ -147,7 +147,7 @@ else
             comment = comment.. " | " .. string.gsub(x.description, "[\r\n\t]+", " ")
         end
         if #comment > 3000 then
-            comment = string.sub(comment, 1, 3000 - 5) .. "..."
+            comment = string.sub(comment, 1, 3000 - 3) .. "..."
         end
 
         -- build metadata table
