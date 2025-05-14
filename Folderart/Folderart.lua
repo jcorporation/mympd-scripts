@@ -22,7 +22,7 @@ end
 
 if result.data[1] == nil then
     mympd.log(3, "Folder is empty")
-    return mympd.http_redirect("/assets/coverimage-notavailable")
+    return mympd.http_redirect("/assets/coverimage-folder")
 end
 
 return mympd.http_redirect("/albumart?offset=0&uri=" .. mympd.urlencode(result.data[1].uri))
