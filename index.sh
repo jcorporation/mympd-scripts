@@ -27,9 +27,16 @@ do
     [ "$VERSION" = "null" ] && VERSION="0"
     printf '%s:{"name":%s,"desc":%s,"version":%s}' "$FILE" "$NAME" "$DESC" "$VERSION">&3
     I=$((I+1))
-    openssl dgst -sha256 -sign privatekey.pem -out "$F.sig" "$F"
+    if [ -f privatekey.pem ]
+    then
+        openssl dgst -sha256 -sign privatekey.pem -out "/tmp/sig" "$F"
+        openssl base64 -in "/tmp/sig" -out "$F.sig"
+    fi
+    openssl base64 -d -in "$F.sig" -out "/tmp/sig"
+    openssl dgst -sha256 -verify publickey.pem -signature "/tmp/sig" "$F"
 done
 printf "}\n" >&3
 exec 3>&-
 
 jq "." < index.json > /dev/null
+rm /tmp/sig
