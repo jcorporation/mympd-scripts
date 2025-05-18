@@ -27,6 +27,7 @@ do
     [ "$VERSION" = "null" ] && VERSION="0"
     printf '%s:{"name":%s,"desc":%s,"version":%s}' "$FILE" "$NAME" "$DESC" "$VERSION">&3
     I=$((I+1))
+    openssl dgst -sha256 -sign privatekey.pem -out "$F.sig" "$F"
 done
 printf "}\n" >&3
 exec 3>&-
