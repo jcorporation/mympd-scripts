@@ -9,6 +9,7 @@
   - MUSICBRAINZ_ARTISTID
   - MUSICBRAINZ_RELEASETRACKID
   - MUSICBRAINZ_TRACKID
+- Optional: Add the variable `scrobble_genre_blacklist` with a comma separated list of genres that should not be scrobbled.
 
 ## Feedback
 

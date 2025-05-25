@@ -12,3 +12,4 @@ This is a scrobbler for the native [Maloja](https://github.com/krateng/maloja) A
 - Create a new trigger
   - Event: `mympd_scrobble`
   - Action: above script
+- Optional: Add the variable `scrobble_genre_blacklist` with a comma separated list of genres that should not be scrobbled.

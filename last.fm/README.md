@@ -9,6 +9,7 @@ Scrobble tracks, send now playing and feedback from myMPD to last.fm.
 | lastfm_api_key | your api key |
 | lastfm_secret | your shared secret |
 | lastfm_session_key | your session key |
+| scrobble_genre_blacklist | Comma separated list of genres that should not be scrobbled. |
 
 You can use the script `lastfm.lua` with the trigger argument set to `key` to fetch and set the session key. It will asks for your last.fm username and password. Set the variables `lastfm_api_key` and `lastfm_secret` before.
 

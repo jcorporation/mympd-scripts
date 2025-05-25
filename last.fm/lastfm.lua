@@ -1,4 +1,4 @@
--- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 3, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
+-- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 4, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
 
 if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
   return mympd.jsonrpc_error("No Last.fm API Key set")
@@ -64,6 +64,10 @@ if mympd_arguments.trigger == "player" then
     return "webradio"
   end
 
+  if mympd.tblvalue_in_list(mympd_env.var.scrobble_genre_blacklist, mympd_state.current_song.Genre) == true then
+    return
+  end
+
   local data = {
     method      = "track.updateNowPlaying",
     api_key     = mympd_env.var.lastfm_api_key,
@@ -92,6 +96,10 @@ end
 if mympd_arguments.trigger == "scrobble" then
   if mympd_state.current_song == nil then
     return "Scrobble: Not playing"
+  end
+
+  if mympd.tblvalue_in_list(mympd_env.var.scrobble_genre_blacklist, mympd_state.current_song.Genre) == true then
+    return
   end
 
   local data = {

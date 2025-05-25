@@ -1,4 +1,4 @@
--- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 5, "desc": "Scrobbles songs to your Maloja server.", "order":0, "arguments":[]}
+-- {"name": "MalojaScrobbler", "file": "Maloja/MalojaScrobbler.lua", "version": 6, "desc": "Scrobbles songs to your Maloja server.", "order":0, "arguments":[]}
 if mympd.isnilorempty(mympd_env.var.maloja_token) then
     return mympd.jsonrpc_error("No Maloja token set")
 end
@@ -17,6 +17,10 @@ if string.sub(mympd_state.current_song.uri, 1, 8) == "https://" or
    string.sub(mympd_state.current_song.uri, 1, 7) == "http://"
 then
     return
+end
+
+if mympd.tblvalue_in_list(mympd_env.var.scrobble_genre_blacklist, mympd_state.current_song.Genre) == true then
+  return
 end
 
 local uri = mympd_env.var.maloja_host .. "/apis/mlj_1/newscrobble?key=" .. mympd_env.var.maloja_token

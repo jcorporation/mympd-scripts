@@ -1,4 +1,4 @@
--- {"name": "ListenBrainzPlayer", "file": "ListenBrainz/ListenBrainzPlayer.lua", "version": 4, "desc": "Sends the now playing info to ListenBrainz.", "order":0, "arguments":[]}
+-- {"name": "ListenBrainzPlayer", "file": "ListenBrainz/ListenBrainzPlayer.lua", "version": 5, "desc": "Sends the now playing info to ListenBrainz.", "order":0, "arguments":[]}
 if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
   return mympd.jsonrpc_error("No ListenBrainz token set")
 end
@@ -22,6 +22,10 @@ end
 if string.sub(mympd_state.current_song.uri, 1, 8) == "https://" or
    string.sub(mympd_state.current_song.uri, 1, 7) == "http://"
 then
+  return
+end
+
+if mympd.tblvalue_in_list(mympd_env.var.scrobble_genre_blacklist, mympd_state.current_song.Genre) == true then
   return
 end
 
