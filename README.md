@@ -9,13 +9,13 @@ Each group of scripts are in a separate folder together with a README.md for usa
 You can find here scripts for:
 
 - Scrobbling
-- Fetching album- and artistart
+- Fetching album- and artist-art
 - Fetching lyrics
 - and many more
 
 ## Documentation
 
-https://jcorporation.github.io/myMPD/scripting/
+https://jcorporation.github.io/myMPD/050-scripting/
 
 ## Contributions
 
