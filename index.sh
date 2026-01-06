@@ -35,6 +35,7 @@ then
     I=0
     for F in */*.lua
     do
+        # Append script to index
         echo "    $F"
         [ "$I" -gt 0 ] &&  printf "," >&3
         NAME=$(basename "$F" .lua | jq -Ra .)
@@ -46,10 +47,8 @@ then
         [ "$VERSION" = "null" ] && VERSION="0"
         printf '%s:{"name":%s,"desc":%s,"version":%s}' "$FILE" "$NAME" "$DESC" "$VERSION" >&3
         I=$((I+1))
-        if [ -f privatekey.pem ]
-        then
-            sig_create "$F"
-        fi
+        # Create script signature
+        sig_create "$F"
     done
     printf "}\n" >&3
     exec 3>&-
