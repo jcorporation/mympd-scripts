@@ -17,12 +17,5 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      - name: Create index of lua scripts
+      - name: Check lua script signatures
         run: ./index.sh
-
-      - name: Add, commit and push
-        uses: EndBug/add-and-commit@v9.1.4
-        with:
-          add: index.json
-          message: Update index
-          push: true
