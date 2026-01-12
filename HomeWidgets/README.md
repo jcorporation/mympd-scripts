@@ -58,7 +58,7 @@ Uses vcgencmd to get Raspberry Pi status information. The mympd user needs read 
 
 ## WidgetRaspberryStatusGPIOd
 
-Connects to the REST-API of myGPIOd to read Raspberry Pi status information. Set the argument `mygpiod_uri` to the uri of myGPIOd, default: `http://localhost:8081/api/`.
+Connects to the REST-API of myGPIOd to read Raspberry Pi status information. Set the argument `mygpiod_uri` to the uri of myGPIOd, default: `http://localhost:8081/api/v1/`.
 
 ## WidgetStats
 
