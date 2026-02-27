@@ -203,7 +203,7 @@ if mympd_arguments.trigger == "fetchkey" then
     value = ret.session.key
   })
 
-  return "Set session key for last.fm to " .. ret.session.key
+  return "Set session key for Last.fm to " .. ret.session.key
 end
 
 return "lastfm: unknown function"
