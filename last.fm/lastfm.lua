@@ -82,7 +82,7 @@ if mympd_arguments.trigger == "player" then
   local data = {
     method      = "track.updateNowPlaying",
     api_key     = mympd_env.var.lastfm_api_key,
-    track       = mympd_state.current_song.Title or "",
+    track       = mympd_state.current_song.Title,
     artist      = firstTagValue(mympd_state.current_song.Artist),
     album       = mympd_state.current_song.Album or "",
     albumArtist = firstTagValue(mympd_state.current_song.AlbumArtist),
@@ -119,7 +119,7 @@ if mympd_arguments.trigger == "scrobble" then
     method      = "track.scrobble",
     api_key     = mympd_env.var.lastfm_api_key,
     timestamp   = tostring(mympd_state.start_time),
-    track       = mympd_state.current_song.Title or "",
+    track       = mympd_state.current_song.Title,
     artist      = firstTagValue(mympd_state.current_song.Artist),
     album       = mympd_state.current_song.Album or "",
     albumArtist = firstTagValue(mympd_state.current_song.AlbumArtist),
@@ -161,8 +161,8 @@ if mympd_arguments.trigger == "feedback" then
   local data = {
     method      = "track.love",
     api_key     = mympd_env.var.lastfm_api_key,
-    track       = mympd_state.current_song.Title or "",
-    artist      = firstTagValue(mympd_state.current_song.Artist),
+    track       = mympd_state.current_song.Title,
+    artist      = mympd_state.current_song.Artist[1],
     sk          = mympd_env.var.lastfm_session_key,
   }
 
