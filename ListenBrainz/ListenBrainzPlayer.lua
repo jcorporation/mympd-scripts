@@ -1,4 +1,4 @@
--- {"name": "ListenBrainzPlayer", "file": "ListenBrainz/ListenBrainzPlayer.lua", "version": 5, "desc": "Sends the now playing info to ListenBrainz.", "order":0, "arguments":[]}
+-- {"name": "ListenBrainzPlayer", "file": "ListenBrainz/ListenBrainzPlayer.lua", "version": 6, "desc": "Sends the now playing info to ListenBrainz.", "order":0, "arguments":[]}
 if mympd.isnilorempty(mympd_env.var.listenbrainz_token) then
   return mympd.jsonrpc_error("No ListenBrainz token set")
 end
@@ -53,7 +53,7 @@ local payload = json.encode({
         recording_mbid = mympd_state.current_song.MUSICBRAINZ_TRACKID,
         artist_mbids = artist_mbids
       },
-      artist_name = mympd_state.current_song.Artist[1],
+      artist_name = mympd.firstTableValue(mympd_state.current_song.Artist),
       track_name = mympd_state.current_song.Title,
       release_name = mympd_state.current_song.Album
     }

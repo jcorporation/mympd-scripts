@@ -71,7 +71,7 @@ end
 -- Fetch the lyrics
 for _, provider in pairs(providers) do
     mympd.log(6, "Try to fetch lyrics from " .. provider.name)
-    local artist = provider.artist_filter(song.Artist[1])
+    local artist = mympd.firstTableValue(provider.artist_filter(song.Artist))
     local album = provider.album_filter(song.Album)
     local title = provider.title_filter(song.Title)
     local duration = song.Duration

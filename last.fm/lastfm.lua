@@ -1,4 +1,4 @@
--- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 5, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
+-- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 6, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
 
 if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
   return mympd.jsonrpc_error("No Last.fm API Key set")
@@ -10,10 +10,6 @@ end
 local rc, msg = mympd.check_arguments({trigger = "notempty"})
 if rc == false then
     return msg
-end
-
-local function firstTagValue(field)
-  return (field and field[1]) or ""
 end
 
 local function hashRequest(data, secret)
@@ -83,9 +79,9 @@ if mympd_arguments.trigger == "player" then
     method      = "track.updateNowPlaying",
     api_key     = mympd_env.var.lastfm_api_key,
     track       = mympd_state.current_song.Title,
-    artist      = firstTagValue(mympd_state.current_song.Artist),
+    artist      = mympd.firstTableValue(mympd_state.current_song.Artist),
     album       = mympd_state.current_song.Album or "",
-    albumArtist = firstTagValue(mympd_state.current_song.AlbumArtist),
+    albumArtist = mympd.firstTableValue(mympd_state.current_song.AlbumArtist),
     sk          = mympd_env.var.lastfm_session_key,
   }
 
@@ -120,9 +116,9 @@ if mympd_arguments.trigger == "scrobble" then
     api_key     = mympd_env.var.lastfm_api_key,
     timestamp   = tostring(mympd_state.start_time),
     track       = mympd_state.current_song.Title,
-    artist      = firstTagValue(mympd_state.current_song.Artist),
+    artist      = mympd.firstTableValue(mympd_state.current_song.Artist),
     album       = mympd_state.current_song.Album or "",
-    albumArtist = firstTagValue(mympd_state.current_song.AlbumArtist),
+    albumArtist = mympd.firstTableValue(mympd_state.current_song.AlbumArtist),
     sk          = mympd_env.var.lastfm_session_key,
   }
 
