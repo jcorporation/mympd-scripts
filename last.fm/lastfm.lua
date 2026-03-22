@@ -83,15 +83,9 @@ if mympd_arguments.trigger == "player" then
     method      = "track.updateNowPlaying",
     api_key     = mympd_env.var.lastfm_api_key,
     track       = mympd_state.current_song.Title,
-<<<<<<< HEAD
-    artist      = firstTagValue(mympd_state.current_song.Artist),
-    album       = mympd_state.current_song.Album or "",
-    albumArtist = firstTagValue(mympd_state.current_song.AlbumArtist),
-=======
     artist      = mympd.firstTableValue(mympd_state.current_song.Artist),
     album       = mympd_state.current_song.Album or "",
     albumArtist = mympd.firstTableValue(mympd_state.current_song.AlbumArtist),
->>>>>>> devel
     sk          = mympd_env.var.lastfm_session_key,
   }
 
@@ -126,15 +120,9 @@ if mympd_arguments.trigger == "scrobble" then
     api_key     = mympd_env.var.lastfm_api_key,
     timestamp   = tostring(mympd_state.start_time),
     track       = mympd_state.current_song.Title,
-<<<<<<< HEAD
-    artist      = firstTagValue(mympd_state.current_song.Artist),
-    album       = mympd_state.current_song.Album or "",
-    albumArtist = firstTagValue(mympd_state.current_song.AlbumArtist),
-=======
     artist      = mympd.firstTableValue(mympd_state.current_song.Artist),
     album       = mympd_state.current_song.Album or "",
     albumArtist = mympd.firstTableValue(mympd_state.current_song.AlbumArtist),
->>>>>>> devel
     sk          = mympd_env.var.lastfm_session_key,
   }
 
