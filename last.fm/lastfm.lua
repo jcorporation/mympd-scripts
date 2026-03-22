@@ -1,4 +1,4 @@
--- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 6, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
+-- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 7, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
 
 if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
   return mympd.jsonrpc_error("No Last.fm API Key set")
