@@ -1,4 +1,4 @@
--- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 6, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
+-- {"name": "Lyrics", "file": "Lyrics/Lyrics.lua", "version": 7, "desc": "Fetches lyrics on demand.", "order":0, "arguments":["uri"]}
 -- Import lyrics provider configuration
 local providers = require "scripts/LyricsProviders"
 local code, headers, body, song, lyrics_text, desc, synced
@@ -71,7 +71,7 @@ end
 -- Fetch the lyrics
 for _, provider in pairs(providers) do
     mympd.log(6, "Try to fetch lyrics from " .. provider.name)
-    local artist = mympd.firstTableValue(provider.artist_filter(song.Artist))
+    local artist = provider.artist_filter(mympd.firstTableValue(song.Artist))
     local album = provider.album_filter(song.Album)
     local title = provider.title_filter(song.Title)
     local duration = song.Duration
