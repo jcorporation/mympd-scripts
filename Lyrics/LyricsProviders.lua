@@ -1,4 +1,4 @@
--- {"name": "LyricsProviders", "file": "Lyrics/LyricsProviders.lua", "version": 3, "desc": "Lyrics providers for the Lyrics script.", "order":0, "arguments":[]}
+-- {"name": "LyricsProviders", "file": "Lyrics/LyricsProviders.lua", "version": 4, "desc": "Lyrics providers for the Lyrics script.", "order":0, "arguments":[]}
 
 local p_www_songtexte_com = {
     name = "Songtexte",
@@ -16,7 +16,7 @@ local p_www_songtexte_com = {
         return title
     end,
     identity_uri = "https://www.songtexte.com/search?q={title}+{artist}&c=all",
-    identity_pattern = "(songtext/.-/.-%-.-%.html)",
+    identity_pattern = "href=\"(songtext/.-/.-%-.-%.html)\"",
     lyrics_uri = "https://www.songtexte.com/",
     lyrics_pattern = "<div id=\"lyrics\">(.-)<p id=\"artistCopyright\"",
     result_filter = function(result)
