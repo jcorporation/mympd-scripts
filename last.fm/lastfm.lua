@@ -1,15 +1,20 @@
--- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 7, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
-
-if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
-  return mympd.jsonrpc_error("No Last.fm API Key set")
-end
-if mympd.isnilorempty(mympd_env.var.lastfm_session_key) then
-  return mympd.jsonrpc_error("No Last.fm Session Key set")
-end
+-- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 8, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
 
 local rc, msg = mympd.check_arguments({trigger = "notempty"})
 if rc == false then
     return msg
+end
+
+if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
+  return mympd.jsonrpc_error("No Last.fm API Key set")
+end
+
+if mympd_arguments.trigger ~= "key" and
+   mympd_arguments.trigger ~= "fetchkey" 
+then  
+  if mympd.isnilorempty(mympd_env.var.lastfm_session_key) then
+    return mympd.jsonrpc_error("No Last.fm Session Key set")
+  end
 end
 
 local function firstTagValue(field)
@@ -196,7 +201,13 @@ if mympd_arguments.trigger == "fetchkey" then
 
   local body
   rc, body = sendData(data)
+  if rc ~= 0 then
+    return "Fetchkey: HTTP error"
+  end
   local ret = json.decode(body)
+  if not ret.session.key then
+    return "Fetchkey: " .. ret.message
+  end
 
   mympd.api("MYMPD_API_SCRIPT_VAR_SET", {
     key = "lastfm_session_key",
