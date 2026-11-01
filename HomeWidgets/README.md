@@ -19,6 +19,14 @@ Reads the battery capacity from the sys filesystem.
 | -------- | ----------- |
 | battery | The battery sys folder, e.g. `BAT0` |
 
+# WidgetLastFMsimilarArtists
+
+Lists similar artists from current playing song from Last.fm. Requires an Last.fm API key configured in the variable `lastfm_api_key`.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| entries | Number of albums to list. |
+
 ## WidgetMostPlayedAlbums
 
 Lists most played albums. You must use the Playcounts script to set album playcounts in the sticker database.
