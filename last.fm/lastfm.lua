@@ -1,4 +1,4 @@
--- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 8, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
+-- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 9, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
 
 local rc, msg = mympd.check_arguments({trigger = "notempty"})
 if rc == false then
@@ -10,8 +10,8 @@ if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
 end
 
 if mympd_arguments.trigger ~= "key" and
-   mympd_arguments.trigger ~= "fetchkey" 
-then  
+   mympd_arguments.trigger ~= "fetchkey"
+then
   if mympd.isnilorempty(mympd_env.var.lastfm_session_key) then
     return mympd.jsonrpc_error("No Last.fm Session Key set")
   end
