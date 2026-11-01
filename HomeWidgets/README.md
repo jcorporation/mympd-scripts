@@ -2,31 +2,6 @@
 
 This scripts can be used as the backend for widgets on the home screen. They return a http response with html content that is displayed in the widget.
 
-## WidgetMostPlayedAlbums
-
-Lists most played albums. You must use the Playcounts script to set album playcounts in the sticker database.
-
-| ARGUMENT | DESCRIPTION |
-| -------- | ----------- |
-| entries | Number of albums to list. |
-
-## WidgetMostPlayedTag
-
-Lists most played tag. You must use the Playcounts script to set tag playcounts in the sticker database.
-
-| ARGUMENT | DESCRIPTION |
-| -------- | ----------- |
-| tag | Tagtype, e.g. Artist |
-| entries | Number of artists to list. |
-
-## WidgetMostPlayedSongs
-
-Lists most played albums. Song playcounts are always maintained if the sticker database is enabled.
-
-| ARGUMENT | DESCRIPTION |
-| -------- | ----------- |
-| entries | Number of songs to list. |
-
 ## WidgetAlbums
 
 Lists newest or random albums.
@@ -44,6 +19,31 @@ Reads the battery capacity from the sys filesystem.
 | -------- | ----------- |
 | battery | The battery sys folder, e.g. `BAT0` |
 
+## WidgetMostPlayedAlbums
+
+Lists most played albums. You must use the Playcounts script to set album playcounts in the sticker database.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| entries | Number of albums to list. |
+
+## WidgetMostPlayedSongs
+
+Lists most played albums. Song playcounts are always maintained if the sticker database is enabled.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| entries | Number of songs to list. |
+
+## WidgetMostPlayedTag
+
+Lists most played tag. You must use the Playcounts script to set tag playcounts in the sticker database.
+
+| ARGUMENT | DESCRIPTION |
+| -------- | ----------- |
+| tag | Tagtype, e.g. Artist |
+| entries | Number of artists to list. |
+
 ## WidgetPlaylists
 
 Lists newest playlists.
@@ -60,10 +60,6 @@ Uses vcgencmd to get Raspberry Pi status information. The mympd user needs read 
 
 Connects to the REST-API of myGPIOd to read Raspberry Pi status information. Set the argument `mygpiod_uri` to the uri of myGPIOd, default: `http://localhost:8081/api/v1/`.
 
-## WidgetStats
-
-Show MPD database statistics.
-
 ## WidgetSongs
 
 Lists newest or random songs.
@@ -72,3 +68,7 @@ Lists newest or random songs.
 | -------- | ----------- |
 | entries | Number of songs to list. |
 | view | `random` or `newest` |
+
+## WidgetStats
+
+Show MPD database statistics.
