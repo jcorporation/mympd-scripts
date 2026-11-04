@@ -1,4 +1,4 @@
--- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 9, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
+-- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 10, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
 
 local rc, msg = mympd.check_arguments({trigger = "notempty"})
 if rc == false then
@@ -6,6 +6,10 @@ if rc == false then
 end
 
 if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
+  return mympd.jsonrpc_error("No Last.fm API Key set")
+end
+
+if mympd.isnilorempty(mympd_env.var.lastfm_secret) then
   return mympd.jsonrpc_error("No Last.fm API Key set")
 end
 
@@ -51,15 +55,24 @@ local function sendData(data)
   data["api_sig"] = hashRequest(data, mympd_env.var.lastfm_secret)
   local encoded = urlencode_data(data)
 
-  local code, headers, body
-  rc, code, headers, body = mympd.http_client(
+  local http_rc, code, headers, body = mympd.http_client(
     "POST",
     "https://ws.audioscrobbler.com/2.0/?format=json",
     extra_headers,
     encoded
   )
+  return http_rc, body
+end
 
-  return rc, body
+local function returnError(prefix, body)
+  local is_json, ret = pcall(json.decode, body)
+  if is_json == true and
+     ret.error ~= nil and
+     ret.message ~= nil
+  then
+    return mympd.jsonrpc_error(prefix .. ": " .. ret.error .. " - " .. ret.message)
+  end
+  return mympd.jsonrpc_error(prefix .. ": HTTP error")
 end
 
 -- MAIN
@@ -97,7 +110,7 @@ if mympd_arguments.trigger == "player" then
   local body
   rc, body = sendData(data)
   if rc ~= 0 then
-    return "Now Playing: Error"
+    return returnError("Now Playing", body)
   end
 
   local ret = json.decode(body)
@@ -134,7 +147,7 @@ if mympd_arguments.trigger == "scrobble" then
   local body
   rc, body = sendData(data)
   if rc ~= 0 then
-    return "Scrobble: Error"
+    return returnError("Scrobble", body)
   end
 
   local ret = json.decode(body)
@@ -174,7 +187,7 @@ if mympd_arguments.trigger == "feedback" then
   local body
   rc, body = sendData(data)
   if rc ~= 0 then
-    return "Feedback: Error"
+    return returnError("Feedback", body)
   end
 
   return "Feedback: " .. data.artist .. " - " .. data.track .. " OK"
@@ -202,7 +215,7 @@ if mympd_arguments.trigger == "fetchkey" then
   local body
   rc, body = sendData(data)
   if rc ~= 0 then
-    return "Fetchkey: HTTP error"
+    return returnError("Fetchkey", body)
   end
   local ret = json.decode(body)
   if not ret.session.key then
