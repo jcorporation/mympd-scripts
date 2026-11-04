@@ -1,4 +1,4 @@
--- {"name": "WidgetAlbums", "file": "HomeWidgets/WidgetLastFMsimilarArtists.lua", "version": 1, "desc": "Home widget for Last.fm similar artists.", "order":0,"arguments":["entries"]}
+-- {"name": "WidgetAlbums", "file": "HomeWidgets/WidgetLastFMsimilarArtists.lua", "version": 2, "desc": "Home widget for Last.fm similar artists.", "order":0,"arguments":["entries"]}
 local response_headers = "Content-type: text/html\r\n"
 
 if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
@@ -6,13 +6,13 @@ if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
     return mympd.http_reply("200", response_headers, response_body)
 end
 
+local entries
 local rc, msg = mympd.check_arguments({entries = "number"})
 if rc == false then
-    local body = "<div class=\"text-center p-3\">" .. msg .. "</div>"
-    return mympd.http_reply("500", response_headers, body)
+    entries = 10
+else
+    entries = tonumber(mympd_arguments.entries)
 end
-
-local entries = tonumber(mympd_arguments.entries)
 
 mympd.init()
 if not mympd_state.current_song then
