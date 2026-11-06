@@ -2,7 +2,7 @@
 
 local rc, msg = mympd.check_arguments({trigger = "notempty"})
 if rc == false then
-    return msg
+    return mympd.jsonrpc_error(msg)
 end
 
 if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then
