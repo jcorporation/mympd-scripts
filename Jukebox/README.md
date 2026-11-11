@@ -18,4 +18,4 @@ Blissify is a program used to make playlists of songs that sound alike from your
 
 ## JukeboxRandomPlaylist
 
-Adds random songs from a random playlist.
+Adds a random range of songs from a random playlist.

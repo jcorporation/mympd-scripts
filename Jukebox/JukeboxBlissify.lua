@@ -1,4 +1,4 @@
--- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 10, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":0,"arguments":["addToQueue"]}
+-- {"name": "JukeboxBlissify", "file": "Jukebox/JukeboxBlissify.lua", "version": 11, "desc": "Uses blissify-rs to populate the jukebox queue.", "order":0,"arguments":["addToQueue"]}
 
 if mympd.isnilorempty(mympd_env.var.blissify_path) then
     return mympd.jsonrpc_error("Variable blissify_path not set")
@@ -33,6 +33,12 @@ if rc == 1 then
     return
 end
 local jukebox_length = result.totalEntities
+if min_jukebox_length <= jukebox_length then
+    -- Jukebox queue is already filled, no need to add more songs
+    send_error("Jukebox queue is already filled.")
+    return
+end
+
 -- request one more song (https://github.com/Polochon-street/blissify-rs/issues/66)
 local to_add = addSongs + min_jukebox_length - jukebox_length + 1
 local last_song = nil
