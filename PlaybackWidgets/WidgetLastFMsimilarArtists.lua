@@ -1,4 +1,4 @@
--- {"name": "WidgetAlbums", "file": "PlaybackWidgets/WidgetLastFMsimilarArtists.lua", "version": 1, "desc": "Playback widget for Last.fm similar artists.", "order":0,"arguments":[]}
+-- {"name": "WidgetLastFMsimilarArtists", "file": "PlaybackWidgets/WidgetLastFMsimilarArtists.lua", "version": 2, "desc": "Playback widget for Last.fm similar artists.", "order":0,"arguments":[]}
 local response_headers = "Content-type: text/html\r\n"
 
 if mympd.isnilorempty(mympd_env.var.lastfm_api_key) then

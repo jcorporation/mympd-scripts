@@ -1,4 +1,4 @@
--- {"name": "WidgetAlbums", "file": "AlbumDetailWidgets/AlbumDetailExample.lua", "version": 1, "desc": "Example widget for playlist detail view.", "order":0,"arguments":["plist","smartpls"]}
+-- {"name": "WidgetPlaylistDetailExample", "file": "PlaylistDetailWidgets/WidgetPlaylistDetailExample.lua", "version": 2, "desc": "Example widget for playlist detail view.", "order":0,"arguments":["plist","smartpls"]}
 local response_headers = "Content-type: text/html\r\n"
 
 local response_body = "<div><ul>" ..
