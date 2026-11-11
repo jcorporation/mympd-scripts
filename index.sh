@@ -69,3 +69,27 @@ do
     echo -n "    $F..."
     sig_check "$F"
 done
+
+echo "--"
+echo "Checking script header"
+for F in */*.lua
+do
+    echo -n "    $F..."
+    SCRIPT_HEADER=$(head -1 "$F" < $F | sed 's/^-- //')
+    HEADER_FILENAME=$(printf "%s" "$SCRIPT_HEADER" | jq -r '.file')
+    HEADER_NAME=$(printf "%s" "$SCRIPT_HEADER" | jq -r '.name')
+
+    FILE_NAME=$(basename "$F" .lua)
+
+    if [ "$HEADER_FILENAME" != "$F" ]
+    then
+        echo "Invalid filename in header"
+        exit 1
+    elif [ "$HEADER_NAME" != "$FILE_NAME" ]
+    then
+        echo "Invalid name in header"
+        exit 1
+    else
+        echo "OK"
+    fi
+done
