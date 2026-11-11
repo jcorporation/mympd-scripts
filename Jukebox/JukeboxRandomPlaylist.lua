@@ -1,4 +1,4 @@
--- {"name": "JukeboxRandomPlaylist", "file": "Jukebox/JukeboxRandomPlaylist.lua", "version": 2, "desc": "Populates the jukebox queue with random songs from a random playlist.", "order":0, "arguments":["addToQueue"]}
+-- {"name": "JukeboxRandomPlaylist", "file": "Jukebox/JukeboxRandomPlaylist.lua", "version": 3, "desc": "Populates the jukebox queue with random songs from a random playlist.", "order":0, "arguments":["addToQueue"]}
 
 local addSongs = 1
 local min_jukebox_length = 50
@@ -22,9 +22,14 @@ if rc == 1 then
     return
 end
 
+if result.returnedEntities == 0 then
+    send_error("No playlists found.")
+    return
+end
+
 -- Get playlist by random number
 math.randomseed(os.time())
-local number = math.random(1, #result.data)
+local number = math.random(1, result.returnedEntities)
 local playlist = result.data[number].uri
 
 -- Get length of the jukebox queue
@@ -35,17 +40,51 @@ if rc == 1 then
 end
 local jukebox_length = result.length
 
--- Get the songs from the playlist
+if min_jukebox_length <= jukebox_length then
+    -- Jukebox queue is already filled, no need to add more songs
+    send_error("Jukebox queue is already filled.")
+    return
+end
+
+-- Get random song range from the playlist
+local songCount
+rc, songCount = mympd.api("MYMPD_API_PLAYLIST_CONTENT_ENUMERATE", {
+    plist = playlist
+})
+if rc == 1 then
+    send_error("Failure getting playlist length for " .. playlist)
+    return
+end
+
+if songCount.entities < addSongs + 1 then
+    send_error("Not enough songs found in playlist.")
+    return
+end
+
+local getSongs = addSongs + min_jukebox_length - jukebox_length
+if getSongs <= 0 then
+    send_error("Jukebox queue is already filled.")
+    return
+end
+
+local maxOffset = math.max(0, songCount.entities - getSongs)
+local randomOffset = math.random(0, maxOffset)
+
 local songs
 rc, songs = mympd.api("MYMPD_API_PLAYLIST_CONTENT_LIST", {
     plist = playlist,
     expression = "",
-    offset = 0,
-    limit = addSongs + min_jukebox_length - jukebox_length,
+    offset = randomOffset,
+    limit = getSongs,
     fields = {}
 })
 if rc == 1 then
     send_error("Failure getting playlist " .. playlist)
+    return
+end
+
+if songs.returnedEntities == 0 then
+    send_error("No songs returned from playlist.")
     return
 end
 
