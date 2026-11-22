@@ -1,4 +1,4 @@
--- {"name": "lastfm", "file": "last.fm/lastfm.lua", "version": 11, "desc": "Interface for last.fm.", "order":0, "arguments":["trigger"]}
+-- {"name": "Lastfm", "file": "Last.fm/Lastfm.lua", "version": 12, "desc": "Interface for Last.fm.", "order":0, "arguments":["trigger"]}
 
 local rc, msg = mympd.check_arguments({ trigger = "notempty" })
 if rc == false then
