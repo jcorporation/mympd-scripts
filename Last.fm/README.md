@@ -1,4 +1,4 @@
-# last.fm
+# Last.fm
 
 Scrobble tracks, send now playing and feedback from myMPD to last.fm.
 
@@ -11,9 +11,9 @@ Scrobble tracks, send now playing and feedback from myMPD to last.fm.
 | lastfm_session_key | your session key |
 | scrobble_genre_blacklist | Comma separated list of genres that should not be scrobbled. |
 
-You can use the script `lastfm.lua` with the trigger argument set to `key` to fetch and set the session key. It will asks for your last.fm username and password. Set the variables `lastfm_api_key` and `lastfm_secret` before.
+You can use the script `Lastfm.lua` with the trigger argument set to `key` to fetch and set the session key. It will asks for your last.fm username and password. Set the variables `lastfm_api_key` and `lastfm_secret` before.
 
-The last.fm APi is available for everyone. You can get your API key and shared secret from: https://www.last.fm/api
+The Last.fm APi is available for everyone. You can get your API key and shared secret from: https://www.last.fm/api
 
 ## Set triggers for events
 
