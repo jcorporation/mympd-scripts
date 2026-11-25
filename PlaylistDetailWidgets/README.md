@@ -7,6 +7,6 @@ This scripts are called with following arguments that are referencing the curren
 - plist
 - smartpls
 
-# PlaylistDetailExample
+## PlaylistDetailExample
 
 Simply returns the arguments.
